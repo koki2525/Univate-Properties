@@ -12,7 +12,7 @@ class TimesharesImport implements ToModel
      *
      * @return Timeshare|null
      */
-    
+
     public function model(array $row)
     {
         return new Timeshare([
@@ -25,7 +25,7 @@ class TimesharesImport implements ToModel
             'price' => $row[6],
             'sleeps' => $row[7],
             'unit' => $row[8],
-            'fromDate' => $row[9], 
+            'fromDate' => $row[9],
             'toDate' => $row[10],
             'levy' => $row[11],
             'setPrice' => 0,
@@ -48,7 +48,7 @@ class TimesharesImport implements ToModel
             'propertType' => 'Timeshare',
             'agent'=> 'None',
             'pre_selected' => 0
-            
+
         ]);
     }
 }

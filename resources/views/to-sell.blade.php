@@ -64,7 +64,7 @@
                             @foreach($resorts as $resort)
                             <option value="{{ $resort->resort }}" {{ old('resort') ==  $resort->resort  ? 'selected' : '' }}>{{ $resort->resort }}</option>
                             @endforeach
-                            <option value="Other">OTHER</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
                     <div class="col-md-6">

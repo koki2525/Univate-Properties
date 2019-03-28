@@ -2657,6 +2657,7 @@ class PagesController extends Controller {
 
 	public function import()
     {
+        config(['excel.import.startRow' => 2 ]);
         Excel::import(new TimesharesImport, Input::file('ex_file'));
 
         return Redirect::back()->with('view-success', 'Your import is successful!');
