@@ -334,13 +334,13 @@
                     $("#region").html("<option value='mpumalanga'>Mpumalanga</option>");
                 }
             });
-
+            /*
             $("#referedBy").change(function () {
                 var val = $(this).val();
                 if (val == "No") {
                     document.getElementById("estateAgency").value = 'Uni-vate Properties';
-                } 
-            });
+                }
+            }); */
     </script>
 
 @stop
