@@ -1,0 +1,195 @@
+@extends('master')
+
+@section('title', 'List Commercial Rental')
+
+@section('description', 'Uni-Vate Properties provides clients with a simple and efficient way to list and sell or rent their commercial property.')
+
+@section('keywords', 'where to sell my commercial property, where to place my property for rent, free property listing sites, Uni-Vate Properties, estate agent services, list my rental')
+
+@section('content')
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="my-4">List Commercial Rental Property</h1>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <form id="mainForm" method="POST" action="/list-commercial-rental" accept-charset="UTF-8" enctype="multipart/form-data">
+            @csrf
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label>Property Name</label>
+                        <input class="form-control" type="text" name="name" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Address</label>
+                        <input class="form-control" type="text" name="address" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label>Unit</label>
+                        <input class="form-control" type="text" name="unit" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Size</label>
+                        <input class="form-control" type="text" name="size" />
+                    </div>
+                </div>
+
+               
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label>Price</label>
+                        <input class="form-control" type="text" name="price" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Owner</label>
+                        <input class="form-control" type="text" name="owner" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Operational Costs</label>
+                        <input class="form-control" type="text" name="opCost" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label>Region</label>
+                        <select class="form-control" name="region">
+                            <option value="">Please Select</option>
+                            <option value="any">Any</option>
+                            <option value="gauteng">Gauteng</option>
+                            <option value="Kwazulu Natal">Kwazulu Natal</option>
+                            <option value="mpumalanga">Mpumalanga</option>
+                            <option value="north west">North West</option>
+                            <option value="free state">Free State</option>
+                            <option value="eastern cape">Eastern Cape</option>
+                            <option value="western cape">Western Cape</option>
+                            <option value="northern cape">Northern Cape</option>
+                            <option value="limpopo">Limpopo</option>
+                        </select> 
+                    </div>
+                    <div class="col-md-6">
+                    <label>Town</label>
+                        <select class="form-control" data-trigger="" name="town">
+                            <option placeholder="" value="">Please Select</option>
+                            <option value="any">Any</option>
+                            <option value="Pretoria">Pretoria</option>
+                            <option value="Johannesburg">Johannesburg</option>
+                            <option value="Centurion">Centurion</option>
+                            <option value="Durban">Durban</option>
+                            <option value="Cape Town">Cape Town</option>
+                            <option value="Knysna">Knysna</option>
+                            <option value="Durban">Sedgefield</option>
+                            <option value="Midrand">Midrand</option>
+                        </select>     
+                    </div>
+                </div>
+                        
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label>Suburb</label>
+                        <select class="form-control" data-trigger="" name="surburb">
+                            <option placeholder="" value="">Please Select</option>
+                            <option value="any">Any</option>
+                            <option value="Carlswald">Carlswald</option>
+                            <option value="Silver Lakes">Silver Lakes</option>
+                            <option value="Mooikloof">Mooikloof</option>
+                            <option value="Zwavelpoort">Zwavelpoort</option>
+                            <option value="Pretoria North">Pretoria North</option>
+                            <option value="Pretoria East">Pretoria East</option>
+                            <option value="Pretoria South">Pretoria South</option>
+                        </select> 
+                    </div>
+                    <div class="col-md-6">
+                        <label>Property Type</label>
+                        <select class="form-control" data-trigger="" name="propertType">
+                            <option placeholder="" value="">Please Select</option>
+                            <option value="any">Any</option>
+                            <option value="Commercial">Commercial</option>
+                            <option value="Industrial">Industrial</option>
+                            <option value="Vacant land">Vacant land</option>
+                            <option value="Retail">Retail</option>
+                        </select> 
+                    </div>
+                </div>
+                        
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label>Contact Person</label> 
+                        <input class="form-control" type="text" name="contact_person" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Contact Email</label>
+                        <input class="form-control" type="email" name="contact_email" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Contact Contact Number</label>
+                        <input class="form-control" type="text" name="contact_mobile" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <label>Property Description</label>
+                        <textarea class="form-control editor" name="description"></textarea>
+                    </div>
+                </div>
+
+                <div class="input-group control-group increment" >
+          <input type="file" name="filename[]" class="form-control">
+          <div class="input-group-btn"> 
+            <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
+          </div>
+        </div>
+                
+                
+                
+                <button class="btn btn-blue btn-lg" id="submit" type="submit">SUBMIT</button>
+                
+            </form>
+        </div>
+    </div>
+</div> 
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+      $(".btn-success").click(function(){ 
+          var html = $(".clone").html();
+          $(".increment").after(html);
+      });
+
+      $("body").on("click",".btn-danger",function(){ 
+          $(this).parents(".control-group").remove();
+      });
+
+    });
+
+</script>
+
+ <script>
+//    var input = document.getElementById( 'image1' );
+//    var infoArea = document.getElementById( 'image1Label' );
+//
+//    input.addEventListener( 'change', showFileName );
+//
+//    function showFileName( event ) {
+//
+//        // the change event gives us the input it occurred in 
+//        var input = event.srcElement;
+//
+//        // the input has an array of files in the `files` property, each one has a name that you can use. We're just using the name here.
+//        var fileName = input.files[0].name;
+//
+//        // use fileName however fits your app best, i.e. add it into a div
+//        infoArea.textContent = fileName;
+//    }
+</script>
+
+@stop
+  
