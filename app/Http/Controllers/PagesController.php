@@ -3881,7 +3881,7 @@ class PagesController extends Controller {
                             'agency' => Auth::user()->agency
                         )
                     );
-                    
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -3905,7 +3905,7 @@ class PagesController extends Controller {
             $message->from('info@univateproperties.co.za');
 		});
 
-        return Redirect::to('view-all-timeshares')->with('view-success','Your selection of timeshares is now assigned to your agency.'); 
+        return Redirect::to('view-all-timeshares')->with('view-success','Your selection of timeshares is now assigned to your agency.');
     }
 
     public function prelistAcessList()
@@ -3926,9 +3926,10 @@ class PagesController extends Controller {
         ->update(array(
                 'access_prelist' => 1
             )
-        ); 
+        );
+        //testers
 
-        return Redirect::back()->with('view-success','Access Granted.'); 
+        return Redirect::back()->with('view-success','Access Granted.');
     }
 
     public function revokePrelistAccess($id)
@@ -3938,9 +3939,9 @@ class PagesController extends Controller {
         ->update(array(
                 'access_prelist' => 0
             )
-        ); 
+        );
 
-        return Redirect::back()->with('view-success','Access Revoked.'); 
+        return Redirect::back()->with('view-success','Access Revoked.');
     }
 
 }
