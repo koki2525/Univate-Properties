@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="price">Price</label>
-                        <input class="form-control" type="text" name="price" id="price" value="R {{ $timeshare->price }}" disabled>
+                        <input class="form-control" type="text" name="price" id="price" value="R {{ number_format($timeshare->price, 2) }}" disabled>
                     </div>
                 </div>
                 <div class="form-row">
@@ -79,6 +79,6 @@
             <img class="img-fluid" src="{{ $resort->image3 }}" alt="Resort Image" />
         </div>
     </div>
-        
+
 </div>
 @stop

@@ -114,7 +114,7 @@
             rt.adjustCount = 0;
         }
     });
-    
+
     function Conform_Delete() {
         return confirm("Are you sure want to delete this commercial property?");
     }
@@ -153,7 +153,7 @@
                         <th>Size</th>
                         <th>Price ex VAT</th>
                         <th>Region</th>
-                        <th>Town</th> 
+                        <th>Town</th>
                         <th>Suburb</th>
                         <th>Status</th>
                         <th>Type</th>
@@ -170,7 +170,7 @@
                         <td>{{ $commercial->name }}</td>
                         <td>{{ $commercial->unit }}</td>
                         <td>{{ $commercial->size }}</td>
-                        <td>{{ $commercial->price }}</td>
+                        <td>{{ number_format($commercial->price, 2) }}</td>
                         <td>{{ ucfirst(trans($commercial->region)) }}</td>
                         <td>{{ $commercial->town }}</td>
                         <td>{{ $commercial->surburb }}</td>
@@ -190,8 +190,8 @@
                             </a>
                         </td>
                         @endif
-                        
-                      
+
+
 
                         <td class="text-center">
                             <a href="/edit-commercial/{{ $commercial->id }}">
@@ -209,7 +209,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <div class="col-md-6 offset-md-3 mb-4 d-flex justify-content-center">
             <?php echo $commercials->links(); ?>
         </div>

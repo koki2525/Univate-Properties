@@ -190,7 +190,7 @@
                         <td>{{ $timeshare->bedrooms }}</td>
                         <td>{{ ucfirst(trans($timeshare->season)) }}</td>
                         <td>{{ ucfirst(trans($timeshare->region)) }}</td>
-                        <td>R {{ $timeshare->price }}</td>
+                        <td>R {{ number_format($timeshare->price, 2) }}</td>
                         <td>{{ $timeshare->created_at }}</td>
 
                         @if($timeshare->published==1)

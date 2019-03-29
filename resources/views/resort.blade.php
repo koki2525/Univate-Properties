@@ -43,7 +43,7 @@
                                 <td><span data-season="{{ $timeshare->season }}">{{ $timeshare->season }}</span></td>
                                 <td><span data-season="">{{ $timeshare->fromDate }}</span></td>
                                 <td><span data-season="">{{ $timeshare->toDate }}</span></td>
-                                <td><span data-setPrice="{{ $timeshare->setPrice }}">R{{ $timeshare->setPrice }}</span></td>
+                                <td><span data-setPrice="{{ $timeshare->setPrice }}">R{{ number_format($timeshare->setPrice, 2) }}</span></td>
                                 <td><span data-status="{{ $timeshare->status }}">{{ $timeshare->status }}</span></td>
                                 <td><a  href="/timeshare-enquiry/{{ $timeshare->id }}" ><i class="fa fa-flag" aria-hidden="true"></i> Enquire Now</a></td>
                             </tr>
@@ -85,16 +85,16 @@
                     @endif
                 </div>
             </div>
-                
+
             <div class="row mb-5">
                 @if($resort->advisor!=NULL)
                 <div class="col-md-3 mb-4 mb-md-0">
                     <a href="{{ $resort->advisor }}" target="_blank">
                         <img class="img-fluid" src="/images/awards/2018_COE_Logos_white-bkg_translations_en-US-UK.JPG" alt="Awards" />
-                    </a>     
+                    </a>
                 </div>
                 @endif
-                
+
                 @foreach($awards as $award)
 
                 <div class="col-md-3 mb-4 mb-md-0">
@@ -136,7 +136,7 @@
                             <p class="mt-3"><a href="{{ $resort->layout }}" target="_blank">Download Resort Lay-Out</a></p>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
         <div class="col-md-3 pl-3 pl-md-5 sidebar">
