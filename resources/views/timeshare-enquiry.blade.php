@@ -43,6 +43,12 @@
                     </div>
                 </div>
                 <div class="form-row">
+                    <div class="col-md-6">
+                        <label for="resortModule">Current Year Levy</label>
+                        <input class="form-control" type="text" id="module" name="levy" value="R {{ number_format($timeshare->levy, 2) }}" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="col-md-12">
                         <input class="form-control" type="text" name="name" placeholder="Name">
                     </div>

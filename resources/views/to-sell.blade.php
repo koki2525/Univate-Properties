@@ -39,14 +39,6 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label>Agent name <em>(if applicable)</em></label>
-                        @if(Auth::check() && (Auth::user()->role == "agency admin" or (Auth::user()->role == "user" && Auth::user()->agency)))
-                        <input class="form-control" type="text" id="agentName" name="agentName" value="{{ Auth::user()->name }}" readonly />
-                        @else
-                        <input class="form-control" type="text" id="agentName" name="agentName" value="{{ old('agentName') }}" />
-                        @endif
-                    </div>
-                    <div class="col-md-4">
                         <label>Name of agency <em>(if applicable)</em></label>
                         @if(Auth::check() && (Auth::user()->role == "agency admin" or (Auth::user()->role == "user" && Auth::user()->agency)))
                         <input class="form-control" type="text" id="estateAgency" name="estateAgency" value="{{ Auth::user()->agency }}" readonly />
@@ -54,6 +46,15 @@
                         <input class="form-control" type="text" id="estateAgency" name="estateAgency" />
                         @endif
                     </div>
+                    <div class="col-md-4">
+                        <label>Agent name <em>(if applicable)</em></label>
+                        @if(Auth::check() && (Auth::user()->role == "agency admin" or (Auth::user()->role == "user" && Auth::user()->agency)))
+                        <input class="form-control" type="text" id="agentName" name="agentName" value="{{ Auth::user()->name }}" readonly />
+                        @else
+                        <input class="form-control" type="text" id="agentName" name="agentName" value="{{ old('agentName') }}" />
+                        @endif
+                    </div>
+
                 </div>
 
                 <div class="form-group row">

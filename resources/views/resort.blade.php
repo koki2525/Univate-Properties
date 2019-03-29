@@ -45,7 +45,7 @@
                                 <td><span data-season="">{{ $timeshare->toDate }}</span></td>
                                 <td><span data-setPrice="{{ $timeshare->setPrice }}">R{{ number_format($timeshare->setPrice, 2) }}</span></td>
                                 <td><span data-status="{{ $timeshare->status }}">{{ $timeshare->status }}</span></td>
-                                <td><a  href="/timeshare-enquiry/{{ $timeshare->id }}" ><i class="fa fa-flag" aria-hidden="true"></i> Enquire Now</a></td>
+                                <td><a  href="/timeshare-enquiry/{{ $timeshare->id }}" ><i class="fa fa-flag" aria-hidden="true"></i> Yes</a></td>
                             </tr>
                             @endforeach
                         </tbody>
