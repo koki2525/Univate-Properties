@@ -2,21 +2,21 @@
     <div class="row">
         <div class="col-md-12 text-center">
             <p class="mb-0"><img class="img-fluid logo" src="{{ asset('/images/logo.png') }}" alt="Uni-Vate Properties Logo" /></p>
-            @if(Auth::check() && Auth::user()->role == "agent")
-            <p style="color: black;font-style: italic;">Agent : {{ Auth::user()->name }} from {{ Auth::user()->agency }}</p>
-            @elseif(Auth::check() && Auth::user()->role == "agency admin")
-            <p style="color: black;font-style: italic;">Agency administrator : {{ Auth::user()->name }} from {{ Auth::user()->agency }}</p>
-            @elseif(Auth::check() && Auth::user()->role == "user" && Auth::user()->agency)
-            <p style="color: black;font-style: italic;">Agent : {{ Auth::user()->name }} from {{ Auth::user()->agency }}</p>
-            @elseif(Auth::check() && Auth::user()->role == "user")
-            <p style="color: black;font-style: italic;">Private Individual : {{ Auth::user()->name }}</p>
-            @elseif(Auth::check() && Auth::user()->role == "admin")
-            <p style="color: black;font-style: italic;">Super Administrator : {{ Auth::user()->name }}</p>
-            @endif
             <div class="social-media">
                 <a href="tel:+27124921238"><i class="fas fa-phone-square fa-2x"></i></a>
                 <a href="mailto:info@univateproperties.co.za"><i class="fas fa-envelope-square fa-2x"></i></a>
                 <a href="https://www.facebook.com/univateproperties/" target="_blank"><i class="fab fa-facebook-square fa-2x"></i></a>
+                @if(Auth::check() && Auth::user()->role == "agent")
+                <p style="color: black;font-style: italic;">Agent : {{ Auth::user()->name }} from {{ Auth::user()->agency }}</p>
+                @elseif(Auth::check() && Auth::user()->role == "agency admin")
+                <p style="color: black;font-style: italic;">Agency administrator : {{ Auth::user()->name }} from {{ Auth::user()->agency }}</p>
+                @elseif(Auth::check() && Auth::user()->role == "user" && Auth::user()->agency)
+                <p style="color: black;font-style: italic;">Agent : {{ Auth::user()->name }} from {{ Auth::user()->agency }}</p>
+                @elseif(Auth::check() && Auth::user()->role == "user")
+                <p style="color: black;font-style: italic;">Private Individual : {{ Auth::user()->name }}</p>
+                @elseif(Auth::check() && Auth::user()->role == "admin")
+                <p style="color: black;font-style: italic;">Super Administrator : {{ Auth::user()->name }}</p>
+                @endif
             </div>
         </div>
     </div>
