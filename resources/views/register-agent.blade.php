@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" type="text" name="surname" placeholder="Surname">
-                    </div> 
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-4">
@@ -33,7 +33,7 @@
                         <input class="form-control" type="text" name="tel" placeholder="Telephone Number">
                     </div>
                     <div class="col-md-4">
-                        <input class="form-control" type="text" name="cell" placeholder="Cell Number">
+                        <input class="form-control" type="text" name="cell" id="mobile" placeholder="Cell Number">
                     </div>
                 </div>
                 <div class="form-row">
@@ -61,8 +61,8 @@
 
                 <button class="btn btn-blue btn-lg" id="submit" type="submit">SUBMIT</button>
             </form>
-        </div>  
+        </div>
     </div>
-    
-</div> 
+
+</div>
 @stop

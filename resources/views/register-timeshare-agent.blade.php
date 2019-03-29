@@ -28,10 +28,10 @@
               </div>
               <div class="form-row">
               <div class="col-md-6">
-                    <input class="form-control" type="text" name="phone" placeholder="Phone Number" value="{{ old('phone') }}">
+                    <input class="form-control" type="text" name="phone" id="phone" placeholder="Phone Number" value="{{ old('phone') }}">
                 </div>
                 <div class="col-md-6">
-                    <input class="form-control" type="text" name="mobile" placeholder="Mobile Number" value="{{ old('mobile') }}">
+                    <input class="form-control" type="text" name="mobile" id="mobile" placeholder="Mobile Number" value="{{ old('mobile') }}">
                 </div>
               </div>
               <div class="form-row">
@@ -44,12 +44,12 @@
                 <div class="col-md-4">
                     <input class="form-control" type="password" name="password1" placeholder="Confirm Password" value="{{ old('password1') }}">
                 </div>
-              </div> 
+              </div>
 
                 <button class="btn btn-blue btn-lg" id="submit" type="submit">SUBMIT</button>
             </form>
-        </div>  
+        </div>
     </div>
-    
-</div> 
+
+</div>
 @stop

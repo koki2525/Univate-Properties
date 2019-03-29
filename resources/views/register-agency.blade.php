@@ -21,7 +21,7 @@
             @csrf
                 <p><strong>Agency Details</strong></p>
                 <div class="form-row">
-                    <div class="col-md-4"> 
+                    <div class="col-md-4">
                         <input class="form-control" type="text" name="agency" placeholder="Agency Name" value="{{ old('agency') }}">
                     </div>
                     <div class="col-md-4">
@@ -38,17 +38,17 @@
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" type="text" name="surname" placeholder="Surname" value="{{ old('surname') }}">
-                    </div> 
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-4">
                         <input class="form-control" type="email" name="email" placeholder="Email" value="{{ old('email') }}">
                     </div>
                     <div class="col-md-4">
-                        <input class="form-control" type="text" name="phone" placeholder="Telephone Number" value="{{ old('phone') }}">
+                        <input class="form-control" type="text" name="phone" id="phone" placeholder="Telephone Number" value="{{ old('phone') }}">
                     </div>
                     <div class="col-md-4">
-                        <input class="form-control" type="text" name="mobile" placeholder="Cell Number" value="{{ old('mobile') }}">
+                        <input class="form-control" type="text" name="mobile" id="mobile" placeholder="Cell Number" value="{{ old('mobile') }}">
                     </div>
                 </div>
                 <div class="form-row">
@@ -65,8 +65,8 @@
 
                 <button class="btn btn-blue btn-lg" id="submit" type="submit">SUBMIT</button>
             </form>
-        </div>  
+        </div>
     </div>
-    
-</div> 
+
+</div>
 @stop
