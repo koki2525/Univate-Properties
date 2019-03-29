@@ -212,3 +212,27 @@ Route::post('pre-listed-weeks','PagesController@handlePreListedWeeks');
 Route::get('pre-list-access','PagesController@prelistAcessList');
 Route::get('give-prelist-acess/{id}','PagesController@givePrelistAccess');
 Route::get('revoke-prelist-acess/{id}','PagesController@revokePrelistAccess');
+
+// Password Reset Routes...
+Route::post('password/email', [
+    'as' => 'password.email',
+    'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail'
+  ]);
+  Route::get('password/reset', [
+    'as' => 'password.request',
+    'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm'
+  ]);
+  Route::post('password/reset', [
+    'as' => 'password.update',
+    'uses' => 'Auth\ResetPasswordController@reset'
+  ]);
+  Route::get('password/reset/{token}', [
+    'as' => 'password.reset',
+    'uses' => 'Auth\ResetPasswordController@showResetForm'
+  ]);
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('verifyTimeshare/{id}','PagesController@verifyTimeshare');

@@ -3945,4 +3945,16 @@ class PagesController extends Controller {
         return Redirect::back()->with('view-success','Access Revoked.');
     }
 
+    public function verifyTimeshare($id)
+	{
+		DB::table('timeshares')
+                    ->where('id','=', $id)
+                    ->update(array(
+                            'verified' => 1
+                        )
+					);
+
+		return Redirect::back()->withInput()->with('view-success', 'Timeshare has been successfully verified.');
+	}
+
 }
