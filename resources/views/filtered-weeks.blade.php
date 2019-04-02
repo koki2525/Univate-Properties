@@ -15,7 +15,7 @@
     </div>
     <div class="row">
         <div class="col-md-7 offset-md-1">
-            <form id="mainForm" method="POST" action="/filter-weeks/{{ $resort->slug }}" accept-charset="UTF-8" enctype="multipart/form-data">
+            <form id="mainForm" method="POST" action="/filter-weeks{{ $resort->slug }}" accept-charset="UTF-8" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
@@ -29,6 +29,7 @@
                                 <div class="col-md-4">
                                     <br>
                                     <button class="btn btn-blue">Filter</button>
+                                    <a class="btn btn-blue even-width mr-auto" href="javascript:history.back()">BACK</a>
                                 </div>
                         </div> 
             </form>

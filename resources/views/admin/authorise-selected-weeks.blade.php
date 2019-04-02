@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Admin')
+@section('title', 'Authorise pre-listed Weeks')
 
 @section('description', '')
 
@@ -124,44 +124,17 @@
 <div class="container-fluid">
     <div class="row mb-4 mt-5">
         <div class="col-md-10 offset-md-1">
-            <form id="mainForm" method="POST" action="/search" accept-charset="UTF-8" enctype="multipart/form-data">
-            @csrf
-                <div class="form-row">
-                    <div class="col-md-5 offset-md-3">
-                        <input class="form-control" name="search" type="text">
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-blue" type="submit">
-                            <i class="fas fa-search-plus"></i>
-                            SEARCH
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-            <hr>
-
-
-                <!--<form id="mainForm" method="POST" action="/upload-timeshares" accept-charset="UTF-8" enctype="multipart/form-data">
-                    @csrf
-                    <div style="margin-left: 18rem;" class="col-md-10 offset-md-1">
-                    <label for="file">Excel Upload</label>
-                    <input type="file" id="file" name="ex_file">
-                    <button class="btn btn-blue" type="submit">
-                            LOAD
-                    </button>
-                    </div> -->
-                </form>
+            <h1>Pre-listed Weeks</h1>
         </div>
     </div>
-
+    <form id="mainForm" method="POST" action="/authorise-pre-listed-weeks" accept-charset="UTF-8" enctype="multipart/form-data">
+        @csrf
     <div class="row">
         <div class="col-md-10 offset-md-1 table-responsive">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
-                        <th>Owner</th>
-                        <th>Agent</th>
+                        <th>Agency</th>
                         <th>Resort</th>
                         <th>Week</th>
                         <th>Module</th>
@@ -171,18 +144,14 @@
                         <th>Region</th>
                         <th>Amount</th>
                         <th>Submitted</th>
-                        <th>Publish</th>
                         <th>Status</th>
-                        <!--<th>Status updated on</th>-->
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Select</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($timeshares as $timeshare)
                     <tr>
-                        <td>{{ $timeshare->owner }}</td>
-                        <td>{{ $timeshare->agent }}</td>
+                        <td>{{ $timeshare->agency }}</td>
                         <td>{{ $timeshare->resort }}</td>
                         <td>{{ $timeshare->week }}</td>
                         <td>{{ $timeshare->module }}</td>
@@ -192,39 +161,13 @@
                         <td>{{ ucfirst(trans($timeshare->region)) }}</td>
                         <td>R {{ number_format($timeshare->price, 2) }}</td>
                         <td>{{ $timeshare->created_at }}</td>
-
-                        @if($timeshare->published==1)
-                        <td class="text-center">
-                            <a href="/publishTimeshare/{{ $timeshare->id }}">
-                                <i class="fas fa-cloud-upload-alt fa-2x text-success"></i>
-                            </a>
-                        </td>
-                        @else
-                        <td class="text-center">
-                            <a href="/publishTimeshare/{{ $timeshare->id }}">
-                                <i class="fas fa-cloud-upload-alt fa-2x text-danger"></i>
-                            </a>
-                        </td>
-                        @endif
-
                         <td>{{ $timeshare->status }}</td>
-                        <!--<td>{{ date('F d, Y', strtotime($timeshare->updated_at)) }}</td>-->
-
-                        <td class="text-center">
-                            <a href="/edit-timeshare/{{ $timeshare->id }}">
-                                <i class="far fa-edit blue-text fa-2x"></i>
-                            </a>
-                        </td>
-
-                        <td class="text-center">
-                            <a onclick="return Conform_Delete()" href="/deleteTimeshare/{{ $timeshare->id }}">
-                                <i class="fas fa-times fa-2x text-danger"></i>
-                            </a>
-                        </td>
+                        <th><input type="checkbox" name="selected[]" value="{{ $timeshare->id }}"></th>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+            <button class="btn btn-blue btn-lg" id="submit" type="submit">SUBMIT</button>
         </div>
 
         <div class="col-md-6 offset-md-3 mb-4 d-flex justify-content-center">
@@ -232,6 +175,8 @@
         </div>
     </div>
 </div>
+
+</form>
 
 
 @stop

@@ -132,7 +132,7 @@ class PagesController extends Controller {
 				'season' => 'required',
 				'sleeps' => 'required',
 				'unit' => 'required',
-				'region' => 'required'
+                'region' => 'required'
             ]);
 
 
@@ -141,7 +141,11 @@ class PagesController extends Controller {
 			if(!Auth::check())
         {
             return Redirect::back()->with('view-error', ' You need to be logged in to submit a timeshare, please login or register if you do not have an account')->withInput()->withErrors($validator);
-		}
+        }
+        if(!Input::hasFile('mandate'))
+        {
+            return Redirect::back()->with('view-error', 'A PDF mandate is required to submit your timeshare.')->withInput()->withErrors($validator);
+        }
 
 
         if($validator->fails())
@@ -189,15 +193,29 @@ class PagesController extends Controller {
 		$timeshare->spacebankedyear = Input::get('spacebankedyear');
 		$timeshare->spacebankOwner = Input::get('spacebankOwner');
 		$timeshare->agency = Auth::user()->agency;
-		$timeshare->agent = Auth::user()->name;
+        $timeshare->agent = Auth::user()->name;
+        /*
+        $request = request();
+
+        $mandate = $request->file('mandate');
+        $profileImageSaveAsName = time() . Auth::id() . "-mandate." . 
+                                  $mandate->getClientOriginalExtension();
+
+        $upload_path = 'mandates/';
+        $profile_image_url = '/'.$upload_path . $profileImageSaveAsName;
+        $success = $mandate->move($upload_path, $profileImageSaveAsName);
+
+        $timeshare->mandate = $profile_image_url; */
+
         $timeshare->save();
 
 		$data = ['timeshare' => $timeshare, 'seller' => $seller];
 
-        Mail::send('emails.timeshare', $data, function($message)
+        Mail::send('emails.timeshare', $data, function($message) use ($timeshare)
         {
             $message->to('info@univateproperties.co.za','Uni-vate')->bcc('koketso.maphopha@gmail.com','Koketso Maphopha')->subject('New timeshare submission');
             $message->from('info@univateproperties.co.za');
+            $message->attach($timeshare->mandate);
 		});
 
 		return Redirect::to('/pay-listing-fee/'.$timeshare->id)->with('view-success',' Your Timeshare has been successfully submitted');
@@ -2839,7 +2857,8 @@ class PagesController extends Controller {
         }
 
 			$user = new User;
-			$user->name = Input::get('name');
+            $user->name = Input::get('name');
+            $user->surname = Input::get('surname');
 			$user->email = Input::get('email');
 			$user->phone = Input::get('phone');
 			$user->mobile = Input::get('mobile');
@@ -2901,7 +2920,8 @@ class PagesController extends Controller {
 		if(!Auth::check())
 		{
 			$user = new User;
-			$user->name = Input::get('name');
+            $user->name = Input::get('name');
+            $user->surname = Input::get('surname');
 			$user->email = Input::get('email');
 			$user->phone = Input::get('phone');
 			$user->mobile = Input::get('mobile');
@@ -3873,7 +3893,7 @@ class PagesController extends Controller {
     public function handlePreListedWeeks()
     {
         $selected = Input::get('selected');
-
+        /*
         foreach($selected as $id)
         {
             DB::table('timeshares')
@@ -3889,16 +3909,20 @@ class PagesController extends Controller {
                     'pre_selected' => 1
                 )
             );
-        }
+        } */
 
-        $leftovers = DB::table('timeshares')
-            ->where('pre_selected','=',0)
-            ->where('owner','=','Lengen')
+        $selectedWeeks = NULL;
+
+        foreach($selected as $id)
+        {
+           $selectedWeeks = DB::table('timeshares')
+            ->where('id','=',$id)
             ->get();
+        }
 
         $agency = Auth::user()->agency;
 
-        $data = ['leftovers' => $leftovers, 'agency' => $agency];
+        $data = ['selectedWeeks' => $selectedWeeks, 'agency' => $agency];
 
         Mail::send('emails.pre-select', $data, function($message)
         {
@@ -3906,7 +3930,7 @@ class PagesController extends Controller {
             $message->from('info@univateproperties.co.za');
 		});
 
-        return Redirect::to('view-all-timeshares')->with('view-success','Your selection of timeshares is now assigned to your agency.');
+        return Redirect::to('view-all-timeshares')->with('view-success','Your selection of timeshares has now been sent for authorisation.');
     }
 
     public function prelistAcessList()
@@ -3955,6 +3979,51 @@ class PagesController extends Controller {
 					);
 
 		return Redirect::back()->withInput()->with('view-success', 'Timeshare has been successfully verified.');
-	}
+    }
+
+    public function serveSelctedPreListedWeeks()
+    {
+        $timeshares = DB::table('timeshares')
+            ->where('owner','=','Lengen')
+            ->where('pre_selected','=',0)
+            ->paginate(10);
+
+            return View::make('authorise-pre-listed-weeks')
+                ->with('timeshares',$timeshares);
+    }
+
+    public function handleAuthorisePreselectedWeeks()
+    {
+
+    }
+
+    public function serveNewResort()
+    {
+        return View::make('new-resort');
+    }
+
+    public function filterWeeks($slug)
+    {
+        $resort = DB::table('resorts')
+		->where('slug','=',$slug)
+		->first();
+		
+		$awards = explode(',',$resort->awards);
+        $facilities = explode(',',$resort->facilities);
+
+        $start = DateTime::createFromFormat('m-d-Y', Input::get('from'))->format('Y-m-d');
+        $end = DateTime::createFromFormat('m-d-Y', Input::get('to'))->format('Y-m-d');
+
+        Timeshare::whereDate('exam_date', '>=', Carbon::now()->toDateString());
+
+        $timeshares = Timeshare::whereBetween('fromDate', [$start, $end])
+            ->paginate(10); dd($timeshares);
+
+            return View::make('filtered-weeks')
+                ->with('resort',$resort)
+                ->with('awards',$awards)
+                ->with('facilities',$facilities)
+                ->with('timeshares',$timeshares);
+    }
 
 }

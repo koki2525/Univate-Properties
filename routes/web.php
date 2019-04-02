@@ -236,3 +236,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('verifyTimeshare/{id}','PagesController@verifyTimeshare');
+
+Route::post('filter-weeks/{slug}','PagesController@filterWeeks');

@@ -15,6 +15,21 @@ class TimesharesImport implements ToModel
 
     public function model(array $row)
     {
+        $fromPieces = explode("/",$row[9]);
+        dd($fromPieces);
+        $day = $fromPieces[0];
+        $month = $fromPieces[1];
+        $year = '2019';
+
+        $fromDate = $day+"-"+$month+"-"+$year;
+
+        $toPieces = explode("/",$row[10]);
+        $day1 = $toPieces[0];
+        $month1 = $toPieces[1];
+        $year = '2019';
+
+        $toDate = $day1+"-"+$month1+"-"+$year;
+
         return new Timeshare([
             'resort'     => $row[0],
             'module' => $row[1],
@@ -25,8 +40,8 @@ class TimesharesImport implements ToModel
             'price' => $row[6],
             'sleeps' => $row[7],
             'unit' => $row[8],
-            'fromDate' => $row[9],
-            'toDate' => $row[10],
+            'fromDate' => $fromDate,
+            'toDate' => $toDate,
             'levy' => $row[11],
             'setPrice' => 0,
             'offerPending' => 0,

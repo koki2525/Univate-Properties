@@ -19,10 +19,13 @@
             <form id="mainForm" method="POST" action="/register-timeshare-agent" accept-charset="UTF-8" enctype="multipart/form-data">
             @csrf
               <div class="form-row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <input class="form-control" type="text" name="name" placeholder="Name" value="{{ old('name') }}">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                        <input class="form-control" type="text" name="surname" placeholder="Surname" value="{{ old('surname') }}">
+                    </div>
+                <div class="col-md-4">
                     <input class="form-control" type="email" name="email" placeholder="Email" value="{{ old('email') }}">
                 </div>
               </div>

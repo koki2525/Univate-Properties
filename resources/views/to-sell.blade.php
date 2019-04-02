@@ -26,7 +26,7 @@
                         <label>Were you referred by an agent?</label>
                         <br>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="referedBy" value='Yes' @if(old('referedBy')) checked @endif>
+                            <input class="form-check-input" type="radio" id="referedBy" name="referedBy" value='Yes' @if(old('referedBy')) checked @endif>
                             <label class="form-check-label" for="referedBy">
                                 Yes
                             </label>
@@ -287,6 +287,17 @@
                     </div>
                 </div>
 
+                <hr>
+
+                <div class="form-group row">
+                        <label for="name" class="col-form-label col-md-8">
+                            1.7 Mandate to sell timeshare
+                        </label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="file" name="mandate" value="{{ old('mandate') }}" />
+                        </div>
+                    </div>
+
                 <button type="submit" class="btn btn-blue btn-lg">SUBMIT</button>
 
                 <hr>
@@ -300,7 +311,8 @@
         </div>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
         $(document).ready(function () {
             $("#resort").change(function () {
@@ -334,14 +346,14 @@
                 else if (val == "Verlorenkloof") {
                     $("#region").html("<option value='mpumalanga'>Mpumalanga</option>");
                 }
-            });
-            /*
+            }
+
             $("#referedBy").change(function () {
                 var val = $(this).val();
                 if (val == "No") {
-                    document.getElementById("estateAgency").value = 'Uni-vate Properties';
+                    $('#estateAgency').val('Uni-Broker Resales');
                 }
-            }); */
+            });
     </script>
 
 @stop

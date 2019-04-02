@@ -22,7 +22,7 @@
     <body>
         <p>Dear Delia</p>
 
-        <p>{{ $agency }} has selected timeshares on the pre-select list. These are the left over weeks from the pre-select list</p>
+        <p>{{ $agency }} has selected the following timeshares on the pre-select list. Please authorise on the admin panel.</p>
 
         <table style="width:100%">
                 <tr>
@@ -38,7 +38,7 @@
                     <th>Amount</th>
                     <th>Status</th>
                 </tr>
-                @foreach($leftovers as $timeshare)
+                @foreach($selectedWeeks as $timeshare)
                 <tr>
                         <td>{{ $timeshare->owner }}</td>
                         <td>{{ $timeshare->agent }}</td>

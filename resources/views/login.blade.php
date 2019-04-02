@@ -12,7 +12,6 @@
 		<div class="row">
 			<div class="col-md-7 offset-md-1">
 				<h1 class="my-4">Login</h1>
-				<p>You are required to login to make an offer</p>
 			</div>
 		</div>
 		<div class="row">
@@ -50,7 +49,11 @@
 
 										<label class="form-check-label" for="remember">
 											{{ __('Remember Me') }}
-										</label>
+                                        </label>
+
+                                        <!--<a class="btn btn-link" href="/register">
+                                                {{ __("Don't have an account? Register here") }}
+                                            </a> -->
 									</div>
 								</div>
 
@@ -62,9 +65,9 @@
 									<br><br><br>
 
 									@if (Route::has('password.request'))
-										<a class="btn btn-link" href="{{ route('password.request') }}">
+										<!--<a class="btn btn-link" href="{{ route('password.request') }}">
 											{{ __('Forgot Your Password?') }}
-										</a>
+										</a> -->
 									@endif
 								</div>
 							</form>
@@ -73,8 +76,8 @@
 				</div>
 			</div>
 </div>
-				
-	
+
+
 	<script>
 		$('#loginModal').on('shown.bs.modal', function () {
 			$('#myInput').trigger('focus')
