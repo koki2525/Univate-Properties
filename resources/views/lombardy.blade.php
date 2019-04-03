@@ -33,7 +33,7 @@
                             @foreach($lombardy as $unit)
                             <tr>
                                 <td>{{ $unit->size }}</td>
-                                <td>{{ $unit->price }}</td>
+                                <td>R {{ number_format($unit->price, 2) }}</td>
                                 <td>{{ $unit->surburb }}</td>
                                 <td>{{ $unit->unit }}</td>
                                 <td>{{ $unit->status2 }}</td>

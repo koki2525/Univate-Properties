@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h1 class="my-4">Register as a private seller/buyer</h1>
+            <h1 class="my-4">Register as a private seller</h1>
         </div>
     </div>
     <div class="row">

@@ -36,7 +36,7 @@
                         <tbody>
                             <tr>
                                 <td>{{ $property->size }}</td>
-                                <td>{{ $property->price }}</td>
+                                <td>R {{ number_format($property->price, 2) }}</td>
                                 <td>{{ $property->surburb }}</td>
                                 <td>{{ $property->unit }}</td>
                                 <td>{{ $property->status2 }}</td>

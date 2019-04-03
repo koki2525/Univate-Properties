@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-md-6">
                         <lable for="resortWeek">Price</lable>
-                        <input class="form-control" type="text" id="price" name="price" value="{{ $unit->price }}" disabled>
+                        <input class="form-control" type="text" id="price" name="price" value="{{ number_format($unit->price, 2) }}" disabled>
                     </div>
                 </div>
                 <div class="form-row">
@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-12">
-                        <input class="form-control" type="text" name="mobile" placeholder="Contact Number">
+                        <input class="form-control" type="text" id="mobile" name="mobile" placeholder="Contact Number">
                     </div>
                 </div>
                 <div class="form-row">

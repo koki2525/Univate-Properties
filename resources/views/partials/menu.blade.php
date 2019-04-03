@@ -113,6 +113,11 @@
                             @endif
                         </div>
                     </li>
+                    @if(Auth::check())
+                        <li class="nav-item">
+                            <a class="nav-link" href="/update-profile/{{ Auth::user()->id }}">Update Profile</a>
+                        </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" href="/contact-us">Contact Us</a>
                     </li>

@@ -56,8 +56,16 @@
                                 <td><span data-module="{{ $timeshare->module }}">{{ $timeshare->module }}</span></td>
                                 <td><span data-bedrooms="{{ $timeshare->bedrooms }}">{{ $timeshare->bedrooms }}</span></td>
                                 <td><span data-season="{{ $timeshare->season }}">{{ $timeshare->season }}</span></td>
-                                <td><span data-season="">{{ $timeshare->fromDate }}</span></td>
-                                <td><span data-season="">{{ $timeshare->toDate }}</span></td>
+                                @if($timeshare->fromDate==NULL)
+                                <td> - </td>
+                                @else
+                                <td>{{ \Carbon\Carbon::parse($timeshare->fromDate)->format('jS F Y') }}</td>
+                                @endif
+                                @if($timeshare->toDate==NULL)
+                                <td> - </td>
+                                @else
+                                <td><span data-season="">{{ \Carbon\Carbon::parse($timeshare->toDate)->format('jS F Y') }}</span></td>
+                                @endif
                                 <td><span data-setPrice="{{ $timeshare->setPrice }}">R{{ number_format($timeshare->setPrice, 2) }}</span></td>
                                 <td><span data-status="{{ $timeshare->status }}">{{ $timeshare->status }}</span></td>
                                 <td><a  href="/timeshare-enquiry/{{ $timeshare->id }}" ><i class="fa fa-flag" aria-hidden="true"></i> Yes</a></td>

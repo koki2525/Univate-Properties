@@ -128,7 +128,7 @@
                     </div>
                     <div class="col-md-4">
                         <label>Contact Contact Number</label>
-                        <input class="form-control" type="text" name="contact_mobile" />
+                        <input class="form-control" type="text" id="mobile" name="contact_mobile" />
                     </div>
                 </div>
 
@@ -139,12 +139,29 @@
                     </div>
                 </div>
 
-                <div class="input-group control-group increment" >
-          <input type="file" name="filename[]" class="form-control">
-          <div class="input-group-btn"> 
-            <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-          </div>
-        </div>
+                <div class="form-row">
+                        <div class="col-md-4">
+                            <label>Image 1</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="image1" name="image1" multiple="multiple">
+                                <label class="custom-file-label" for="image1" aria-describedby="image1" id="image1Label">Choose file</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Image 2</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="image2" name="image2">
+                                <label class="custom-file-label" for="image2" aria-describedby="image2" id="image2Label">Choose file</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Image 3</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="image3" name="image3">
+                                <label class="custom-file-label" for="image3" aria-describedby="image3" id="image3Label">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
                 
                 
                 

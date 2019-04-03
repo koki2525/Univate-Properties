@@ -1,6 +1,6 @@
 <!-- Login or Register Modal -->
 <div class="modal fade" id="loginOrRegister" tabindex="-1" role="dialog" aria-labelledby="loginOrRegisterModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" style="max-width: 1090px;" role="document">
             <div class="modal-content px-0 px-md-4">
                 <div class="modal-header">
                     <h5 class="modal-title" id="loginOrRegisterModalLabel">Login or Register</h5>
@@ -14,7 +14,7 @@
                                 <div class="row mb-4">
 
                                     <div class="col-md-6">
-                                            <p>Login</p>
+                                            <h5>Login</h5>
                                             <form method="POST" action="/login">
                                                 @csrf
 
@@ -30,11 +30,8 @@
                                                             </span>
                                                         @endif
                                                     </div>
-
-                                                    <br>
-
-                            <!--                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>-->
-
+                                                </div>
+                                                <div class="form-row">
                                                     <div class="col-md-12">
                                                         <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Password">
 
@@ -45,6 +42,9 @@
                                                         @endif
                                                     </div>
                                                 </div>
+                                                
+
+                                               
 
                                                 <div class="form-group">
                                                     <div class="form-check">
@@ -60,6 +60,12 @@
                                                     <button style="width: 100%;" type="submit" class="btn btn-blue">
                                                         {{ __('Login') }}
                                                     </button>
+                                                    <p></p>
+                                                    @if (Route::has('password.request'))
+                                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                                            {{ __('Forgot Your Password?') }}
+                                                        </a>
+                                                    @endif
                                                 </div>
                                             </form>
                                     </div>
@@ -68,9 +74,11 @@
                                         <h5>Register</h5>
                                     <div class="row mb-4">
                                         <div class="col-md-12">
+                                            <p>If you are a private seller or buyer, register by clicking the button below.</p>
                                             <a style="width: 100%;" class="btn btn-blue" href="/register">Private Individial</a><br><br>
                                         </div>
                                         <div class="col-md-12">
+                                                <p>If you are a compliant estate agency, register by clicking the button below.</p>
                                             <a style="width: 100%;" class="btn btn-blue" href="/register-agency">Agency Registration</a>
                                         </div>
                                     </div>

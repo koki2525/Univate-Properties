@@ -118,7 +118,7 @@
                     </div>
                     <div class="col-md-4">
                         <label>Contact Contact Number</label>
-                        <input class="form-control" type="text" name="contact_mobile" />
+                        <input class="form-control" id="mobile" type="text" name="contact_mobile" />
                     </div>
                 </div>
 

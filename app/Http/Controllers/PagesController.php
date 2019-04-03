@@ -2841,7 +2841,8 @@ class PagesController extends Controller {
 	{
 		$validator = Validator::make(Input::all(),
             [
-				'name' => 'required',
+                'name' => 'required',
+                'surname' => 'required',
 				'email' => 'required',
 				'username' => 'required'
 			]);
@@ -4011,19 +4012,81 @@ class PagesController extends Controller {
 		$awards = explode(',',$resort->awards);
         $facilities = explode(',',$resort->facilities);
 
-        $start = DateTime::createFromFormat('m-d-Y', Input::get('from'))->format('Y-m-d');
-        $end = DateTime::createFromFormat('m-d-Y', Input::get('to'))->format('Y-m-d');
+        //$start = \DateTime::createFromFormat('m-d-Y', Input::get('from'))->format('Y-m-d');
+       // $end = \DateTime::createFromFormat('m-d-Y', Input::get('to'))->format('Y-m-d');
+      
 
-        Timeshare::whereDate('exam_date', '>=', Carbon::now()->toDateString());
+       // Timeshare::whereDate('exam_date', '>=', Carbon::now()->toDateString());
 
-        $timeshares = Timeshare::whereBetween('fromDate', [$start, $end])
-            ->paginate(10); dd($timeshares);
-
+        $timeshares = Timeshare::whereBetween(DB::raw('DATE(fromDate)'), array(Input::get('from'), Input::get('to')))->paginate(10);
+         
             return View::make('filtered-weeks')
                 ->with('resort',$resort)
                 ->with('awards',$awards)
                 ->with('facilities',$facilities)
                 ->with('timeshares',$timeshares);
     }
+
+    public function serveEditProfile($id)
+    {
+        $user = DB::table('users')
+            ->where('id','=',$id)
+            ->first();
+
+            return View::make('update-profile')
+                ->with('user',$user);
+    }
+
+    public function handleEditProfile($id)
+	{
+		$validator = Validator::make(Input::all(),
+            [
+                'name' => 'required',
+				'email' => 'required'
+            ]);
+
+        if($validator->fails())
+        {
+            return Redirect::back()->with('view-error', ' There were errors in your submission please review below')->withInput()->withErrors($validator);
+		}
+
+		DB::table('users')
+                    ->where('id','=', $id)
+                    ->update(array(
+                            'name' => Input::get('name')
+                        )
+					);
+
+		DB::table('users')
+		->where('id','=', $id)
+		->update(array(
+				'surname' => Input::get('surname')
+			)
+		);
+
+		DB::table('users')
+		->where('id','=', $id)
+		->update(array(
+				'email' => Input::get('email')
+			)
+		);
+
+		DB::table('users')
+		->where('id','=', $id)
+		->update(array(
+				'phone' => Input::get('tel')
+			)
+		);
+
+		DB::table('users')
+		->where('id','=', $id)
+		->update(array(
+				'mobile' => Input::get('cell')
+			)
+        );
+     
+		return Redirect::back()->with('view-success',"You have successfully updated your details");
+
+	}
 
 }
