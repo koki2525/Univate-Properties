@@ -685,6 +685,23 @@ class PagesController extends Controller {
 
         }
 
+        if(Input::get('levy')!=$timeshare->levy)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'Levy changed from '.$timeshare->levy.' to '.Input::get('levy');
+            $log->save();
+            
+            DB::table('timeshares')
+                ->where('id','=', $id)
+                ->update(array(
+                        'levy' => Input::get('levy')
+                    )
+                );
+
+        }
+
         if(Input::get('fromDate')!=$timeshare->fromDate)
         {
             $log = new TimeshareLog;
