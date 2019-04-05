@@ -55,11 +55,11 @@
         <div class="form-row">
             <div class="col-md-6">
                 <label style="font-weight:bolder;">Depature Date</label>
-                <input class="form-control" type="date" class="form-control" name="fromDate" value="{{ date('d-M-y', strtotime($timeshare->fromDate)) }}" />
+                <input class="form-control" type="date" data-date-format="DD MMMM YYYY" class="form-control" name="fromDate" value="{{ date('y-M-d', strtotime($timeshare->fromDate)) }}" />
             </div>
             <div class="col-md-6">
                 <label style="font-weight:bolder;">Arrival Date</label>
-                <input class="form-control" type="date" class="form-control" name="toDate" value="{{ date('d-M-y', strtotime($timeshare->toDate)) }}" />
+                <input class="form-control" type="date" data-date-format="DD MMMM YYYY" class="form-control" name="toDate" value="{{ date('y-M-d', strtotime($timeshare->toDate)) }}" />
             </div>
         </div>
 
