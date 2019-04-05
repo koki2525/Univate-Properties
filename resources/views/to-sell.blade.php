@@ -26,13 +26,13 @@
                         <label>Were you referred by an agent?</label>
                         <br>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="referedBy" class="referedBy" name="referedBy" value='Yes' @if(old('referedBy')) checked @endif>
+                            <input class="form-check-input" type="radio" id="referedBy" class="radiogroup" name="referedBy" value='Yes' @if(old('referedBy')) checked @endif>
                             <label class="form-check-label" for="referedBy">
                                 Yes
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="referedBy" class="referedBy" name="referedBy" value='No' @if(!old('referedBy')) checked @endif>
+                            <input class="form-check-input" type="radio" id="referedBy" class="radiogroup" name="referedBy" value='No' @if(!old('referedBy')) checked @endif>
                             <label class="form-check-label" for="referedBy">
                                 No
                             </label>
@@ -351,12 +351,10 @@
 
     </script>
     <script>
-            $(document).ready(function () {
-                if($('#referedBy').val('No')){
-                        $('#estateAgency').val('Uni-Broker Resales');
-                        }
-                    }
-                );
+            $('.radiogroup').change(function(e){
+                var selectedValue = 'Uni-Broker Resales';
+                $('#estateAgency').val(selectedValue)
+            });
     </script>
 
 @stop

@@ -54,6 +54,17 @@
 
         <div class="form-row">
             <div class="col-md-6">
+                <label style="font-weight:bolder;">Depature Date</label>
+                <input class="form-control" type="date" class="form-control" name="fromDate" value="{{ date('d-M-y', strtotime($timeshare->fromDate)) }}" />
+            </div>
+            <div class="col-md-6">
+                <label style="font-weight:bolder;">Arrival Date</label>
+                <input class="form-control" type="date" class="form-control" name="toDate" value="{{ date('d-M-y', strtotime($timeshare->toDate)) }}" />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6">
                 <label>Week</label>
                 <input class="form-control" type="text" name="week" value="{{ $timeshare->week }}"/>
             </div>
@@ -73,19 +84,25 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label>Owner</label>
                 <input class="form-control" type="text" name="owner" value="{{ $timeshare->owner }}" />
             </div>
-            <div class="col-md-4">
-                <label>Has your week been spacebanked this year?</label>
-                <input class="form-control" type="text" name="spacebankedyear" value="{{ $timeshare->spacebankedyear }}" />
+            <div class="col-md-6">
+                    <label>Levy</label>
+                    <input class="form-control" type="text" name="levy" value="{{ $timeshare->levy }}" />
+                </div>
             </div>
-            <div class="col-md-4">
-                <label>If yes, please confirm with whom</label>
-                <input class="form-control" type="text" name="spacebankOwner" value="{{ $timeshare->spacebankOwner }}" />
+            <div class="form-row">
+                <div class="col-md-6">
+                    <label>Has your week been spacebanked this year?</label>
+                    <input class="form-control" type="text" name="spacebankedyear" value="{{ $timeshare->spacebankedyear }}" />
+                </div>
+                <div class="col-md-6">
+                    <label>If yes, please confirm with whom</label>
+                    <input class="form-control" type="text" name="spacebankOwner" value="{{ $timeshare->spacebankOwner }}" />
+                </div>
             </div>
-        </div>
 
         <div class="form-row">
             <div class="col-md-6">
@@ -113,7 +130,7 @@
             <div class="col-md-4">
                 <label>Status <em>(current : {{ $timeshare->status }})</em></label>
                 <select class="form-control" name="status">
-                    <option value='NULL'>Please Select</option>
+                    <option value=NULL>Please Select</option>
                     <option value="Offer Pending">Offer Pending</option>
                     <option value="Lengen">Lengen</option>
                     <option value="Sold">Sold</option>

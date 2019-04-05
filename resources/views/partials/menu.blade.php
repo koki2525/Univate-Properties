@@ -118,6 +118,19 @@
                             <a class="nav-link" href="/update-profile/{{ Auth::user()->id }}">Update Profile</a>
                         </li>
                     @endif
+                    @if(Auth::check() && Auth::user()->role === 'admin')
+                        <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Tender Weeks
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="/upload-tender-weeks">Tender Weeks Upload</a>
+                                    <a class="dropdown-item" href="/pre-list-access">Manage Access</a>
+                                    <a class="dropdown-item" href="/review-prelisted-weeks">Approve selected Weeks</a>
+                                </div>
+                            </li>
+                        </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" href="/contact-us">Contact Us</a>
                     </li>

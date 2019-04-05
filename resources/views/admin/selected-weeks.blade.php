@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Prelist Acess Control')
+@section('title', 'Pre-listed Weeks')
 
 @section('description', '')
 
@@ -114,61 +114,73 @@
             rt.adjustCount = 0;
         }
     });
-    
+
     function Conform_Delete() {
-        return confirm("Are you sure want to delete this agency?");
+        return confirm("Are you sure want to delete this timeshare?");
     }
 
 </script>
 
 <div class="container-fluid">
     <div class="row mb-4 mt-5">
-        <div class="col-md-10 offset-md-1">  
-            <h1>Access Control for pre-listed weeks</h1>
-            <a class="btn btn-primary" href="/review-prelisted-weeks">Approve Pre-selected Weeks</a>
+        <div class="col-md-10 offset-md-1">
+            <h1>{{ $agency->agency }} pre-listed weeks</h1>
         </div>
     </div>
-
+    <form id="mainForm" method="POST" action="/selected-weeks/{{ $agency->id }}" accept-charset="UTF-8" enctype="multipart/form-data">
+        @csrf
     <div class="row">
         <div class="col-md-10 offset-md-1 table-responsive">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
-                        <th>Agency</th>
-                        <th>Administrator Name</th>
-                        <th>Give/Revoke Access to pre-listed weeks</th>
+                        <th>Owner</th>
+                        <th>Agent</th>
+                        <th>Resort</th>
+                        <th>Week</th>
+                        <th>Module</th>
+                        <th>Unit</th>
+                        <th>Beds</th>
+                        <th>Season</th>
+                        <th>Region</th>
+                        <th>Amount</th>
+                        <th>Submitted</th>
+                        <th>Status</th>
+                        <th>Select</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($agencies as $agency)
+                    @foreach($timeshares as $timeshare)
                     <tr>
-                        <td>{{ $agency->agency }}</td>
-                        <td>{{  $agency->name }}</td>
-
-                        @if($agency->access_prelist==1)
-                        <td class="text-center">
-                            <a href="/revoke-prelist-acess/{{ $agency->id }}">
-                                <i class="fas fa-cloud-upload-alt fa-2x text-success"></i>
-                            </a>
-                        </td>
-                        @else
-                        <td class="text-center">
-                            <a href="/give-prelist-acess/{{ $agency->id }}">
-                                <i class="fas fa-cloud-upload-alt fa-2x text-danger"></i>
-                            </a>
-                        </td>
-                        @endif
+                        <td>{{ $timeshare->owner }}</td>
+                        <td>{{ $timeshare->agent }}</td>
+                        <td>{{ $timeshare->resort }}</td>
+                        <td>{{ $timeshare->week }}</td>
+                        <td>{{ $timeshare->module }}</td>
+                        <td>{{ $timeshare->unit }}</td>
+                        <td>{{ $timeshare->bedrooms }}</td>
+                        <td>{{ ucfirst(trans($timeshare->season)) }}</td>
+                        <td>{{ ucfirst(trans($timeshare->region)) }}</td>
+                        <td>R {{ number_format($timeshare->price, 2) }}</td>
+                        <td>{{ $timeshare->created_at }}</td>
+                        <td>{{ $timeshare->status }}</td>
+                        <th><input type="checkbox" name="selected[]" value="{{ $timeshare->id }}"></th>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+            <button class="btn btn-blue btn-lg" id="submit" type="submit">APPROVE</button>
+            <a class="btn btn-blue btn-lg" href="/publish-remaining-weeks">PUBLISH THE REST</a>
+            <a class="btn btn-blue btn-lg" href="javascript:history.back()">BACK</a>
         </div>
-        
+
         <div class="col-md-6 offset-md-3 mb-4 d-flex justify-content-center">
-            <?php echo $agencies->links(); ?>
+            <?php echo $timeshares->links(); ?>
         </div>
     </div>
 </div>
+
+</form>
 
 
 @stop

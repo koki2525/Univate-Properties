@@ -61,6 +61,12 @@
     $('#datepicker4').datepicker({
         uiLibrary: 'bootstrap4'
     });
+    $('#datepicker5').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
+    $('#datepicker6').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
     $('#statusDate').datepicker({
         uiLibrary: 'bootstrap4',
         format: 'dd/mm/yyyy'

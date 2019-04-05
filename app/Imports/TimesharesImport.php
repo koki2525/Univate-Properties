@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Timeshare;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class TimesharesImport implements ToModel
+class TimesharesImport implements ToModel, WithHeadingRow
 {
     /**
      * @param array $row
@@ -15,39 +16,24 @@ class TimesharesImport implements ToModel
 
     public function model(array $row)
     {
-        $fromPieces = explode("/",$row[9]);
-        dd($fromPieces);
-        $day = $fromPieces[0];
-        $month = $fromPieces[1];
-        $year = '2019';
-
-        $fromDate = $day+"-"+$month+"-"+$year;
-
-        $toPieces = explode("/",$row[10]);
-        $day1 = $toPieces[0];
-        $month1 = $toPieces[1];
-        $year = '2019';
-
-        $toDate = $day1+"-"+$month1+"-"+$year;
-
         return new Timeshare([
-            'resort'     => $row[0],
-            'module' => $row[1],
-            'week' => $row[2],
-            'bedrooms' => $row[3],
-            'season' => $row[4],
-            'region' => $row[5],
-            'price' => $row[6],
-            'sleeps' => $row[7],
-            'unit' => $row[8],
-            'fromDate' => $fromDate,
-            'toDate' => $toDate,
-            'levy' => $row[11],
+            'resort'     => $row['Resort'],
+            'module' => $row['Module'],
+            'week' => $row['Week'],
+            'bedrooms' => $row['Bedrooms'],
+            'season' => $row['Season'],
+            'region' => $row['Region'],
+            'price' => $row['Price'],
+            'sleeps' => $row['Sleeps'],
+            'unit' => $row['Unit'],
+            'fromDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['From date']),
+            'toDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['To date']),
+            'levy' => $row['Levy'],
             'setPrice' => 0,
             'offerPending' => 0,
             'sold' => 0,
             'published' => 0,
-            'owner' => 'Lengen',
+            'owner' => 'UB',
             'spacebankOwner' => NULL,
             'other' => NULL,
             'agency' => NULL,

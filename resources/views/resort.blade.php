@@ -24,8 +24,10 @@
                                     From : <input data-date-format="dd-mm-yyyy" id="datepicker1" class="form-control" name="from" value="{{ old('date') }}"  />
                                 </div>
                                 <div class="col-md-4">
-                                    To : <input data-date-format="dd-mm-yyyy" id="datepicker2" class="form-control" name="to" value="{{ old('date') }}"  /><br><br>
+                                    To : <input data-date-format="dd-mm-yyyy" <div class="form-row">
                                 </div>
+            
+      
                                 <div class="col-md-4">
                                     <br>
                                     <button class="btn btn-blue">Filter</button>

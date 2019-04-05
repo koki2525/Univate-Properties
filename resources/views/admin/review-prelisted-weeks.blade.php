@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Prelist Acess Control')
+@section('title', 'Prelist')
 
 @section('description', '')
 
@@ -124,8 +124,7 @@
 <div class="container-fluid">
     <div class="row mb-4 mt-5">
         <div class="col-md-10 offset-md-1">  
-            <h1>Access Control for pre-listed weeks</h1>
-            <a class="btn btn-primary" href="/review-prelisted-weeks">Approve Pre-selected Weeks</a>
+            <h1>Manage pre-listed weeks</h1>
         </div>
     </div>
 
@@ -135,29 +134,18 @@
                 <thead>
                     <tr>
                         <th>Agency</th>
-                        <th>Administrator Name</th>
-                        <th>Give/Revoke Access to pre-listed weeks</th>
+                        <th>View selected pre-listed weeks</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($agencies as $agency)
                     <tr>
                         <td>{{ $agency->agency }}</td>
-                        <td>{{  $agency->name }}</td>
-
-                        @if($agency->access_prelist==1)
                         <td class="text-center">
-                            <a href="/revoke-prelist-acess/{{ $agency->id }}">
-                                <i class="fas fa-cloud-upload-alt fa-2x text-success"></i>
+                            <a href="/selected-weeks/{{ $agency->id }}">
+                                <i class="fa fa-list"> Manage</i>
                             </a>
                         </td>
-                        @else
-                        <td class="text-center">
-                            <a href="/give-prelist-acess/{{ $agency->id }}">
-                                <i class="fas fa-cloud-upload-alt fa-2x text-danger"></i>
-                            </a>
-                        </td>
-                        @endif
                     </tr>
                     @endforeach
                 </tbody>
