@@ -30,6 +30,7 @@ use App\Support;
 use Auth;
 use View;
 use Mail;
+use App\TimeshareLog;
 
 class PagesController extends Controller {
 
@@ -132,7 +133,7 @@ class PagesController extends Controller {
 				'season' => 'required',
 				'sleeps' => 'required',
 				'unit' => 'required',
-				'region' => 'required'
+                'region' => 'required'
             ]);
 
 
@@ -141,8 +142,7 @@ class PagesController extends Controller {
 			if(!Auth::check())
         {
             return Redirect::back()->with('view-error', ' You need to be logged in to submit a timeshare, please login or register if you do not have an account')->withInput()->withErrors($validator);
-		}
-
+        }
 
         if($validator->fails())
         {
@@ -164,7 +164,7 @@ class PagesController extends Controller {
 		$seller->agencyName = Input::get('agencyName');
 		$seller->referedBy = Input::get('referedBy');
 		$seller->occupationDate1 = Input::get('occupationDate1');
-		$seller->occupationDate2 = Input::get('occupationDate2');
+        $seller->occupationDate2 = Input::get('occupationDate2');
         $seller->save();
 
 
@@ -185,19 +185,35 @@ class PagesController extends Controller {
 		$timeshare->unit = Input::get('unit');
 		$timeshare->owner = Input::get('owner');
 		$timeshare->listingFee = 'Pending';
-		$timeshare->paid = Input::get('paid');
+        $timeshare->paid = Input::get('paid');
+        $timeshare->fromDate = Input::get('occupationDate1');
+        $timeshare->toDate = Input::get('occupationDate2');
 		$timeshare->spacebankedyear = Input::get('spacebankedyear');
 		$timeshare->spacebankOwner = Input::get('spacebankOwner');
 		$timeshare->agency = Auth::user()->agency;
-		$timeshare->agent = Auth::user()->name;
+        $timeshare->agent = Auth::user()->name;
+        /*
+        $request = request();
+
+        $mandate = $request->file('mandate');
+        $profileImageSaveAsName = time() . Auth::id() . "-mandate." . 
+                                  $mandate->getClientOriginalExtension();
+
+        $upload_path = 'mandates/';
+        $profile_image_url = '/'.$upload_path . $profileImageSaveAsName;
+        $success = $mandate->move($upload_path, $profileImageSaveAsName);
+
+        $timeshare->mandate = $profile_image_url; */
+
         $timeshare->save();
 
 		$data = ['timeshare' => $timeshare, 'seller' => $seller];
 
-        Mail::send('emails.timeshare', $data, function($message)
+        Mail::send('emails.timeshare', $data, function($message) use ($timeshare)
         {
             $message->to('info@univateproperties.co.za','Uni-vate')->bcc('koketso.maphopha@gmail.com','Koketso Maphopha')->subject('New timeshare submission');
             $message->from('info@univateproperties.co.za');
+            $message->attach($timeshare->mandate);
 		});
 
 		return Redirect::to('/pay-listing-fee/'.$timeshare->id)->with('view-success',' Your Timeshare has been successfully submitted');
@@ -614,125 +630,300 @@ class PagesController extends Controller {
         if($validator->fails())
         {
             return Redirect::back()->with('view-error', ' There were errors in your submission please review below')->withInput()->withErrors($validator);
-		}
+        }
 
-		DB::table('timeshares')
-                    ->where('id','=', $id)
-                    ->update(array(
-                            'resort' => Input::get('resort')
-                        )
-					);
+        $timeshare = DB::table('timeshares')
+            ->where('id','=',$id)
+            ->first();
+        
+        if(Input::get('resort')!=$timeshare->resort)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'Resort name changed from '.$timeshare->resort.' to '.Input::get('resort');
+            $log->save();
 
-		DB::table('timeshares')
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'resort' => Input::get('resort')
+                )
+            );
+        }
+
+        if(Input::get('module')!=$timeshare->module)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'Module changed from '.$timeshare->module.' to '.Input::get('module');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'module' => Input::get('module')
+                )
+            );
+        }
+
+        if(Input::get('week')!=$timeshare->week)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'Week changed from '.$timeshare->week.' to '.Input::get('week');
+            $log->save();
+            
+            DB::table('timeshares')
+                ->where('id','=', $id)
+                ->update(array(
+                        'week' => Input::get('week')
+                    )
+                );
+
+        }
+
+        if(Input::get('fromDate')!=$timeshare->fromDate)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'Departure date changed from '.$timeshare->fromDate.' to '.Input::get('fromDate');
+            $log->save();
+            
+            DB::table('timeshares')
+                ->where('id','=', $id)
+                ->update(array(
+                        'fromDate' => \Carbon\Carbon::parse(Input::get('fromDate'))->format('Y-m-s')
+                    )
+                );
+        }
+
+        if(Input::get('toDate')!=$timeshare->toDate)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'Arrival date changed from '.$timeshare->toDate.' to '.Input::get('toDate');
+            $log->save();
+            
+            DB::table('timeshares')
 		->where('id','=', $id)
 		->update(array(
-				'module' => Input::get('module')
+				'toDate' => \Carbon\Carbon::parse(Input::get('toDate'))->format('Y-m-s')
 			)
-		);
+        );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'week' => Input::get('week')
-			)
-		);
+        if(Input::get('season')!=$timeshare->season)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'The season was changed from '.$timeshare->season.' to '.Input::get('season');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'season' => Input::get('season')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'season' => Input::get('season')
-			)
-		);
+        if(Input::get('region')!=$timeshare->region)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'The region was changed from '.$timeshare->region.' to '.Input::get('region');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'region' => Input::get('region')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'region' => Input::get('region')
-			)
-		);
+        if(Input::get('setPrice')!=$timeshare->setPrice)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'The set price was changed from '.$timeshare->setPrice.' to '.Input::get('setPrice');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'setPrice' => Input::get('setPrice')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'setPrice' => Input::get('setPrice')
-			)
-		);
+        if(Input::get('price')!=$timeshare->price)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'The price was changed from '.$timeshare->price.' to '.Input::get('price');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'price' => Input::get('price')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'price' => Input::get('price')
-			)
-		);
+        if(Input::get('bedrooms')!=$timeshare->bedrooms)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'The number of bedrooms was changed from '.$timeshare->bedrooms.' to '.Input::get('bedrooms');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'bedrooms' => Input::get('bedrooms')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'bedrooms' => Input::get('bedrooms')
-			)
-		);
+        if(Input::get('sleeps')!=$timeshare->sleeps)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'The maximum occupation per unit was changed from '.$timeshare->sleeps.' to '.Input::get('sleeps');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'sleeps' => Input::get('sleeps')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'sleeps' => Input::get('sleeps')
-			)
-		);
+        if(Input::get('unit')!=$timeshare->unit)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'The unit number was changed from '.$timeshare->unit.' to '.Input::get('unit');
+            $log->save();
+            
+            DB::table('timeshares')
+                ->where('id','=', $id)
+                ->update(array(
+                        'unit' => Input::get('unit')
+                    )
+                );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'unit' => Input::get('unit')
-			)
-		);
+        if(Input::get('owner')!=$timeshare->owner)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'The owner was changed from '.$timeshare->owner.' to '.Input::get('owner');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'owner' => Input::get('owner')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'owner' => Input::get('owner')
-			)
-		);
+        if(Input::get('spacebankedyear')!=$timeshare->spacebankedyear)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'The space banked year was changed from '.$timeshare->spacebankedyear.' to '.Input::get('spacebankedyear');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'spacebankedyear' => Input::get('spacebankedyear')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'spacebankedyear' => Input::get('spacebankedyear')
-			)
-		);
+        if(Input::get('spacebankOwner')!=$timeshare->spacebankOwner)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'The space bank owner was changed from '.$timeshare->spacebankOwner.' to '.Input::get('spacebankOwner');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'spacebankOwner' => Input::get('spacebankOwner')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'spacebankOwner' => Input::get('spacebankOwner')
-			)
-		);
+        if(Input::get('status')!=$timeshare->status)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'The status was changed from '.$timeshare->status.' to '.Input::get('status');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'status' => Input::get('status')
+                )
+            );
+        }
 
-		if(Input::get('status')!='NULL'){
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'status' => Input::get('status')
-			)
-		);
-	}
-	if(Input::get('publish')!='NULL') {
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'published' => Input::get('publish')
-			)
-		);
-	}
+        if(Input::get('published')!=$timeshare->published)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'The publish status was changed from '.$timeshare->published.' to '.Input::get('published');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'published' => Input::get('publish')
+                )
+            );
+        }
 
-
-	if(Input::has('statusDate')) {
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'statusDate' => Input::get('statusDate')
-			)
-		);
-	}
+        if(Input::get('statusDate')!=$timeshare->statusDate)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->change = 'The status date was changed from '.$timeshare->statusDate.' to '.Input::get('statusDate');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'statusDate' => \Carbon\Carbon::parse(Input::get('statusDate'))->format('Y-m-s')
+                )
+            );
+        }
 
 		return Redirect::to('admin')->with('view-success',' Timeshare successfully updated');
 
@@ -2657,6 +2848,7 @@ class PagesController extends Controller {
 
 	public function import()
     {
+        config(['excel.import.startRow' => 1 ]);
         Excel::import(new TimesharesImport, Input::file('ex_file'));
 
         return Redirect::back()->with('view-success', 'Your import is successful!');
@@ -2822,7 +3014,8 @@ class PagesController extends Controller {
 	{
 		$validator = Validator::make(Input::all(),
             [
-				'name' => 'required',
+                'name' => 'required',
+                'surname' => 'required',
 				'email' => 'required',
 				'username' => 'required'
 			]);
@@ -2838,7 +3031,8 @@ class PagesController extends Controller {
         }
 
 			$user = new User;
-			$user->name = Input::get('name');
+            $user->name = Input::get('name');
+            $user->surname = Input::get('surname');
 			$user->email = Input::get('email');
 			$user->phone = Input::get('phone');
 			$user->mobile = Input::get('mobile');
@@ -2900,7 +3094,8 @@ class PagesController extends Controller {
 		if(!Auth::check())
 		{
 			$user = new User;
-			$user->name = Input::get('name');
+            $user->name = Input::get('name');
+            $user->surname = Input::get('surname');
 			$user->email = Input::get('email');
 			$user->phone = Input::get('phone');
 			$user->mobile = Input::get('mobile');
@@ -3861,8 +4056,9 @@ class PagesController extends Controller {
     public function servePreListedWeeks()
     {
         $timeshares = DB::table('timeshares')
-            ->where('owner','=','Lengen')
+            ->where('owner','=','UB')
             ->where('pre_selected','=',0)
+            ->where('chosen','=',NULL)
             ->paginate(10);
 
             return View::make('pre-listed-weeks')
@@ -3872,13 +4068,13 @@ class PagesController extends Controller {
     public function handlePreListedWeeks()
     {
         $selected = Input::get('selected');
-
+        
         foreach($selected as $id)
         {
             DB::table('timeshares')
                     ->where('id','=', $id)
                     ->update(array(
-                            'agency' => Auth::user()->agency
+                            'chosen' => Auth::user()->agency
                         )
                     );
 
@@ -3888,24 +4084,28 @@ class PagesController extends Controller {
                     'pre_selected' => 1
                 )
             );
-        }
+        } 
 
-        $leftovers = DB::table('timeshares')
-            ->where('pre_selected','=',0)
-            ->where('owner','=','Lengen')
+        $selectedWeeks = NULL;
+
+        foreach($selected as $id)
+        {
+           $selectedWeeks = DB::table('timeshares')
+            ->where('id','=',$id)
             ->get();
+        }
 
         $agency = Auth::user()->agency;
 
-        $data = ['leftovers' => $leftovers, 'agency' => $agency];
+        $data = ['selectedWeeks' => $selectedWeeks, 'agency' => $agency];
 
         Mail::send('emails.pre-select', $data, function($message)
         {
-            $message->to('brucel@uni-vision.co.za','Bruce Lynwood')->bcc('koketso.maphopha@gmail.com','Koketso Maphopha')->subject('Leftover tender weeks');
+            $message->to('brucel@uni-vision.co.za','Bruce Lynwood')->bcc('koketso.maphopha@gmail.com','Koketso Maphopha')->subject('Tender weeks selected');
             $message->from('info@univateproperties.co.za');
 		});
 
-        return Redirect::to('view-all-timeshares')->with('view-success','Your selection of timeshares is now assigned to your agency.');
+        return Redirect::to('pre-listed-weeks')->with('view-success','Your selection of timeshares has now been sent for authorisation.');
     }
 
     public function prelistAcessList()
@@ -3942,6 +4142,222 @@ class PagesController extends Controller {
         );
 
         return Redirect::back()->with('view-success','Access Revoked.');
+    }
+
+    public function verifyTimeshare($id)
+	{
+		DB::table('timeshares')
+                    ->where('id','=', $id)
+                    ->update(array(
+                            'verified' => 1
+                        )
+					);
+
+		return Redirect::back()->withInput()->with('view-success', 'Timeshare has been successfully verified.');
+    }
+
+    public function serveSelctedPreListedWeeks()
+    {
+        $timeshares = DB::table('timeshares')
+            ->where('owner','=','Lengen')
+            ->where('pre_selected','=',0)
+            ->paginate(10);
+
+            return View::make('authorise-pre-listed-weeks')
+                ->with('timeshares',$timeshares);
+    }
+
+    public function handleAuthorisePreselectedWeeks()
+    {
+
+    }
+
+    public function serveNewResort()
+    {
+        return View::make('new-resort');
+    }
+
+    public function filterWeeks($slug)
+    {
+        $resort = DB::table('resorts')
+		->where('slug','=',$slug)
+		->first();
+		
+		$awards = explode(',',$resort->awards);
+        $facilities = explode(',',$resort->facilities);
+
+        //$start = \DateTime::createFromFormat('m-d-Y', Input::get('from'))->format('Y-m-d');
+       // $end = \DateTime::createFromFormat('m-d-Y', Input::get('to'))->format('Y-m-d');
+      
+
+       // Timeshare::whereDate('exam_date', '>=', Carbon::now()->toDateString());
+
+        $timeshares = Timeshare::whereBetween(DB::raw('DATE(fromDate)'), array(Input::get('from'), Input::get('to')))->paginate(10);
+         
+            return View::make('filtered-weeks')
+                ->with('resort',$resort)
+                ->with('awards',$awards)
+                ->with('facilities',$facilities)
+                ->with('timeshares',$timeshares);
+    }
+
+    public function serveEditProfile($id)
+    {
+        $user = DB::table('users')
+            ->where('id','=',$id)
+            ->first();
+
+            return View::make('update-profile')
+                ->with('user',$user);
+    }
+
+    public function handleEditProfile($id)
+	{
+		$validator = Validator::make(Input::all(),
+            [
+                'name' => 'required',
+				'email' => 'required'
+            ]);
+
+        if($validator->fails())
+        {
+            return Redirect::back()->with('view-error', ' There were errors in your submission please review below')->withInput()->withErrors($validator);
+		}
+
+		DB::table('users')
+                    ->where('id','=', $id)
+                    ->update(array(
+                            'name' => Input::get('name')
+                        )
+					);
+
+		DB::table('users')
+		->where('id','=', $id)
+		->update(array(
+				'surname' => Input::get('surname')
+			)
+		);
+
+		DB::table('users')
+		->where('id','=', $id)
+		->update(array(
+				'email' => Input::get('email')
+			)
+		);
+
+		DB::table('users')
+		->where('id','=', $id)
+		->update(array(
+				'phone' => Input::get('tel')
+			)
+		);
+
+		DB::table('users')
+		->where('id','=', $id)
+		->update(array(
+				'mobile' => Input::get('cell')
+			)
+        );
+     
+		return Redirect::back()->with('view-success',"You have successfully updated your details");
+
+    }
+    
+    public function serveUploadTenderWeeks()
+    {
+        return View::make('admin.upload-tender-weeks');
+    }
+
+    public function handleExcelUpload()
+    {
+        config(['excel.import.startRow' => 1 ]);
+        Excel::import(new TimesharesImport, Input::file('ex_file'));
+
+        return Redirect::back()->with('view-success', 'Your import is successful!');
+    }
+
+    public function reviewPrelistedWeeks()
+    {
+        $agencies = DB::table('agencies')
+            ->paginate(10);
+
+        return View::make('admin.review-prelisted-weeks')
+            ->with('agencies',$agencies);
+    }
+
+    
+
+    public function selectedWeeks($id)
+    {
+        $agency = DB::table('agencies')
+            ->where('id','=',$id)
+            ->first();
+
+        $timeshares = DB::table('timeshares')
+            ->where('chosen','=',$agency->agency)
+            ->paginate(10);
+
+            return View::make('admin.selected-weeks')
+                ->with('agency',$agency)
+                ->with('timeshares',$timeshares);
+
+        
+
+    }
+
+    public function handleReviewPrelistedWeeks($id)
+    {
+        $agency = DB::table('agencies')
+            ->where('id','=',$id)
+            ->first();
+
+        $selected = Input::get('selected');
+        
+        foreach($selected as $id)
+        {
+            DB::table('timeshares')
+                    ->where('id','=', $id)
+                    ->update(array(
+                            'agency' => $agency->agency
+                        )
+                    );
+
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'pre_selected' => 1
+                )
+            );
+        } 
+
+        $data = ['agency' => $agency];
+
+        Mail::send('emails.pre-list-authorised', $data, function($message)
+        {
+            $message->to('brucel@uni-vision.co.za','Bruce Lynwood')->bcc('koketso.maphopha@gmail.com','Koketso Maphopha')->subject('Tender weeks preselection approved.');
+            $message->from('info@univateproperties.co.za');
+		});
+
+        return Redirect::to('review-prelisted-weeks')->with('view-success','Tender weeks have been successfully assigned to agency.'); 
+    }
+
+    public function publishTheRest()
+    {
+        $timeshares = DB::table('timeshares')
+            ->where('owner','=','UB')
+            ->get();
+
+            foreach($timeshares as $timeshare)
+            {
+                DB::table('timeshares')
+                    ->where('id','=', $id)
+                    ->update(array(
+                            'id' => $timeshare->id
+                        )
+            );
+            }
+
+            return Redirect::to('review-prelisted-weeks')->with('view-success','The remaining timeshares have been successfully published.'); 
     }
 
 }

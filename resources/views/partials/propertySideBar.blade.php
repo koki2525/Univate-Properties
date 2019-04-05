@@ -3,7 +3,7 @@
         <h2>{{ $property->name }} Info</h2>
         <ul class="facilities">
             @if($property->location)<li>{{ $property->location }}</li>@endif
-            @if($property->price)<li>{{ $property->price }}</li>@endif
+            @if($property->price)<li>R {{ number_format($property->price, 2) }}</li>@endif
             @if($property->size)<li>{{ $property->size }}</li>@endif
             @if($property->bedrooms)<li>{{ $property->bedrooms }} Bedroom</li>@endif
             @if($property->bathrooms)<li>{{ $property->bathrooms }} Bathroom</li>@endif
@@ -23,7 +23,7 @@
                 <input class="form-control" type="email" name="email" placeholder="Email" />
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" name="cell" placeholder="Contact number" />
+                <input class="form-control" type="text" id="mobile" name="cell" placeholder="Contact number" />
             </div>
             <div class="form-group">
                 <input class="form-control" type="text" name="property" placeholder="Property" />

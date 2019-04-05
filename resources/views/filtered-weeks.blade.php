@@ -15,7 +15,7 @@
     </div>
     <div class="row">
         <div class="col-md-7 offset-md-1">
-            <form id="mainForm" method="POST" action="/filter-weeks/{{ $resort->slug }}" accept-charset="UTF-8" enctype="multipart/form-data">
+            <form id="mainForm" method="POST" action="/filter-weeks{{ $resort->slug }}" accept-charset="UTF-8" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
@@ -24,13 +24,12 @@
                                     From : <input data-date-format="dd-mm-yyyy" id="datepicker1" class="form-control" name="from" value="{{ old('date') }}"  />
                                 </div>
                                 <div class="col-md-4">
-                                    To : <input data-date-format="dd-mm-yyyy" <div class="form-row">
+                                    To : <input data-date-format="dd-mm-yyyy" id="datepicker2" class="form-control" name="to" value="{{ old('date') }}"  /><br><br>
                                 </div>
-            
-      
                                 <div class="col-md-4">
                                     <br>
                                     <button class="btn btn-blue">Filter</button>
+                                    <a class="btn btn-blue even-width mr-auto" href="javascript:history.back()">BACK</a>
                                 </div>
                         </div> 
             </form>
@@ -58,16 +57,8 @@
                                 <td><span data-module="{{ $timeshare->module }}">{{ $timeshare->module }}</span></td>
                                 <td><span data-bedrooms="{{ $timeshare->bedrooms }}">{{ $timeshare->bedrooms }}</span></td>
                                 <td><span data-season="{{ $timeshare->season }}">{{ $timeshare->season }}</span></td>
-                                @if($timeshare->fromDate==NULL)
-                                <td> - </td>
-                                @else
-                                <td>{{ \Carbon\Carbon::parse($timeshare->fromDate)->format('jS F Y') }}</td>
-                                @endif
-                                @if($timeshare->toDate==NULL)
-                                <td> - </td>
-                                @else
-                                <td><span data-season="">{{ \Carbon\Carbon::parse($timeshare->toDate)->format('jS F Y') }}</span></td>
-                                @endif
+                                <td><span data-season="">{{ $timeshare->fromDate }}</span></td>
+                                <td><span data-season="">{{ $timeshare->toDate }}</span></td>
                                 <td><span data-setPrice="{{ $timeshare->setPrice }}">R{{ number_format($timeshare->setPrice, 2) }}</span></td>
                                 <td><span data-status="{{ $timeshare->status }}">{{ $timeshare->status }}</span></td>
                                 <td><a  href="/timeshare-enquiry/{{ $timeshare->id }}" ><i class="fa fa-flag" aria-hidden="true"></i> Yes</a></td>

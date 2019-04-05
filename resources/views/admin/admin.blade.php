@@ -142,7 +142,7 @@
             <hr>
 
 
-                <form id="mainForm" method="POST" action="/upload-timeshares" accept-charset="UTF-8" enctype="multipart/form-data">
+                <!--<form id="mainForm" method="POST" action="/upload-timeshares" accept-charset="UTF-8" enctype="multipart/form-data">
                     @csrf
                     <div style="margin-left: 18rem;" class="col-md-10 offset-md-1">
                     <label for="file">Excel Upload</label>
@@ -150,7 +150,7 @@
                     <button class="btn btn-blue" type="submit">
                             LOAD
                     </button>
-                    </div>
+                    </div> -->
                 </form>
         </div>
     </div>
@@ -190,7 +190,7 @@
                         <td>{{ $timeshare->bedrooms }}</td>
                         <td>{{ ucfirst(trans($timeshare->season)) }}</td>
                         <td>{{ ucfirst(trans($timeshare->region)) }}</td>
-                        <td>R {{ $timeshare->price }}</td>
+                        <td>R {{ number_format($timeshare->price, 2) }}</td>
                         <td>{{ $timeshare->created_at }}</td>
 
                         @if($timeshare->published==1)

@@ -32,6 +32,8 @@
         <p>Region : {{ $timeshare->region }}</p>
         <p>Asking Price : {{ $timeshare->price }}</p>
         <p>Region : {{ $timeshare->region }}</p>
+        <p>Arrival Date : {{  $timeshare->fromDate }}</p>
+        <p>Departure Date : {{  $timeshare->toDate }}</p>
 
         <h2>Share Transfer Information</h2>
         <p>Were you referred by an agent? : {{ $seller->referedBy }}</p>

@@ -20,9 +20,9 @@
     </head>
     
     <body>
-        <p>Dear Delia</p>
+        <p>Dear {{ $agency->agency }}</p>
 
-        <p>{{ $agency }} has selected timeshares on the pre-select list. Please authorise on the admin panel.</p>
+        <p>The pre-selected weeks you selected have now been verified and are now listed under your agency. Login into the website and view your updated agency listings.</p>
 
         <p>Regards,<br>
         The Uni-Vate Properties Team

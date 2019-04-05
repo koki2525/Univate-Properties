@@ -1,5 +1,6 @@
-body, html {
-    font-size: 15px;
+body,
+html {
+    font-size: 13.7px !important;
     color: #666;
     font-family: 'Roboto', sans-serif;
     height: 100%;
@@ -38,11 +39,12 @@ h2 {
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: rgba(255,255,255,.8);
+    color: rgba(255, 255, 255, .8);
 }
 
-.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
-    color: rgba(255,255,255,1);
+.navbar-dark .navbar-nav .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: rgba(255, 255, 255, 1);
 }
 
 .dropdown-menu {
@@ -65,7 +67,9 @@ h2 {
     display: block;
 }
 
-.accordion .card:first-of-type, .card-header:first-child, .accordion .card:last-of-type .accordion .card:not(:first-of-type) .card-header:first-child {
+.accordion .card:first-of-type,
+.card-header:first-child,
+.accordion .card:last-of-type .accordion .card:not(:first-of-type) .card-header:first-child {
     border-radius: 0;
 }
 
@@ -102,7 +106,7 @@ h2 {
 }
 
 .sidebar .form-control {
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .sidebar .form-control::placeholder {
@@ -124,7 +128,10 @@ h2 {
     padding-left: 18px;
 }
 
-p a:link, p a:visited, p a:active, .blue-text {
+p a:link,
+p a:visited,
+p a:active,
+.blue-text {
     color: #72C5ED;
 }
 
@@ -152,7 +159,7 @@ p a:hover {
 }
 
 form legend {
-    font-size: 15px;    
+    font-size: 15px;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -166,7 +173,8 @@ form legend {
     color: #666;
 }
 
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
     background-color: #33689B;
     color: #fff;
     border-color: #33689B;
@@ -185,7 +193,7 @@ ol {
     padding-left: 17px;
 }
 
-ol > li {
+ol>li {
     counter-increment: item;
     margin-bottom: 25px;
 }
@@ -194,12 +202,12 @@ ol ol {
     padding-left: 40px;
 }
 
-ol ol > li {
+ol ol>li {
     display: block;
     margin-bottom: 0;
 }
 
-ol ol > li:before {
+ol ol>li:before {
     content: counters(item, ".") ". ";
     margin-left: -30px;
 }
@@ -208,8 +216,12 @@ footer {
     background-color: #C2C0BF;
 }
 
-footer p, footer a:link , footer a:visited , footer a:hover , footer a:active {
-    color: rgba(255,255,255,1);
+footer p,
+footer a:link,
+footer a:visited,
+footer a:hover,
+footer a:active {
+    color: rgba(255, 255, 255, 1);
     font-size: 12px;
     text-decoration: none;
 }
@@ -222,12 +234,11 @@ footer p, footer a:link , footer a:visited , footer a:hover , footer a:active {
 }
 
 @media (max-width: 768px) {
-
     .form-row {
         margin-bottom: 0;
     }
-    
-    .form-row>.col, .form-row>[class*=col-] {
+    .form-row>.col,
+    .form-row>[class*=col-] {
         margin-bottom: 15px;
     }
 }

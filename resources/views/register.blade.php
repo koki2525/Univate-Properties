@@ -31,7 +31,7 @@
                         <input class="form-control" type="email" name="email" placeholder="Email">
                     </div>
                     <div class="col-md-6">
-                        <input class="form-control" type="text" name="mobile" placeholder="Contact Number">
+                        <input class="form-control" type="text" name="mobile" id="mobile" placeholder="Contact Number">
                     </div>
                 </div>
                 <div class="form-row">
@@ -48,8 +48,8 @@
 
                 <button class="btn btn-blue btn-lg" id="submit" type="submit">SUBMIT</button>
             </form>
-        </div>  
+        </div>
     </div>
-    
-</div> 
+
+</div>
 @stop

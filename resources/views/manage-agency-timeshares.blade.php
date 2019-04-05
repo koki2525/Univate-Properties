@@ -114,7 +114,7 @@
             rt.adjustCount = 0;
         }
     });
-    
+
     function Conform_Delete() {
         return confirm("Are you sure want to delete this timeshare?");
     }
@@ -142,7 +142,7 @@
                         <th>Season</th>
                         <th>Region</th>
                         <th>Amount</th>
-                        <th>Submitted</th>
+                        <th>Verified</th>
                         <th>Publish</th>
                         <th>Status</th>
                         <th>Edit</th>
@@ -162,7 +162,19 @@
                         <td>{{ ucfirst(trans($timeshare->season)) }}</td>
                         <td>{{ ucfirst(trans($timeshare->region)) }}</td>
                         <td>R {{ $timeshare->price }}</td>
-                        <td>{{ $timeshare->created_at }}</td>
+                        @if($timeshare->verified==1)
+                        <td class="text-center">
+                            <a href="/verifyTimeshare/{{ $timeshare->id }}">
+                                <i class="fas fa-cloud-upload-alt fa-2x text-success"></i>
+                            </a>
+                        </td>
+                        @else
+                        <td class="text-center">
+                            <a href="/verifyTimeshare/{{ $timeshare->id }}">
+                                <i class="fas fa-cloud-upload-alt fa-2x text-danger"></i>
+                            </a>
+                        </td>
+                        @endif
 
                         @if($timeshare->published==1)
                         <td class="text-center">
@@ -177,7 +189,7 @@
                             </a>
                         </td>
                         @endif
-                        
+
                         <td>{{ $timeshare->status }}</td>
 
                         <td class="text-center">
@@ -196,7 +208,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <div class="col-md-6 offset-md-3 mb-4 d-flex justify-content-center">
             <?php echo $timeshares->links(); ?>
         </div>

@@ -123,34 +123,9 @@
 
 <div class="container-fluid">
     <div class="row mb-4 mt-5">
-        <div class="col-md-10 offset-md-1">
-            <!--<form id="mainForm" method="POST" action="/search" accept-charset="UTF-8" enctype="multipart/form-data">
-            @csrf
-                <div class="form-row">
-                    <div class="col-md-5 offset-md-3">
-                        <input class="form-control" name="search" type="text">
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-blue" type="submit">
-                            <i class="fas fa-search-plus"></i>
-                            SEARCH
-                        </button>
-                    </div>
-                </div>
-            </form> -->
-
-                <!--
-                <form id="mainForm" method="POST" action="/upload-timeshares" accept-charset="UTF-8" enctype="multipart/form-data">
-                    @csrf
-                    <div style="margin-left: 18rem;" class="col-md-10 offset-md-1">
-                    <label for="file">Excel Upload</label>
-                    <input type="file" id="file" name="ex_file">
-                    <button class="btn btn-blue" type="submit">
-                            LOAD
-                    </button>
-                    </div>
-                </form> -->
-                <h1>Access Control for pre-listed weeks</h1>
+        <div class="col-md-10 offset-md-1">  
+            <h1>Access Control for pre-listed weeks</h1>
+            <a class="btn btn-primary" href="/review-prelisted-weeks">Approve Pre-selected Weeks</a>
         </div>
     </div>
 

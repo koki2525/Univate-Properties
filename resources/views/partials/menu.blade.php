@@ -2,21 +2,21 @@
     <div class="row">
         <div class="col-md-12 text-center">
             <p class="mb-0"><img class="img-fluid logo" src="{{ asset('/images/logo.png') }}" alt="Uni-Vate Properties Logo" /></p>
-            @if(Auth::check() && Auth::user()->role == "agent")
-            <p style="color: black;font-style: italic;">Agent : {{ Auth::user()->name }} from {{ Auth::user()->agency }}</p>
-            @elseif(Auth::check() && Auth::user()->role == "agency admin")
-            <p style="color: black;font-style: italic;">Agency administrator : {{ Auth::user()->name }} from {{ Auth::user()->agency }}</p>
-            @elseif(Auth::check() && Auth::user()->role == "user" && Auth::user()->agency)
-            <p style="color: black;font-style: italic;">Agent : {{ Auth::user()->name }} from {{ Auth::user()->agency }}</p>
-            @elseif(Auth::check() && Auth::user()->role == "user")
-            <p style="color: black;font-style: italic;">Private Individual : {{ Auth::user()->name }}</p>
-            @elseif(Auth::check() && Auth::user()->role == "admin")
-            <p style="color: black;font-style: italic;">Super Administrator : {{ Auth::user()->name }}</p>
-            @endif
             <div class="social-media">
                 <a href="tel:+27124921238"><i class="fas fa-phone-square fa-2x"></i></a>
                 <a href="mailto:info@univateproperties.co.za"><i class="fas fa-envelope-square fa-2x"></i></a>
                 <a href="https://www.facebook.com/univateproperties/" target="_blank"><i class="fab fa-facebook-square fa-2x"></i></a>
+                @if(Auth::check() && Auth::user()->role == "agent")
+                <p style="color: black;font-style: italic;">Agent : {{ Auth::user()->name }} from {{ Auth::user()->agency }}</p>
+                @elseif(Auth::check() && Auth::user()->role == "agency admin")
+                <p style="color: black;font-style: italic;">Agency administrator : {{ Auth::user()->name }} from {{ Auth::user()->agency }}</p>
+                @elseif(Auth::check() && Auth::user()->role == "user" && Auth::user()->agency)
+                <p style="color: black;font-style: italic;">Agent : {{ Auth::user()->name }} from {{ Auth::user()->agency }}</p>
+                @elseif(Auth::check() && Auth::user()->role == "user")
+                <p style="color: black;font-style: italic;">Private Individual : {{ Auth::user()->name }}</p>
+                @elseif(Auth::check() && Auth::user()->role == "admin")
+                <p style="color: black;font-style: italic;">Super Administrator : {{ Auth::user()->name }}</p>
+                @endif
             </div>
         </div>
     </div>
@@ -113,6 +113,24 @@
                             @endif
                         </div>
                     </li>
+                    @if(Auth::check())
+                        <li class="nav-item">
+                            <a class="nav-link" href="/update-profile/{{ Auth::user()->id }}">Update Profile</a>
+                        </li>
+                    @endif
+                    @if(Auth::check() && Auth::user()->role === 'admin')
+                        <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Tender Weeks
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="/upload-tender-weeks">Tender Weeks Upload</a>
+                                    <a class="dropdown-item" href="/pre-list-access">Manage Access</a>
+                                    <a class="dropdown-item" href="/review-prelisted-weeks">Approve selected Weeks</a>
+                                </div>
+                            </li>
+                        </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" href="/contact-us">Contact Us</a>
                     </li>

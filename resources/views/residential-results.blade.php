@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-6">
                 <h2>{{ $residential->name }}</h2>
-                <h4>Price {{ $residential->price }}</h4>
+                <h4>Price R {{ number_format($residential->price, 2) }}</h4>
                 <p class="description">{{ $residential->intro }}</p>
             </div>
             <div class="col-md-3 text-center d-flex justify-content-center flex-column">

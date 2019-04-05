@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Pre-listed Weeks')
+@section('title', 'Authorise pre-listed Weeks')
 
 @section('description', '')
 
@@ -127,15 +127,14 @@
             <h1>Pre-listed Weeks</h1>
         </div>
     </div>
-    <form id="mainForm" method="POST" action="/pre-listed-weeks" accept-charset="UTF-8" enctype="multipart/form-data">
+    <form id="mainForm" method="POST" action="/authorise-pre-listed-weeks" accept-charset="UTF-8" enctype="multipart/form-data">
         @csrf
     <div class="row">
         <div class="col-md-10 offset-md-1 table-responsive">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
-                        <th>Owner</th>
-                        <th>Agent</th>
+                        <th>Agency</th>
                         <th>Resort</th>
                         <th>Week</th>
                         <th>Module</th>
@@ -152,8 +151,7 @@
                 <tbody>
                     @foreach($timeshares as $timeshare)
                     <tr>
-                        <td>{{ $timeshare->owner }}</td>
-                        <td>{{ $timeshare->agent }}</td>
+                        <td>{{ $timeshare->agency }}</td>
                         <td>{{ $timeshare->resort }}</td>
                         <td>{{ $timeshare->week }}</td>
                         <td>{{ $timeshare->module }}</td>

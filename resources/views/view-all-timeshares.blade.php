@@ -114,7 +114,7 @@
             rt.adjustCount = 0;
         }
     });
-    
+
     function Conform_Delete() {
         return confirm("Are you sure want to delete this timeshare?");
     }
@@ -176,7 +176,7 @@
                         <td>{{ $timeshare->bedrooms }}</td>
                         <td>{{ ucfirst(trans($timeshare->season)) }}</td>
                         <td>{{ ucfirst(trans($timeshare->region)) }}</td>
-                        <td>R {{ $timeshare->price }}</td>
+                        <td>R {{ number_format($timeshare->price, 2) }}</td>
                         <td>{{ $timeshare->created_at }}</td>
 
                         @if($timeshare->published==1)
@@ -188,7 +188,7 @@
                             <i class="fas fa-cloud-upload-alt fa-2x text-danger"></i>
                         </td>
                         @endif
-                        
+
                         <td>{{ $timeshare->status }}</td>
                         <!--<td>{{ date('F d, Y', strtotime($timeshare->updated_at)) }}</td>-->
                     </tr>
@@ -196,7 +196,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <div class="col-md-6 offset-md-3 mb-4 d-flex justify-content-center">
             <?php echo $timeshares->links(); ?>
         </div>

@@ -243,7 +243,5 @@ Route::post('update-profile/{id}','PagesController@handleEditProfile');
 Route::get('upload-tender-weeks','PagesController@serveUploadTenderWeeks');
 Route::post('upload-tender-weeks','PagesController@handleExcelUpload');
 Route::get('review-prelisted-weeks','PagesController@reviewPrelistedWeeks');
-Route::get('selected-weeks/{id}','PagesController@selectedWeeks');
-Route::post('selected-weeks/{id}','PagesController@handleReviewPrelistedWeeks');
 
-Route::get('publish-remaining-weeks','PagesController@publishTheRest');
+Route::post('selected-weeks/{id}','PagesController@handleReviewPrelistedWeeks');

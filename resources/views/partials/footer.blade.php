@@ -10,8 +10,8 @@
 
 <script src="https://unpkg.com/gijgo@1.9.11/js/gijgo.min.js" type="text/javascript"></script>
 
-<script src="{{ asset('/js/popper.min.js') }}"></script>   
-<script src="{{ asset('/js/bootstrap.min.js') }}"></script>  
+<script src="{{ asset('/js/popper.min.js') }}"></script>
+<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 
 <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
 
@@ -30,7 +30,7 @@
     $('body')
       .on('mouseenter mouseleave','.dropdown',toggleDropdown)
       .on('click', '.dropdown-menu a', toggleDropdown);
-        
+
     $(document).ready(function() {
 
         if(window.location.href.indexOf('#contactModal') != -1) {
@@ -61,10 +61,30 @@
     $('#datepicker4').datepicker({
         uiLibrary: 'bootstrap4'
     });
+    $('#datepicker5').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
+    $('#datepicker6').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
     $('#statusDate').datepicker({
         uiLibrary: 'bootstrap4',
         format: 'dd/mm/yyyy'
     });
+</script>
+
+<script>
+    document.getElementById('mobile').addEventListener('input', function (e) {
+        var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+        e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+      });
+</script>
+
+<script>
+    document.getElementById('phone').addEventListener('input', function (e) {
+        var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+        e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+      });
 </script>
 
 <script>

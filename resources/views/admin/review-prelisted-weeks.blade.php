@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Pre-listed Weeks')
+@section('title', 'Prelist')
 
 @section('description', '')
 
@@ -114,71 +114,49 @@
             rt.adjustCount = 0;
         }
     });
-
+    
     function Conform_Delete() {
-        return confirm("Are you sure want to delete this timeshare?");
+        return confirm("Are you sure want to delete this agency?");
     }
 
 </script>
 
 <div class="container-fluid">
     <div class="row mb-4 mt-5">
-        <div class="col-md-10 offset-md-1">
-            <h1>Pre-listed Weeks</h1>
+        <div class="col-md-10 offset-md-1">  
+            <h1>Manage pre-listed weeks</h1>
         </div>
     </div>
-    <form id="mainForm" method="POST" action="/pre-listed-weeks" accept-charset="UTF-8" enctype="multipart/form-data">
-        @csrf
+
     <div class="row">
         <div class="col-md-10 offset-md-1 table-responsive">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
-                        <th>Owner</th>
-                        <th>Agent</th>
-                        <th>Resort</th>
-                        <th>Week</th>
-                        <th>Module</th>
-                        <th>Unit</th>
-                        <th>Beds</th>
-                        <th>Season</th>
-                        <th>Region</th>
-                        <th>Amount</th>
-                        <th>Submitted</th>
-                        <th>Status</th>
-                        <th>Select</th>
+                        <th>Agency</th>
+                        <th>View selected pre-listed weeks</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($timeshares as $timeshare)
+                    @foreach($agencies as $agency)
                     <tr>
-                        <td>{{ $timeshare->owner }}</td>
-                        <td>{{ $timeshare->agent }}</td>
-                        <td>{{ $timeshare->resort }}</td>
-                        <td>{{ $timeshare->week }}</td>
-                        <td>{{ $timeshare->module }}</td>
-                        <td>{{ $timeshare->unit }}</td>
-                        <td>{{ $timeshare->bedrooms }}</td>
-                        <td>{{ ucfirst(trans($timeshare->season)) }}</td>
-                        <td>{{ ucfirst(trans($timeshare->region)) }}</td>
-                        <td>R {{ number_format($timeshare->price, 2) }}</td>
-                        <td>{{ $timeshare->created_at }}</td>
-                        <td>{{ $timeshare->status }}</td>
-                        <th><input type="checkbox" name="selected[]" value="{{ $timeshare->id }}"></th>
+                        <td>{{ $agency->agency }}</td>
+                        <td class="text-center">
+                            <a href="/selected-weeks/{{ $agency->id }}">
+                                <i class="fa fa-list"> Manage</i>
+                            </a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-            <button class="btn btn-blue btn-lg" id="submit" type="submit">SUBMIT</button>
         </div>
-
+        
         <div class="col-md-6 offset-md-3 mb-4 d-flex justify-content-center">
-            <?php echo $timeshares->links(); ?>
+            <?php echo $agencies->links(); ?>
         </div>
     </div>
 </div>
-
-</form>
 
 
 @stop

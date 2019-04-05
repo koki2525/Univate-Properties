@@ -124,10 +124,10 @@
 <div class="container-fluid">
     <div class="row mb-4 mt-5">
         <div class="col-md-10 offset-md-1">
-            <h1>Pre-listed Weeks</h1>
+            <h1>{{ $agency->agency }} pre-listed weeks</h1>
         </div>
     </div>
-    <form id="mainForm" method="POST" action="/pre-listed-weeks" accept-charset="UTF-8" enctype="multipart/form-data">
+    <form id="mainForm" method="POST" action="/selected-weeks/{{ $agency->id }}" accept-charset="UTF-8" enctype="multipart/form-data">
         @csrf
     <div class="row">
         <div class="col-md-10 offset-md-1 table-responsive">
@@ -169,7 +169,9 @@
                     @endforeach
                 </tbody>
             </table>
-            <button class="btn btn-blue btn-lg" id="submit" type="submit">SUBMIT</button>
+            <button class="btn btn-blue btn-lg" id="submit" type="submit">APPROVE</button>
+            <a class="btn btn-blue btn-lg" href="/publish-remaining-weeks">PUBLISH THE REST</a>
+            <a class="btn btn-blue btn-lg" href="javascript:history.back()">BACK</a>
         </div>
 
         <div class="col-md-6 offset-md-3 mb-4 d-flex justify-content-center">

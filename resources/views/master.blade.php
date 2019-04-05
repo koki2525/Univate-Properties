@@ -110,6 +110,8 @@
     @include('partials.login')
     <!-- register -->
     @include('partials.register')
+    <!-- login/register -->
+    @include('partials.loginOrRegister')
     @endif
     
 </body>

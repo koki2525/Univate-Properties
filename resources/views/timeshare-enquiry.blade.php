@@ -21,7 +21,6 @@
         <div class="col-md-6">
             <form id="mainForm" method="POST" action="/interested-timeshare/{{ $timeshare->id }}" accept-charset="UTF-8" enctype="multipart/form-data">
             @csrf
-                <input id="resort" type="hidden" value="{{ $timeshare->resort }}">
                  <div class="form-row">
                     <div class="col-md-6">
                         <label for="resortName">Unit</label>
@@ -39,7 +38,13 @@
                     </div>
                     <div class="col-md-6">
                         <label for="price">Price</label>
-                        <input class="form-control" type="text" name="price" id="price" value="R {{ $timeshare->price }}" disabled>
+                        <input class="form-control" type="text" name="price" id="price" value="R {{ number_format($timeshare->price, 2) }}" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label for="resortModule">Current Year Levy</label>
+                        <input class="form-control" type="text" id="levy" name="levy" value="R {{ number_format($timeshare->levy, 2) }}" disabled>
                     </div>
                 </div>
                 <div class="form-row">
@@ -58,11 +63,12 @@
                     </div>
                 </div>
 
-                <button class="btn btn-blue even-width mr-auto" id="submit" type="submit">ENQUIRE NOW</button>
+                <button class="btn btn-blue even-width mr-auto" type="submit">ENQUIRE NOW</button>
                 @if(Auth::check())
                 <a class="btn btn-blue even-width mr-auto" href="/share-transfer-initiation-for-purchaser/{{ $timeshare->id }}">MAKE AN OFFER</a>
                 @else
-                <a class="btn btn-blue even-width mr-auto" href="#" data-toggle="modal" data-target="#loginModal">MAKE AN OFFER</a>
+                <a class="btn btn-blue even-width mr-auto" href="#" data-toggle="modal" data-target="#loginOrRegister">MAKE AN OFFER</a>
+                
                 @endif
                 <a class="btn btn-blue even-width mr-auto" href="javascript:history.back()">BACK</a>
             </form>
@@ -79,6 +85,6 @@
             <img class="img-fluid" src="{{ $resort->image3 }}" alt="Resort Image" />
         </div>
     </div>
-        
+
 </div>
 @stop

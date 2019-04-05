@@ -10,7 +10,7 @@
                 <input class="form-control" type="email" name="email" placeholder="Email" />
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" name="cell" placeholder="Contact number" />
+                <input class="form-control" type="text" id="mobile" name="cell" placeholder="Contact number" />
             </div>
             <div class="form-group">
                 <textarea class="form-control" name="message" placeholder="Message"></textarea>

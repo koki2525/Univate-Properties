@@ -45,18 +45,18 @@
                                 {{ __('Remember Me') }}
                             </label>
                         </div>
+                        
                     </div>
 
                     <div class="form-group mb-0">
-                        <button type="submit" class="btn btn-blue">
+                        <button style="width: 100%;" type="submit" class="btn btn-blue">
                             {{ __('Login') }}
                         </button>
-
                         @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                {{ __('Forgot Your Password?') }}
-                            </a>
-                        @endif
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
                     </div>
                 </form>
             </div>
