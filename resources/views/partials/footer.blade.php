@@ -59,13 +59,16 @@
         format: 'dd/mm/yyyy'
     });
     $('#datepicker4').datepicker({
-        uiLibrary: 'bootstrap4'
+        uiLibrary: 'bootstrap4',
+        format: 'dd/mm/yyyy'
     });
     $('#datepicker5').datepicker({
-        uiLibrary: 'bootstrap4'
+        uiLibrary: 'bootstrap4',
+        format: 'dd/mm/yyyy'
     });
     $('#datepicker6').datepicker({
-        uiLibrary: 'bootstrap4'
+        uiLibrary: 'bootstrap4',
+        format: 'dd/mm/yyyy'
     });
     $('#statusDate').datepicker({
         uiLibrary: 'bootstrap4',

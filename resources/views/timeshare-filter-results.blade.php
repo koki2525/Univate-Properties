@@ -15,12 +15,14 @@
     </div>
     <div class="row">
         <div class="col-md-7 offset-md-1">
-           
+            <form id="mainForm" method="POST" action="/filter-weeks/{{ $resort->slug }}" accept-charset="UTF-8" enctype="multipart/form-data">
+                @csrf
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
                                 
                         </div> 
+            </form>
                     <table style="font-size: 12px;" class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
@@ -68,6 +70,7 @@
                 </div>
                 <div class="col-md-12 mb-4">
                     <a class="btn btn-blue" href="/to-buy">Back to Regions</a>
+                    <a class="btn btn-blue" href="/resort/{{ $resort->slug }}">Show all weeks</a>
                 </div>
             </div>
 

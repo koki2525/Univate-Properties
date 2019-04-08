@@ -247,3 +247,9 @@ Route::get('selected-weeks/{id}','PagesController@selectedWeeks');
 Route::post('selected-weeks/{id}','PagesController@handleReviewPrelistedWeeks');
 
 Route::get('publish-remaining-weeks','PagesController@publishTheRest');
+
+Route::get('timeshare-change-logs','PagesController@serveLogs');
+Route::get('view-user/{id}','PagesController@serveUser');
+Route::get('view-timeshare/{id}','PagesController@serveTimeshareDetails');
+
+Route::post('filter/{id}','PagesController@serveSearchTimeshareFilter');
