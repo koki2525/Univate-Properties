@@ -50,6 +50,7 @@
                             <a class="dropdown-item" href="/to-buy">To Buy</a>
                             @if(Auth::check() && Auth::user()->role == "admin")
                             <a class="dropdown-item" href="/admin">Admin</a>
+                            <a class="dropdown-item" href="/timeshare-change-logs">Logs</a>
                             <a class="dropdown-item" href="/all-agents">All agents</a>
                             <a class="dropdown-item" href="/all-agencies">All agencies</a>
                             @endif

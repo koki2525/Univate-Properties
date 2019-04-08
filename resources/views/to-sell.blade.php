@@ -149,7 +149,8 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-6">
-
+                            <label>Levy</label>
+                            <input class="form-control" type="number" step="any" name="levy" value="{{ old('levy') }}" />
                     </div>
                 </div>
                 <div class="form-group row">

@@ -186,6 +186,7 @@ class PagesController extends Controller {
 		$timeshare->owner = Input::get('owner');
 		$timeshare->listingFee = 'Pending';
         $timeshare->paid = Input::get('paid');
+        $timeshare->levy = Input::get('levy');
         $timeshare->fromDate = Input::get('occupationDate1');
         $timeshare->toDate = Input::get('occupationDate2');
 		$timeshare->spacebankedyear = Input::get('spacebankedyear');
@@ -211,9 +212,9 @@ class PagesController extends Controller {
 
         Mail::send('emails.timeshare', $data, function($message) use ($timeshare)
         {
-            $message->to('info@univateproperties.co.za','Uni-vate')->bcc('koketso.maphopha@gmail.com','Koketso Maphopha')->subject('New timeshare submission');
+            $message->to('rachael@x-scape.co.za','Uni-vate')->bcc('koketso.maphopha@gmail.com','Koketso Maphopha')->subject('New timeshare submission');
             $message->from('info@univateproperties.co.za');
-            $message->attach($timeshare->mandate);
+            //$message->attach($timeshare->mandate);
 		});
 
 		return Redirect::to('/pay-listing-fee/'.$timeshare->id)->with('view-success',' Your Timeshare has been successfully submitted');
@@ -713,7 +714,7 @@ class PagesController extends Controller {
             DB::table('timeshares')
                 ->where('id','=', $id)
                 ->update(array(
-                        'fromDate' => \Carbon\Carbon::parse(Input::get('fromDate'))->format('Y-m-s')
+                        'fromDate' => Input::get('fromDate')
                     )
                 );
         }
@@ -729,7 +730,7 @@ class PagesController extends Controller {
             DB::table('timeshares')
 		->where('id','=', $id)
 		->update(array(
-				'toDate' => \Carbon\Carbon::parse(Input::get('toDate'))->format('Y-m-s')
+				'toDate' => Input::get('toDate')
 			)
         );
         }
@@ -894,7 +895,7 @@ class PagesController extends Controller {
             );
         }
 
-        if(Input::get('status')!=$timeshare->status)
+        if(Input::get('status')!='NULL')
         {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
@@ -910,7 +911,7 @@ class PagesController extends Controller {
             );
         }
 
-        if(Input::get('published')!=$timeshare->published)
+        if(Input::get('publish')!='NULL')
         {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
@@ -937,7 +938,7 @@ class PagesController extends Controller {
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
-                    'statusDate' => \Carbon\Carbon::parse(Input::get('statusDate'))->format('Y-m-s')
+                    'statusDate' => Input::get('statusDate')
                 )
             );
         }
@@ -3639,6 +3640,10 @@ class PagesController extends Controller {
 
 	public function handleEditMyTimeshare($id)
 	{
+        $timeshare = DB::table('timeshares')
+			->where('id','=',$id)
+            ->first();
+            
 		$validator = Validator::make(Input::all(),
             [
                 'resort' => 'required',
@@ -3651,7 +3656,7 @@ class PagesController extends Controller {
         {
             return Redirect::back()->with('view-error', ' There were errors in your submission please review below')->withInput()->withErrors($validator);
 		}
-
+/*
 		DB::table('timeshares')
                     ->where('id','=', $id)
                     ->update(array(
@@ -3691,13 +3696,6 @@ class PagesController extends Controller {
 		->where('id','=', $id)
 		->update(array(
 				'setPrice' => Input::get('setPrice')
-			)
-		);
-
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'price' => Input::get('price')
 			)
 		);
 
@@ -3760,7 +3758,23 @@ class PagesController extends Controller {
 				'statusDate' => Input::get('statusDate')
 			)
 		);
-	}
+    } */
+
+    if(Input::get('price')!=$timeshare->price)
+    {
+        DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'price' => Input::get('price')
+                )
+            );
+        
+        $log = new TimeshareLog;
+                $log->user_id = Auth::user()->id;
+                $log->timeshare_id = $timeshare->id;
+                $log->change = 'The asking price was changed from '.$timeshare->price.' to '.Input::get('price');
+                $log->save();
+        }
 
 		return Redirect::to('my-timeshares')->with('view-success',' Timeshare successfully updated');
 	}
@@ -4376,5 +4390,101 @@ class PagesController extends Controller {
 
             return Redirect::to('review-prelisted-weeks')->with('view-success','The remaining timeshares have been successfully published.'); 
     }
+
+    public function serveLogs()
+    {
+        $logs = DB::table('timeshare_change_logs')
+                ->paginate(10);
+
+        return View::make('admin.timeshare-change-logs')
+            ->with('logs',$logs);
+    }
+
+    public function serveUser($id)
+    {
+        $user = DB::table('users')
+            ->where('id','=',$id)
+            ->first();
+
+            return View::make('admin.view-user')
+                ->with('user',$user);
+    }
+
+    public function serveTimeshareDetails($id)
+    {
+        $timeshare = DB::table('timeshares')
+            ->where('id','=',$id)
+            ->first();
+
+            return View::make('admin.view-timeshare')
+                ->with('timeshare',$timeshare);
+    }
+
+    public function serveSearchTimeshareFilter($id)
+	{
+        if(!(Input::has('week')) and !(Input::has('unit')) and !(Input::has('bedrooms')) and !(Input::has('season')) and !(Input::has('maxPrice')) and !(Input::has('minPrice')))
+        {
+            return Redirect::back()->with('view-error', 'No filter entered, please try again')->withInput()->withErrors($validator);
+        }
+
+        $resort = DB::table('resorts')
+            ->where('id','=',$id)
+            ->first();
+
+        $awards = explode(',',$resort->awards);
+		$facilities = explode(',',$resort->facilities);
+
+        $week = Input::get('week');
+        $unit = Input::get('unit');
+        $bedrooms = Input::get('bedrooms');
+        $minPrice = (float) (Input::get('minPrice'));
+        $maxPrice = (float) (Input::get('maxPrice'));
+        $season = Input::get('season');
+        $module = Input::get('module');
+        $fromDate = Input::get('fromDate');
+        $toDate = Input::get('toDate');
+
+		$timeshares = DB::table('timeshares')
+                ->where(function($query) use ($week, $unit, $bedrooms, $season, $minPrice, $maxPrice, $module, $fromDate, $toDate) {
+
+                if ($week)
+                    $query->where('week','=', $week);
+                if ($unit)
+                    $query->where('unit','=', $unit);
+                if ($bedrooms)
+                    $query->where('bedrooms','=', $bedrooms);
+                if ($module)
+                    $query->where('module','=', $module);
+                if ($fromDate)
+                    $query->where('fromDate','=', $fromDate);
+                if ($toDate)
+                    $query->where('toDate','=', $toDate);
+                if ($season)
+                    $query->where('season','=', $season);
+                if ($maxPrice)
+                    $query->where('setPrice','<=', $maxPrice);
+                if ($minPrice)
+                    $query->where('setPrice','>=', $minPrice); })
+                ->where('resort','=',$resort->resort)
+                ->paginate(5); 
+                
+
+        if($timeshares->isEmpty())
+        {
+            return Redirect::back()->with('view-search-error', 'There were no results found, please try searching by week, unit, number of bedrooms or price.');
+        }
+
+        else
+        {
+            // multiple resorts search results
+            return View::make('timeshare-filter-results')
+                ->with('awards',$awards)
+                ->with('facilities',$facilities)
+                ->with('resort',$resort)
+                ->with('timeshares', $timeshares);
+
+		}
+
+	}
 
 }
