@@ -15,6 +15,7 @@
                         <option value="Red" {{ old('season') ==  'Red' ? 'selected' : '' }}>Red</option>
                         <option value="White" {{ old('season') ==  'White' ? 'selected' : '' }}>White</option>
                         <option value="Blue" {{ old('season') ==  'Blue' ? 'selected' : '' }}>Blue</option>
+                        <option value="Flexi" {{ old('season') ==  'Flexi' ? 'selected' : '' }}>Flexi</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -29,8 +30,8 @@
                 <div class="form-group">
                     <select class="form-control" name="bedrooms">
                             <option value="">Bedrooms</option>
-                            <option value="Studio">Studio</option>
-                            <option value="Hotel">Hotel</option>
+                            <option value="Studio" {{ old('bedrooms') ==  'Studio' ? 'selected' : '' }}>Studio</option>
+                            <option value="Hotel" {{ old('bedrooms') ==  'Hotel' ? 'selected' : '' }}>Hotel</option>
                             <option value="1" {{ old('bedrooms') ==  '1' ? 'selected' : '' }}>1</option>
                             <option value="2" {{ old('bedrooms') ==  '2' ? 'selected' : '' }}>2</option>
                             <option value="3" {{ old('bedrooms') ==  '3' ? 'selected' : '' }}>3</option>
@@ -45,14 +46,14 @@
                 <div class="form-group">
                     <input class="form-control" type="number" step="any" id="maxPrice" name="maxPrice" placeholder="Maximum Price" />
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label>Arrival Date</label>
                     <input class="form-control" type="date" id="fromDate" name="fromDate" placeholder="Arrival Date" />
                 </div>
                 <div class="form-group">
                         <label>Departure Date</label>
                     <input class="form-control" type="date" id="toDate" name="toDate" placeholder="Departure Date" />
-                </div>
+                </div> -->
     
                 <button class="btn btn-blue" type="submit">FILTER</button>
             </form>

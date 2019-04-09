@@ -64,8 +64,7 @@
                             @endforeach
                         </tbody>
                     </table>
-
-                    <?php echo $timeshares->links(); ?>
+                    <?php echo $timeshares->render(); ?>
                     @endif
                 </div>
                 <div class="col-md-12 mb-4">
