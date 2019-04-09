@@ -4466,6 +4466,7 @@ class PagesController extends Controller {
                 if ($minPrice)
                     $query->where('setPrice','>=', $minPrice); })
                 ->where('resort','=',$resort->resort)
+                ->where('published','=',1)
                 ->paginate(5); 
                 
 
