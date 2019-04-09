@@ -131,10 +131,14 @@
                 <label>Status <em>(current : {{ $timeshare->status }})</em></label>
                 <select class="form-control" name="status">
                     <option value='NULL'>Please Select</option>
+                    <option value="Authorization needed">Authorization needed</option>
+                    <option value="For Sale">For Sale</option>
                     <option value="Offer Pending">Offer Pending</option>
                     <option value="Lengen">Lengen</option>
+                    <option value="Offer Accepted">Offer Accepted</option>
+                    <option value="Contract in progress">Contract in progress</option>
+                    <option value="Contract Complete">Contract Complete</option>
                     <option value="Sold">Sold</option>
-                    <option value="For Sale">For Sale</option>
                 </select>
             </div>
             <div class="col-md-4">
