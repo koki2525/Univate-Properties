@@ -4800,9 +4800,9 @@ class PagesController extends Controller {
                 if ($module)
                     $query->where('module','=', $module);
                 if ($fromDate)
-                    $query->where('fromDate','=', $fromDate);
+                    $query->where('fromDate','>=',$fromDate);
                 if ($toDate)
-                    $query->where('toDate','=', $toDate);
+                    $query->where('fromDate','<=',$toDate);
                 if ($season)
                     $query->where('season','=', $season);
                 if ($maxPrice)
@@ -4834,7 +4834,7 @@ class PagesController extends Controller {
     
     public function serveAddNewResort()
     {
-        return View::make('admin.add-new-resort');
+        return View::make('admin.new-resort');
     }
 
     public function handleAddNewResort()
@@ -4846,8 +4846,7 @@ class PagesController extends Controller {
 				'information' => 'required',
 				'image1' => 'required',
                 'image2' => 'required',
-                'image3' => 'required',
-				'logo' => 'required'
+                'image3' => 'required'
             ]);
 
         if($validator->fails())
@@ -4863,6 +4862,11 @@ class PagesController extends Controller {
 		if(Input::has('advisor'))
 		{
 			$resort->advisor = Input::get('advisor');
+        }
+        
+        if(Input::has('url'))
+		{
+			$resort->url = Input::get('url');
 		}
 
 		if(Input::has('awards'))

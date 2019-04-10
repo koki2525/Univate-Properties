@@ -1,11 +1,11 @@
 <div class="row">
-        <div class="col-md-12 light-blue-bg p-2 p-md-4">
+        <div class="col-md-12 blue-bg p-2 p-md-4">
             <h2>Filter Weeks</h2>
             <p>* Select atleast 1 filter field</p>
             <form id="mainForm" method="POST" action="/filter/{{ $resort->id }}" accept-charset="UTF-8" enctype="multipart/form-data">
             @csrf
                 <div class="form-group">
-                    <select class="form-control" name="season">
+                    <select style="color: white;" class="form-control" name="season">
                         <option value="">Season</option>
                         <option value="Peak" {{ old('season') ==  'Peak' ? 'selected' : '' }}>Peak</option>
                         <option value="Peak 1" {{ old('season') ==  'Peak 1' ? 'selected' : '' }}>Peak 1</option>
@@ -28,7 +28,7 @@
                     <input class="form-control" type="text" name="module" placeholder="Module" />
                 </div>
                 <div class="form-group">
-                    <select class="form-control" name="bedrooms">
+                    <select style="color: white;" class="form-control" name="bedrooms">
                             <option value="">Bedrooms</option>
                             <option value="Studio" {{ old('bedrooms') ==  'Studio' ? 'selected' : '' }}>Studio</option>
                             <option value="Hotel" {{ old('bedrooms') ==  'Hotel' ? 'selected' : '' }}>Hotel</option>
@@ -46,14 +46,14 @@
                 <div class="form-group">
                     <input class="form-control" type="number" step="any" id="maxPrice" name="maxPrice" placeholder="Maximum Price" />
                 </div>
-                <!--<div class="form-group">
-                    <label>Arrival Date</label>
-                    <input class="form-control" type="date" id="fromDate" name="fromDate" placeholder="Arrival Date" />
+                <div class="form-group">
+                    <label>Filter Arrival Date From</label>
+                    <input style="color: white;" class="form-control" type="date" id="fromDate" name="fromDate" placeholder="Arrival Date" />
                 </div>
                 <div class="form-group">
-                        <label>Departure Date</label>
-                    <input class="form-control" type="date" id="toDate" name="toDate" placeholder="Departure Date" />
-                </div> -->
+                        <label>Filter Arrival Date To</label>
+                    <input style="color: white;" class="form-control" type="date" id="toDate" name="toDate" placeholder="Departure Date" />
+                </div>
     
                 <button class="btn btn-blue" type="submit">FILTER</button>
             </form>

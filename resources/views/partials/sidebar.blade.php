@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-12 blue-bg p-2 p-md-4">
+    <div class="col-md-12 light-blue-bg p-2 p-md-4">
         <h2>Contact</h2>
         <form id="mainForm" method="POST" action="/contact-us/{{ $resort->id }}" accept-charset="UTF-8" enctype="multipart/form-data">
         @csrf
@@ -22,7 +22,7 @@
 </div>
 <div class="row mb-4">
 @if($resort->facilities!=NULL)
-    <div class="col-md-12 light-blue-bg p-2 p-md-4">
+    <div class="col-md-12 blue-bg p-2 p-md-4">
         <h2>Facilities</h2>
         <ul class="facilities">
         @foreach($facilities as $facility)

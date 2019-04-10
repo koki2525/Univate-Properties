@@ -253,3 +253,6 @@ Route::get('view-user/{id}','PagesController@serveUser');
 Route::get('view-timeshare/{id}','PagesController@serveTimeshareDetails');
 
 Route::post('filter/{id}','PagesController@serveSearchTimeshareFilter');
+
+Route::get('new-resort','PagesController@serveAddNewResort');
+Route::post('new-resort','PagesController@handleAddNewResort');
