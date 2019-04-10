@@ -39,7 +39,7 @@ Route::post('residential','PagesController@handleResidential');
 Route::post('edit-timeshare/{id}', ['as' => 'edit-timeshare', 'uses' => 'PagesController@handleEditTimeshare']);
 Route::get('edit-timeshare/{id}','PagesController@serveEditTimeshare');
 Route::post('edit-timeshare-agent/{id}', ['as' => 'edit-timeshare-agent', 'uses' => 'PagesController@handleEditTimeshareAgent']);
-Route::get('edit-timeshare-agent/{id}','PagesController@serveEditAgencyTimeshareAgent');
+Route::get('edit-timeshare-agent/{id}','PagesController@serveEditTimeshareAgent');
 Route::get('edit-agency-timeshare/{id}','PagesController@serveEditAgencyTimeshare');
 Route::post('edit-agency-timeshare/{id}', ['as' => 'edit-agency-timeshare', 'uses' => 'PagesController@handleEditAgencyTimeshare']);
 

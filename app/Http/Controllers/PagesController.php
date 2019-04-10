@@ -642,6 +642,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'Resort name changed from '.$timeshare->resort.' to '.Input::get('resort');
             $log->save();
 
@@ -658,6 +662,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'Module changed from '.$timeshare->module.' to '.Input::get('module');
             $log->save();
             
@@ -674,6 +682,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'Week changed from '.$timeshare->week.' to '.Input::get('week');
             $log->save();
             
@@ -691,6 +703,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'Levy changed from '.$timeshare->levy.' to '.Input::get('levy');
             $log->save();
             
@@ -708,6 +724,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'Departure date changed from '.$timeshare->fromDate.' to '.Input::get('fromDate');
             $log->save();
             
@@ -724,6 +744,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'Arrival date changed from '.$timeshare->toDate.' to '.Input::get('toDate');
             $log->save();
             
@@ -740,6 +764,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'The season was changed from '.$timeshare->season.' to '.Input::get('season');
             $log->save();
             
@@ -756,6 +784,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'The region was changed from '.$timeshare->region.' to '.Input::get('region');
             $log->save();
             
@@ -772,6 +804,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'The set price was changed from '.$timeshare->setPrice.' to '.Input::get('setPrice');
             $log->save();
             
@@ -788,6 +824,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'The price was changed from '.$timeshare->price.' to '.Input::get('price');
             $log->save();
             
@@ -804,6 +844,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'The number of bedrooms was changed from '.$timeshare->bedrooms.' to '.Input::get('bedrooms');
             $log->save();
             
@@ -820,6 +864,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'The maximum occupation per unit was changed from '.$timeshare->sleeps.' to '.Input::get('sleeps');
             $log->save();
             
@@ -836,6 +884,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'The unit number was changed from '.$timeshare->unit.' to '.Input::get('unit');
             $log->save();
             
@@ -852,6 +904,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'The owner was changed from '.$timeshare->owner.' to '.Input::get('owner');
             $log->save();
             
@@ -868,6 +924,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'The space banked year was changed from '.$timeshare->spacebankedyear.' to '.Input::get('spacebankedyear');
             $log->save();
             
@@ -884,6 +944,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'The space bank owner was changed from '.$timeshare->spacebankOwner.' to '.Input::get('spacebankOwner');
             $log->save();
             
@@ -900,6 +964,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'The status was changed from '.$timeshare->status.' to '.Input::get('status');
             $log->save();
             
@@ -916,6 +984,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'The publish status was changed from '.$timeshare->published.' to '.Input::get('published');
             $log->save();
             
@@ -932,6 +1004,10 @@ class PagesController extends Controller {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
             $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
             $log->change = 'The status date was changed from '.$timeshare->statusDate.' to '.Input::get('statusDate');
             $log->save();
             
@@ -972,123 +1048,391 @@ class PagesController extends Controller {
             return Redirect::back()->with('view-error', ' There were errors in your submission please review below')->withInput()->withErrors($validator);
 		}
 
-		DB::table('timeshares')
-                    ->where('id','=', $id)
-                    ->update(array(
-                            'resort' => Input::get('resort')
-                        )
-					);
+		$timeshare = DB::table('timeshares')
+            ->where('id','=',$id)
+            ->first();
+        
+        if(Input::get('resort')!=$timeshare->resort)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'Resort name changed from '.$timeshare->resort.' to '.Input::get('resort');
+            $log->save();
 
-		DB::table('timeshares')
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'resort' => Input::get('resort')
+                )
+            );
+        }
+
+        if(Input::get('module')!=$timeshare->module)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'Module changed from '.$timeshare->module.' to '.Input::get('module');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'module' => Input::get('module')
+                )
+            );
+        }
+
+        if(Input::get('week')!=$timeshare->week)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'Week changed from '.$timeshare->week.' to '.Input::get('week');
+            $log->save();
+            
+            DB::table('timeshares')
+                ->where('id','=', $id)
+                ->update(array(
+                        'week' => Input::get('week')
+                    )
+                );
+
+        }
+
+        if(Input::get('levy')!=$timeshare->levy)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'Levy changed from '.$timeshare->levy.' to '.Input::get('levy');
+            $log->save();
+            
+            DB::table('timeshares')
+                ->where('id','=', $id)
+                ->update(array(
+                        'levy' => Input::get('levy')
+                    )
+                );
+
+        }
+
+        if(Input::get('fromDate')!=$timeshare->fromDate)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'Departure date changed from '.$timeshare->fromDate.' to '.Input::get('fromDate');
+            $log->save();
+            
+            DB::table('timeshares')
+                ->where('id','=', $id)
+                ->update(array(
+                        'fromDate' => Input::get('fromDate')
+                    )
+                );
+        }
+
+        if(Input::get('toDate')!=$timeshare->toDate)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'Arrival date changed from '.$timeshare->toDate.' to '.Input::get('toDate');
+            $log->save();
+            
+            DB::table('timeshares')
 		->where('id','=', $id)
 		->update(array(
-				'module' => Input::get('module')
+				'toDate' => Input::get('toDate')
 			)
-		);
+        );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'week' => Input::get('week')
-			)
-		);
+        if(Input::get('season')!=$timeshare->season)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'The season was changed from '.$timeshare->season.' to '.Input::get('season');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'season' => Input::get('season')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'season' => Input::get('season')
-			)
-		);
+        if(Input::get('region')!=$timeshare->region)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'The region was changed from '.$timeshare->region.' to '.Input::get('region');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'region' => Input::get('region')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'region' => Input::get('region')
-			)
-		);
+        if(Input::get('setPrice')!=$timeshare->setPrice)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'The set price was changed from '.$timeshare->setPrice.' to '.Input::get('setPrice');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'setPrice' => Input::get('setPrice')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'setPrice' => Input::get('setPrice')
-			)
-		);
+        if(Input::get('price')!=$timeshare->price)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'The price was changed from '.$timeshare->price.' to '.Input::get('price');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'price' => Input::get('price')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'price' => Input::get('price')
-			)
-		);
+        if(Input::get('bedrooms')!=$timeshare->bedrooms)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'The number of bedrooms was changed from '.$timeshare->bedrooms.' to '.Input::get('bedrooms');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'bedrooms' => Input::get('bedrooms')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'bedrooms' => Input::get('bedrooms')
-			)
-		);
+        if(Input::get('sleeps')!=$timeshare->sleeps)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'The maximum occupation per unit was changed from '.$timeshare->sleeps.' to '.Input::get('sleeps');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'sleeps' => Input::get('sleeps')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'sleeps' => Input::get('sleeps')
-			)
-		);
+        if(Input::get('unit')!=$timeshare->unit)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'The unit number was changed from '.$timeshare->unit.' to '.Input::get('unit');
+            $log->save();
+            
+            DB::table('timeshares')
+                ->where('id','=', $id)
+                ->update(array(
+                        'unit' => Input::get('unit')
+                    )
+                );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'unit' => Input::get('unit')
-			)
-		);
+        if(Input::get('owner')!=$timeshare->owner)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'The owner was changed from '.$timeshare->owner.' to '.Input::get('owner');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'owner' => Input::get('owner')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'owner' => Input::get('owner')
-			)
-		);
+        if(Input::get('spacebankedyear')!=$timeshare->spacebankedyear)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'The space banked year was changed from '.$timeshare->spacebankedyear.' to '.Input::get('spacebankedyear');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'spacebankedyear' => Input::get('spacebankedyear')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'spacebankedyear' => Input::get('spacebankedyear')
-			)
-		);
+        if(Input::get('spacebankOwner')!=$timeshare->spacebankOwner)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'The space bank owner was changed from '.$timeshare->spacebankOwner.' to '.Input::get('spacebankOwner');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'spacebankOwner' => Input::get('spacebankOwner')
+                )
+            );
+        }
 
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'spacebankOwner' => Input::get('spacebankOwner')
-			)
-		);
+        if(Input::get('status')!='NULL')
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'The status was changed from '.$timeshare->status.' to '.Input::get('status');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'status' => Input::get('status')
+                )
+            );
+        }
 
-		if(Input::get('status')!='NULL'){
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'status' => Input::get('status')
-			)
-		);
-	}
-	if(Input::get('publish')!='NULL') {
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'published' => Input::get('publish')
-			)
-		);
-	}
+        if(Input::get('publish')!='NULL')
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'The publish status was changed from '.$timeshare->published.' to '.Input::get('published');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'published' => Input::get('publish')
+                )
+            );
+        }
 
-
-	if(Input::has('statusDate')) {
-		DB::table('timeshares')
-		->where('id','=', $id)
-		->update(array(
-				'statusDate' => Input::get('statusDate')
-			)
-		);
-	}
+        if(Input::get('statusDate')!=$timeshare->statusDate)
+        {
+            $log = new TimeshareLog;
+            $log->user_id = Auth::user()->id;
+            $log->timeshare_id = $timeshare->id;
+            $log->name = Auth::user()->name;
+            $log->resort = $timeshare->resort;
+            $log->module = $timeshare->module;
+            $log->unit = $timeshare->unit;
+            $log->change = 'The status date was changed from '.$timeshare->statusDate.' to '.Input::get('statusDate');
+            $log->save();
+            
+            DB::table('timeshares')
+            ->where('id','=', $id)
+            ->update(array(
+                    'statusDate' => Input::get('statusDate')
+                )
+            );
+        }
 
 		return Redirect::to('manage-agency-timeshares')->with('view-success',' Timeshare successfully updated');
 
@@ -4467,7 +4811,7 @@ class PagesController extends Controller {
                     $query->where('setPrice','>=', $minPrice); })
                 ->where('resort','=',$resort->resort)
                 ->where('published','=',1)
-                ->paginate(5); 
+                ->simplePaginate(5); 
                 
 
         if($timeshares->isEmpty())
@@ -4486,6 +4830,68 @@ class PagesController extends Controller {
 
 		}
 
-	}
+    }
+    
+    public function serveAddNewResort()
+    {
+        return View::make('admin.add-new-resort');
+    }
+
+    public function handleAddNewResort()
+    {
+        $validator = Validator::make(Input::all(),
+            [
+                'resort' => 'required',
+				'region' => 'required',
+				'information' => 'required',
+				'image1' => 'required',
+                'image2' => 'required',
+                'image3' => 'required',
+				'logo' => 'required'
+            ]);
+
+        if($validator->fails())
+        {
+            return Redirect::back()->with('view-error', ' There were errors in your submission please review below')->withInput()->withErrors($validator);
+        } 
+
+        $resort = new Resort;
+        $resort->resort = Input::get('resort');
+        $resort->information = Input::get('information');
+		$resort->region = Input::get('region');
+
+		if(Input::has('advisor'))
+		{
+			$resort->advisor = Input::get('advisor');
+		}
+
+		if(Input::has('awards'))
+		{
+			$resort->awards = implode(',',Input::get('awards'));
+		}
+
+		$file = Input::file('image1');
+		$file->move('images/resorts/', $file->getClientOriginalName());
+		$resort->image1 = '/images/resorts/'.$file->getClientOriginalName();
+
+		$file2 = Input::file('image2');
+		$file2->move('images/resorts/', $file2->getClientOriginalName());
+        $resort->image2 = '/images/resorts/'.$file2->getClientOriginalName();
+        
+        $file3 = Input::file('image3');
+		$file3->move('images/resorts/', $file3->getClientOriginalName());
+		$resort->image3 = '/images/resorts/'.$file3->getClientOriginalName();
+
+        if(Input::has('layout'))
+        {
+            $file4 = Input::file('layout');
+            $file4->move('images/layouts/', $file4->getClientOriginalName());
+            $resort->layout = '/images/layouts/'.$file4->getClientOriginalName();
+        }
+
+        $resort->save(); //rachael koketso maphopha - 071 6157 192
+
+		return Redirect::back()->with('view-success',' Resort has been successfully uploaded');
+    }
 
 }

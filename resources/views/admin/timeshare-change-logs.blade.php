@@ -148,17 +148,23 @@
                 <thead>
                     <tr>
                         <th>User</th>
-                        <th>Timeshare Ref</th>
+                        <th>Resort</th>
+                        <th>Module</th>
+                        <th>Unit</th>
                         <th>Change</th>
+                        <th>Timeshare</th>
                         <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($logs as $log)
                     <tr>
-                        <td><a href="/view-user/{{  $log->user_id }}"><i class="fa fa-address-card" aria-hidden="true">{{ $log->name }}</i></td>
-                        <td><a href="/view-timeshare/{{ $log->timeshare_id }}"><i class="fa fa-file" aria-hidden="true"> View full details</i></td>
+                        <td><a href="/view-user/{{  $log->user_id }}">{{ $log->name }}</i></td>
+                        <td>{{ $log->resort }}</td>
+                        <td>{{ $log->module }}</td>
+                        <td>{{ $log->unit }}</td>
                         <td>{{ $log->change }}</td>
+                        <td><a href="/view-timeshare/{{ $log->timeshare_id }}"><i class="fa fa-file" aria-hidden="true"> View full details</i></td>
                         <td>{{ \Carbon\Carbon::parse($log->created_at)->format('jS F Y') }}</td>
                     </tr>
                     @endforeach

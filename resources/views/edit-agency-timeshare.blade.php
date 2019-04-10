@@ -54,6 +54,17 @@
 
         <div class="form-row">
             <div class="col-md-6">
+                <label style="font-weight:bolder;">Arrival Date : {{ $timeshare->fromDate }}</label>
+                <input type="date" class="form-control" name="fromDate" value="{{ $timeshare->fromDate }}"   />
+            </div>
+            <div class="col-md-6">
+                <label style="font-weight:bolder;">Depature Date : {{ $timeshare->toDate }}</label>
+                <input type="date" type="date" class="form-control" name="toDate" value="{{  $timeshare->toDate }}"   />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6">
                 <label>Week</label>
                 <input class="form-control" type="text" name="week" value="{{ $timeshare->week }}"/>
             </div>
@@ -73,19 +84,25 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label>Owner</label>
                 <input class="form-control" type="text" name="owner" value="{{ $timeshare->owner }}" />
             </div>
-            <div class="col-md-4">
-                <label>Has your week been spacebanked this year?</label>
-                <input class="form-control" type="text" name="spacebankedyear" value="{{ $timeshare->spacebankedyear }}" />
+            <div class="col-md-6">
+                    <label>Levy</label>
+                    <input class="form-control" type="text" name="levy" value="{{ $timeshare->levy }}" />
+                </div>
             </div>
-            <div class="col-md-4">
-                <label>If yes, please confirm with whom</label>
-                <input class="form-control" type="text" name="spacebankOwner" value="{{ $timeshare->spacebankOwner }}" />
+            <div class="form-row">
+                <div class="col-md-6">
+                    <label>Has your week been spacebanked this year?</label>
+                    <input class="form-control" type="text" name="spacebankedyear" value="{{ $timeshare->spacebankedyear }}" />
+                </div>
+                <div class="col-md-6">
+                    <label>If yes, please confirm with whom</label>
+                    <input class="form-control" type="text" name="spacebankOwner" value="{{ $timeshare->spacebankOwner }}" />
+                </div>
             </div>
-        </div>
 
         <div class="form-row">
             <div class="col-md-6">
@@ -114,10 +131,14 @@
                 <label>Status <em>(current : {{ $timeshare->status }})</em></label>
                 <select class="form-control" name="status">
                     <option value='NULL'>Please Select</option>
+                    <option value="Authorization needed">Authorization needed</option>
+                    <option value="For Sale">For Sale</option>
                     <option value="Offer Pending">Offer Pending</option>
                     <option value="Lengen">Lengen</option>
+                    <option value="Offer Accepted">Offer Accepted</option>
+                    <option value="Contract in progress">Contract in progress</option>
+                    <option value="Contract Complete">Contract Complete</option>
                     <option value="Sold">Sold</option>
-                    <option value="For Sale">For Sale</option>
                 </select>
             </div>
             <div class="col-md-4">
@@ -129,14 +150,14 @@
                 </select>
             </div>
             <div class="col-md-4">
-                <label>Date</label>
-                <input id="statusDate" class="form-control" name="statusDate"  />
+                <label>Date : {{ \Carbon\Carbon::parse($timeshare->statusDate)->format('jS F Y') }}</label>
+                <input type="date" class="form-control" name="statusDate"  />
             </div>
         </div>
 
         <div class="form-row">
             <div class="col-md-6">
-                <a class="btn btn-blue" href="javascript:history.back()">BACK</a>
+                <a class="btn btn-blue" href="/manage-agency-timeshares">BACK</a>
             </div>
             <div class="col-md-6">
                 <button class="btn btn-blue" id="submit" type="submit">SAVE</button>
@@ -145,3 +166,4 @@
     </form>
 </div> 
 @stop
+

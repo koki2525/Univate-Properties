@@ -54,11 +54,11 @@
 
         <div class="form-row">
             <div class="col-md-6">
-                <label style="font-weight:bolder;">Arrival Date : {{ \Carbon\Carbon::parse($timeshare->fromDate)->format('jS F Y') }}</label>
+                <label style="font-weight:bolder;">Arrival Date : {{ $timeshare->fromDate }}</label>
                 <input type="date" class="form-control" name="fromDate"   />
             </div>
             <div class="col-md-6">
-                <label style="font-weight:bolder;">Depature Date : {{ \Carbon\Carbon::parse($timeshare->toDate)->format('jS F Y') }}</label>
+                <label style="font-weight:bolder;">Depature Date : {{ $timeshare->toDate }}</label>
                 <input type="date" type="date" class="form-control" name="toDate"   />
             </div>
         </div>
