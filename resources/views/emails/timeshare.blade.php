@@ -23,6 +23,7 @@
         @else
         <p>Resort : {{ $timeshare->resort }}</p>
         @endif
+        <p>Owner : {{ $timeshare->owner }}</p>
         <p>Unit : {{ $timeshare->unit }}</p>
         <p>Sleeps Max : {{ $timeshare->sleeps }}</p>
         <p>Module : {{ $timeshare->module }}</p>

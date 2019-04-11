@@ -248,7 +248,7 @@
                         1.4 The purchase price for which I/we bought timeshare module/week was:
                     </label>
                     <div class="col-md-4">
-                         <input class="form-control" type="text" name="purchasePrice" placeholder="R" value="{{ old('purchasePrice') }}" />
+                         <input class="form-control" type="number" step="any" name="purchasePrice" placeholder="R" value="{{ old('purchasePrice') }}" />
                     </div>
                 </div>
 
@@ -273,7 +273,7 @@
                         1.6 The selling price for the timeshare module/week for which I/we want to sell is: (Including Vat)
                     </label>
                     <div class="col-md-4">
-                         <input class="form-control" type="text" name="sellingPrice" placeholder="R" value="{{ old('sellingPrice') }}" />
+                         <input class="form-control" type="number" step="any" name="sellingPrice" placeholder="R" value="{{ old('sellingPrice') }}" />
                     </div>
                 </div>
 
@@ -284,7 +284,7 @@
                         1.7 Estate agent’s commission agreed to (state Rand value)
                     </label>
                     <div class="col-md-4">
-                        <input class="form-control" type="text" name="commission" placeholder="R" value="{{ old('commission') }}" />
+                        <input class="form-control" type="number" step="any" name="commission" placeholder="R" value="{{ old('commission') }}" />
                     </div>
                 </div>
 

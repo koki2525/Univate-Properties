@@ -256,3 +256,6 @@ Route::post('filter/{id}','PagesController@serveSearchTimeshareFilter');
 
 Route::get('new-resort','PagesController@serveAddNewResort');
 Route::post('new-resort','PagesController@handleAddNewResort');
+
+Route::get('bulk-weeks-upload','PagesController@serveBulkExcelUpload');
+Route::post('bulk-weeks-upload','PagesController@handleBulkExcelUpload');

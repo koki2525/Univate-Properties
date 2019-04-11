@@ -47,6 +47,9 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/to-sell">To Sell</a>
+                            @if(Auth::check())
+                            <a class="dropdown-item" href="/bulk-weeks-upload">Bulk Weeks upload</a>
+                            @endif
                             <a class="dropdown-item" href="/to-buy">To Buy</a>
                             @if(Auth::check() && Auth::user()->role == "admin")
                             <a class="dropdown-item" href="/admin">Admin</a>

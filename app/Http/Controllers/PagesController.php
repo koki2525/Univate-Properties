@@ -31,6 +31,7 @@ use Auth;
 use View;
 use Mail;
 use App\TimeshareLog;
+use App\Resort;
 
 class PagesController extends Controller {
 
@@ -136,10 +137,13 @@ class PagesController extends Controller {
                 'region' => 'required'
             ]);
 
+        if(!Input::has('mandate'))
+        {
+            return Redirect::back()->with('view-error', 'A copy of a mandate is required to submit youe timeshare.')->withInput()->withErrors($validator);
+        }
 
 
-
-			if(!Auth::check())
+		if(!Auth::check())
         {
             return Redirect::back()->with('view-error', ' You need to be logged in to submit a timeshare, please login or register if you do not have an account')->withInput()->withErrors($validator);
         }
@@ -193,18 +197,18 @@ class PagesController extends Controller {
 		$timeshare->spacebankOwner = Input::get('spacebankOwner');
 		$timeshare->agency = Auth::user()->agency;
         $timeshare->agent = Auth::user()->name;
-        /*
+        
         $request = request();
 
         $mandate = $request->file('mandate');
         $profileImageSaveAsName = time() . Auth::id() . "-mandate." . 
                                   $mandate->getClientOriginalExtension();
 
-        $upload_path = 'mandates/';
+        $upload_path = public_path() .'mandates/';
         $profile_image_url = '/'.$upload_path . $profileImageSaveAsName;
         $success = $mandate->move($upload_path, $profileImageSaveAsName);
 
-        $timeshare->mandate = $profile_image_url; */
+        $timeshare->mandate = $profile_image_url; 
 
         $timeshare->save();
 
@@ -214,7 +218,7 @@ class PagesController extends Controller {
         {
             $message->to('rachael@x-scape.co.za','Uni-vate')->bcc('koketso.maphopha@gmail.com','Koketso Maphopha')->subject('New timeshare submission');
             $message->from('info@univateproperties.co.za');
-            //$message->attach($timeshare->mandate);
+            $message->attach($timeshare->mandate);
 		});
 
 		return Redirect::to('/pay-listing-fee/'.$timeshare->id)->with('view-success',' Your Timeshare has been successfully submitted');
@@ -232,50 +236,117 @@ class PagesController extends Controller {
 
 	public function serveToBuy()
 	{
-		$gauteng = DB::table('resorts')
-		->where('region','=','gauteng')
-		->groupBy('resort')
-		->get();
+        $timeshares = DB::table('timeshares')
+            ->get();
 
-		$limpopo = DB::table('resorts')
-		->where('region','=','limpopo')
-		->groupBy('resort')
-		->get();
+            $gauteng = NULL;
+            $limpopo = NULL;
+            $mpumalanga = NULL;
+            $kwazulunatal = NULL;
+            $freestate = NULL;
+            $northwest = NULL;
+            $northerncape = NULL;
+            $westerncape = NULL;
+            $easterncape = NULL;
 
-		$mpumalanga = DB::table('resorts')
-		->where('region','=','mpumalanga')
-		->groupBy('resort')
-		->get();
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='gauteng' and $timeshare->published=1)
+                {
+                    $gauteng = DB::table('resorts')
+                        ->where('region','=','gauteng')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
 
-		$kwazulunatal = DB::table('resorts')
-		->where('region','=','Kwazulu Natal')
-		->groupBy('resort')
-		->get();
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='limpopo' && $timeshare->published=1)
+                {
+                    $limpopo = DB::table('resorts')
+                        ->where('region','=','limpopo')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
 
-		$freestate = DB::table('resorts')
-		->where('region','=','free state')
-		->groupBy('resort')
-		->get();
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='mpumalanga' && $timeshare->published=1)
+                {
+                    $mpumalanga = DB::table('resorts')
+                        ->where('region','=','mpumalanga')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
 
-		$northwest = DB::table('resorts')
-		->where('region','=','north west')
-		->groupBy('resort')
-		->get();
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='Kwazulu Natal' && $timeshare->published=1)
+                {
+                    $kwazulunatal = DB::table('resorts')
+                        ->where('region','=','Kwazulu Natal')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
 
-		$northerncape = DB::table('resorts')
-		->where('region','=','northern cape')
-		->groupBy('resort')
-		->get();
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='free state' && $timeshare->published=1)
+                {
+                    $freestate = DB::table('resorts')
+                        ->where('region','=','free state')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
 
-		$westerncape = DB::table('resorts')
-		->where('region','=','western cape')
-		->groupBy('resort')
-		->get();
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='north west' && $timeshare->published=1)
+                {
+                    $northwest = DB::table('resorts')
+                        ->where('region','=','north west')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
 
-		$easterncape = DB::table('resorts')
-		->where('region','=','eastern cape')
-		->groupBy('resort')
-		->get();
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='northern cape' && $timeshare->published=1)
+                {
+                    $northerncape = DB::table('resorts')
+                        ->where('region','=','northern cape')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='western cape' && $timeshare->published=1)
+                {
+                    $westerncape = DB::table('resorts')
+                        ->where('region','=','western cape')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='eastern cape' && $timeshare->published=1)
+                {
+                    $easterncape = DB::table('resorts')
+                        ->where('region','=','eastern cape')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
 
 		return View::make('to-buy')
 		->with('easterncape',$easterncape)
@@ -4827,7 +4898,6 @@ class PagesController extends Controller {
                 ->with('facilities',$facilities)
                 ->with('resort',$resort)
                 ->with('timeshares', $timeshares);
-
 		}
 
     }
@@ -4857,7 +4927,9 @@ class PagesController extends Controller {
         $resort = new Resort;
         $resort->resort = Input::get('resort');
         $resort->information = Input::get('information');
-		$resort->region = Input::get('region');
+        $resort->region = Input::get('region');
+        $resort->meta_Description = Input::get('information');
+        $resort->meta_Keywords = Input::get('information');
 
 		if(Input::has('advisor'))
 		{
@@ -4889,13 +4961,26 @@ class PagesController extends Controller {
         if(Input::has('layout'))
         {
             $file4 = Input::file('layout');
-            $file4->move('images/layouts/', $file4->getClientOriginalName());
-            $resort->layout = '/images/layouts/'.$file4->getClientOriginalName();
+            $file4->move('images/resort_layouts/', $file4->getClientOriginalName());
+            $resort->layout = '/images/resort_layouts/'.$file4->getClientOriginalName();
         }
 
-        $resort->save(); //rachael koketso maphopha - 071 6157 192
+        $resort->save();
 
 		return Redirect::back()->with('view-success',' Resort has been successfully uploaded');
+    }
+
+    public function serveBulkExcelUpload()
+    {
+        return View::make('bulk-weeks-upload');
+    }
+
+    public function handleBulkExcelUpload()
+    {
+        config(['excel.import.startRow' => 1 ]);
+        Excel::import(new TimesharesImport, Input::file('ex_file'));
+
+        return Redirect::back()->with('view-success', 'Your import is successful!');
     }
 
 }

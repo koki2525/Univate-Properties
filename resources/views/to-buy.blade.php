@@ -24,8 +24,7 @@
     <div class="row mb-4">
         <div class="col-md-12">
             <div class="accordion" id="accordionExample">
-                @if($gauteng->isEmpty())
-                @else
+                @if($gauteng!=NULL)
                 <div class="card">
                     <a class="btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         <div class="card-header" id="headingOne">
@@ -46,8 +45,7 @@
                     </div>
                 </div>
                 @endif
-                @if($westerncape->isEmpty())
-                @else
+                @if($westerncape!=NULL)
                 <div class="card">
                     <a class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         <div class="card-header" id="headingTwo">
@@ -67,8 +65,7 @@
                     </div>
                 </div>
                 @endif
-                @if($limpopo->isEmpty())
-                @else
+                @if($limpopo!=NULL)
                 <div class="card">
                     <a class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         <div class="card-header" id="headingThree">
@@ -88,8 +85,7 @@
                     </div>
                 </div>
                 @endif
-                @if($kwazulunatal->isEmpty())
-                @else
+                @if($kwazulunatal!=NULL)
                 <div class="card">
                     <a class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                         <div class="card-header" id="headingFour">
@@ -109,8 +105,7 @@
                     </div>
                 </div>
                 @endif
-                @if($northerncape->isEmpty())
-                @else
+                @if($northerncape!=NULL)
                 <div class="card">
                     <a class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                         <div class="card-header" id="headingFive">
@@ -130,8 +125,7 @@
                     </div>
                 </div>
                 @endif
-                @if($mpumalanga->isEmpty())
-                @else
+                @if($mpumalanga!=NULL)
                 <div class="card">
                     <a class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
                         <div class="card-header" id="headingSix">
@@ -151,8 +145,7 @@
                     </div>
                 </div>
                 @endif
-                @if($northwest->isEmpty())
-                @else
+                @if($northwest!=NULL)
                 <div class="card">
                     <a class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
                         <div class="card-header" id="headingSeven">
@@ -172,8 +165,7 @@
                     </div>
                 </div>
                 @endif
-                @if($easterncape->isEmpty())
-                @else
+                @if($easterncape!=NULL)
                 <div class="card">
                     <a class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
                         <div class="card-header" id="headingEight">
