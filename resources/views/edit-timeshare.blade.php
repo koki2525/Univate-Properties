@@ -54,12 +54,12 @@
 
         <div class="form-row">
             <div class="col-md-6">
-                <label style="font-weight:bolder;">Depature Date</label>
-                <input class="form-control" type="date" class="form-control" name="fromDate" value="{{ date('d-M-y', strtotime($timeshare->fromDate)) }}" />
+                <label style="font-weight:bolder;">Arrival Date : {{ $timeshare->fromDate }}</label>
+                <input type="date" class="form-control" name="fromDate"   />
             </div>
             <div class="col-md-6">
-                <label style="font-weight:bolder;">Arrival Date</label>
-                <input class="form-control" type="date" class="form-control" name="toDate" value="{{ date('d-M-y', strtotime($timeshare->toDate)) }}" />
+                <label style="font-weight:bolder;">Depature Date : {{ $timeshare->toDate }}</label>
+                <input type="date" type="date" class="form-control" name="toDate"   />
             </div>
         </div>
 
@@ -130,11 +130,15 @@
             <div class="col-md-4">
                 <label>Status <em>(current : {{ $timeshare->status }})</em></label>
                 <select class="form-control" name="status">
-                    <option value=NULL>Please Select</option>
+                    <option value='NULL'>Please Select</option>
+                    <option value="Authorization needed">Authorization needed</option>
+                    <option value="For Sale">For Sale</option>
                     <option value="Offer Pending">Offer Pending</option>
                     <option value="Lengen">Lengen</option>
+                    <option value="Offer Accepted">Offer Accepted</option>
+                    <option value="Contract in progress">Contract in progress</option>
+                    <option value="Contract Complete">Contract Complete</option>
                     <option value="Sold">Sold</option>
-                    <option value="For Sale">For Sale</option>
                 </select>
             </div>
             <div class="col-md-4">
@@ -146,8 +150,8 @@
                 </select>
             </div>
             <div class="col-md-4">
-                <label>Date</label>
-                <input id="statusDate" class="form-control" name="statusDate"  />
+                <label>Date : {{ \Carbon\Carbon::parse($timeshare->statusDate)->format('jS F Y') }}</label>
+                <input type="date" class="form-control" name="statusDate"  />
             </div>
         </div>
 
@@ -161,4 +165,17 @@
         </div>
     </form>
 </div> 
+<script>
+        $(document).ready(function(){
+          var date_input=$('input[name="date"]'); //our date input has the name "date"
+          var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+          var options={
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+          };
+          date_input.datepicker(options);
+        })
+    </script>
 @stop

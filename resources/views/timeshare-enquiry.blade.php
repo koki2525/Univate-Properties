@@ -68,7 +68,6 @@
                 <a class="btn btn-blue even-width mr-auto" href="/share-transfer-initiation-for-purchaser/{{ $timeshare->id }}">MAKE AN OFFER</a>
                 @else
                 <a class="btn btn-blue even-width mr-auto" href="#" data-toggle="modal" data-target="#loginOrRegister">MAKE AN OFFER</a>
-                
                 @endif
                 <a class="btn btn-blue even-width mr-auto" href="javascript:history.back()">BACK</a>
             </form>

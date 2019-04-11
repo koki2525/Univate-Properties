@@ -39,7 +39,7 @@ Route::post('residential','PagesController@handleResidential');
 Route::post('edit-timeshare/{id}', ['as' => 'edit-timeshare', 'uses' => 'PagesController@handleEditTimeshare']);
 Route::get('edit-timeshare/{id}','PagesController@serveEditTimeshare');
 Route::post('edit-timeshare-agent/{id}', ['as' => 'edit-timeshare-agent', 'uses' => 'PagesController@handleEditTimeshareAgent']);
-Route::get('edit-timeshare-agent/{id}','PagesController@serveEditAgencyTimeshareAgent');
+Route::get('edit-timeshare-agent/{id}','PagesController@serveEditTimeshareAgent');
 Route::get('edit-agency-timeshare/{id}','PagesController@serveEditAgencyTimeshare');
 Route::post('edit-agency-timeshare/{id}', ['as' => 'edit-agency-timeshare', 'uses' => 'PagesController@handleEditAgencyTimeshare']);
 
@@ -248,4 +248,18 @@ Route::post('selected-weeks/{id}','PagesController@handleReviewPrelistedWeeks');
 
 Route::get('publish-remaining-weeks','PagesController@publishTheRest');
 
+<<<<<<< HEAD
 Route::post('/autocomplete/fetch', 'PagesController@fetch')->name('autocomplete.fetch');
+=======
+Route::get('timeshare-change-logs','PagesController@serveLogs');
+Route::get('view-user/{id}','PagesController@serveUser');
+Route::get('view-timeshare/{id}','PagesController@serveTimeshareDetails');
+
+Route::post('filter/{id}','PagesController@serveSearchTimeshareFilter');
+
+Route::get('new-resort','PagesController@serveAddNewResort');
+Route::post('new-resort','PagesController@handleAddNewResort');
+
+Route::get('bulk-weeks-upload','PagesController@serveBulkExcelUpload');
+Route::post('bulk-weeks-upload','PagesController@handleBulkExcelUpload');
+>>>>>>> rachael
