@@ -42,8 +42,12 @@
                         <label>Name of agency <em>(if applicable)</em></label>
                         @if(Auth::check() && (Auth::user()->role == "agency admin" or (Auth::user()->role == "user" && Auth::user()->agency)))
                         <input class="form-control" type="text" id="estateAgency" name="estateAgency" value="{{ Auth::user()->agency }}" readonly />
+                        <div id="agencyList">
+                        </div>
                         @else
-                        <input class="form-control" type="text" id="estateAgency" name="estateAgency" />
+                        <input class="form-control" type="text" id="estateAgency" name="estateAgency" value="Uni-Broker Resales" />
+                        <div id="agencyList">
+                        </div>
                         @endif
                     </div>
                     <div class="col-md-4">
@@ -350,11 +354,43 @@
         );
 
     </script>
+
     <script>
-            $('.radiogroup').change(function(e){
-                var selectedValue = 'Uni-Broker Resales';
-                $('#estateAgency').val(selectedValue)
+            $('#referedBy').change(function(e){
+                var value = getRadioVal(this, 'referedBy');
+                if($(value==='No')
+                    $('#estateAgency').val('Uni-Broker Resales')
+                else
+                $('#estateAgency').val('')
             });
     </script>
+
+    <script>
+            $(document).ready(function(){
+            
+             $('#estateAgency').keyup(function(){ 
+                    var query = $(this).val();
+                    if(query != '')
+                    {
+                     var _token = $('input[name="_token"]').val();
+                     $.ajax({
+                      url:"{{ route('autocomplete.fetch') }}",
+                      method:"POST",
+                      data:{query:query, _token:_token},
+                      success:function(data){
+                       $('#agencyList').fadeIn();  
+                                $('#agencyList').html(data);
+                      }
+                     });
+                    }
+                });
+            
+                $(document).on('click', 'li', function(){  
+                    $('#estateAgency').val($(this).text());  
+                    $('#agencyList').fadeOut();  
+                });  
+            
+            });
+            </script>
 
 @stop

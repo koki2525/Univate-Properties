@@ -247,3 +247,5 @@ Route::get('selected-weeks/{id}','PagesController@selectedWeeks');
 Route::post('selected-weeks/{id}','PagesController@handleReviewPrelistedWeeks');
 
 Route::get('publish-remaining-weeks','PagesController@publishTheRest');
+
+Route::post('/autocomplete/fetch', 'PagesController@fetch')->name('autocomplete.fetch');

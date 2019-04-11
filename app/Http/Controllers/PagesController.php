@@ -4983,4 +4983,24 @@ class PagesController extends Controller {
         return Redirect::back()->with('view-success', 'Your import is successful!');
     }
 
+    function fetch(Request $request)
+    {
+     if($request->get('query'))
+     {
+      $query = $request->get('query');
+      $data = DB::table('agencies')
+        ->where('agency', 'LIKE', "%{$query}%")
+        ->get();
+      $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+      foreach($data as $row)
+      {
+       $output .= '
+       <li><a href="#">'.$row->agency.'</a></li>
+       ';
+      }
+      $output .= '</ul>';
+      echo $output;
+     }
+    }
+
 }
