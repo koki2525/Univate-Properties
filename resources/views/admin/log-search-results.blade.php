@@ -139,6 +139,8 @@
                     </div>
                 </div>
             </form> 
+            <hr>
+            <a style="margin-left:auto;margin-right:auto;display:block;width: 15%;" class="btn btn-blue" href="/timeshare-change-logs">All logs</a>
         </div>
     </div>
 
@@ -172,9 +174,6 @@
             </table>
         </div>
 
-        <div class="col-md-6 offset-md-3 mb-4 d-flex justify-content-center">
-            <?php echo $logs->links(); ?>
-        </div>
     </div>
 </div>
 

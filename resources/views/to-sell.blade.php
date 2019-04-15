@@ -7,11 +7,21 @@
 @section('keywords', 'Timeshare selling, where to sell my timeshare, Uni-Vate Properties, Uni-Vate timeshare, timeshare for sale, tender weeks available, sell my tender week')
 
 @section('content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+    .choose :hover {
+        background-color: #72c5ed;
+    }
+</style>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="my-4">To Sell</h1>
+            <h1 class="my-4">To Sell
+                    @if(Auth::check())
+                    <a style="float: right;" class="btn btn-blue btn-lg" href="/bulk-weeks-upload">Bulk Weeks upload</a>
+                @endif  
+            </h1>
             <hr>
             <p>* You need to be logged in to submit your listing. Please register and log in if you have not done so already.</p>
             <hr>
@@ -45,7 +55,7 @@
                         <div id="agencyList">
                         </div>
                         @else
-                        <input class="form-control" type="text" id="estateAgency" name="estateAgency" value="Uni-Broker Resales" />
+                        <input class="form-control" type="text" id="estateAgency" name="estateAgency" />
                         <div id="agencyList">
                         </div>
                         @endif
@@ -54,8 +64,12 @@
                         <label>Agent name <em>(if applicable)</em></label>
                         @if(Auth::check() && (Auth::user()->role == "agency admin" or (Auth::user()->role == "user" && Auth::user()->agency)))
                         <input class="form-control" type="text" id="agentName" name="agentName" value="{{ Auth::user()->name }}" readonly />
+                        <div id="agentList">
+                        </div>
                         @else
                         <input class="form-control" type="text" id="agentName" name="agentName" value="{{ old('agentName') }}" />
+                        <div id="agentList">
+                        </div>
                         @endif
                     </div>
 
@@ -316,7 +330,7 @@
         </div>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script>
         $(document).ready(function () {
             $("#resort").change(function () {
@@ -355,35 +369,38 @@
         );
 
     </script>
-
     <script>
-            $('#referedBy').change(function(e){
-                var value = getRadioVal(this, 'referedBy');
-                if($(value==='No')
-                    $('#estateAgency').val('Uni-Broker Resales')
-                else
-                $('#estateAgency').val('')
-            });
+            $(document).ready(function(){
+        $('#referedBy').change(function(){
+            if($(this).val()=="Yes"){
+                $(input[name="estateAgency"]).val('');
+            }
+            else if($(this).val()=="No"){
+                $(input[name="estateAgency"]).val('Uni-Broker Resales');
+            }
+            
+        });
+    });
     </script>
 
     <script>
             $(document).ready(function(){
             
              $('#estateAgency').keyup(function(){ 
-                    var query = $(this).val();
-                    if(query != '')
-                    {
-                     var _token = $('input[name="_token"]').val();
-                     $.ajax({
-                      url:"{{ route('autocomplete.fetch') }}",
-                      method:"POST",
-                      data:{query:query, _token:_token},
-                      success:function(data){
-                       $('#agencyList').fadeIn();  
+                var query = $(this).val();
+                if(query != '')
+                {
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                    url:"{{ route('autocomplete.fetch') }}",
+                    method:"POST",
+                    data:{query:query, _token:_token},
+                    success:function(data){
+                    $('#agencyList').fadeIn();  
                                 $('#agencyList').html(data);
-                      }
-                     });
                     }
+                    });
+                }
                 });
             
                 $(document).on('click', 'li', function(){  
@@ -392,6 +409,34 @@
                 });  
             
             });
-            </script>
+    </script>
+    <script>
+        $(document).ready(function(){
+        
+         $('#agentName').keyup(function(){ 
+            var query = $(this).val();
+            var estateAgency = $('#estateAgency').val(); 
+            if(query != '')
+            {
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                url:"{{ route('autocompleteAgent.fetch') }}",
+                method:"POST",
+                data:{query:query, _token:_token, estateAgency},
+                success:function(data){
+                $('#agentList').fadeIn();  
+                        $('#agentList').html(data);
+                }
+                });
+                }
+            });
+        
+            $(document).on('click', 'span', function(){  
+                $('#agentName').val($(this).text());  
+                $('#agentList').fadeOut();  
+            });  
+        
+        }); 
+</script>
 
 @stop

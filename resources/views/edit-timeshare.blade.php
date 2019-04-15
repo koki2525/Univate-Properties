@@ -131,6 +131,8 @@
                 <label>Status <em>(current : {{ $timeshare->status }})</em></label>
                 <select class="form-control" name="status">
                     <option value='NULL'>Please Select</option>
+                    <option value="Publish">Publish</option>
+                    <option value='Awaiting payment'>Awaiting payment</option>
                     <option value="Authorization needed">Authorization needed</option>
                     <option value="For Sale">For Sale</option>
                     <option value="Offer Pending">Offer Pending</option>

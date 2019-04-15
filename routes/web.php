@@ -83,6 +83,7 @@ Route::post('contact-us','PagesController@handleContacts');
 //Route::get('logout','PagesController@handleLogout');
 Route::get('confirmation/{email}','PagesController@confirmationButton');
 Route::post('search','PagesController@serveSearch');
+Route::post('search-log','PagesController@serveLogSearch');
 
 Route::get('commercial-sales','PagesController@serveCommercialSales');
 Route::get('commercial-rentals','PagesController@serveCommercialRentals');
@@ -231,7 +232,7 @@ Auth::routes([
   ]);
 
 //Route::post('password/reset','Auth\ResetPasswordController@reset');
-  
+
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
@@ -248,9 +249,6 @@ Route::post('selected-weeks/{id}','PagesController@handleReviewPrelistedWeeks');
 
 Route::get('publish-remaining-weeks','PagesController@publishTheRest');
 
-<<<<<<< HEAD
-Route::post('/autocomplete/fetch', 'PagesController@fetch')->name('autocomplete.fetch');
-=======
 Route::get('timeshare-change-logs','PagesController@serveLogs');
 Route::get('view-user/{id}','PagesController@serveUser');
 Route::get('view-timeshare/{id}','PagesController@serveTimeshareDetails');
@@ -262,4 +260,6 @@ Route::post('new-resort','PagesController@handleAddNewResort');
 
 Route::get('bulk-weeks-upload','PagesController@serveBulkExcelUpload');
 Route::post('bulk-weeks-upload','PagesController@handleBulkExcelUpload');
->>>>>>> rachael
+
+Route::post('/autocomplete/fetch', 'PagesController@fetch')->name('autocomplete.fetch');
+Route::post('/autocompleteAgent/fetch', 'PagesController@fetchAgent')->name('autocompleteAgent.fetch');

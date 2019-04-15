@@ -31,6 +31,7 @@ use Auth;
 use View;
 use Mail;
 use App\TimeshareLog;
+use App\TimeshareBulk;
 use App\Resort;
 
 class PagesController extends Controller {
@@ -197,18 +198,18 @@ class PagesController extends Controller {
 		$timeshare->spacebankOwner = Input::get('spacebankOwner');
 		$timeshare->agency = Auth::user()->agency;
         $timeshare->agent = Auth::user()->name;
-        
+
         $request = request();
 
         $mandate = $request->file('mandate');
-        $profileImageSaveAsName = time() . Auth::id() . "-mandate." . 
+        $profileImageSaveAsName = time() . Auth::id() . "-mandate." .
                                   $mandate->getClientOriginalExtension();
 
         $upload_path = public_path() .'mandates/';
         $profile_image_url = '/'.$upload_path . $profileImageSaveAsName;
         $success = $mandate->move($upload_path, $profileImageSaveAsName);
 
-        $timeshare->mandate = $profile_image_url; 
+        $timeshare->mandate = $profile_image_url;
 
         $timeshare->save();
 
@@ -707,7 +708,7 @@ class PagesController extends Controller {
         $timeshare = DB::table('timeshares')
             ->where('id','=',$id)
             ->first();
-        
+
         if(Input::get('resort')!=$timeshare->resort)
         {
             $log = new TimeshareLog;
@@ -739,7 +740,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'Module changed from '.$timeshare->module.' to '.Input::get('module');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -759,7 +760,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'Week changed from '.$timeshare->week.' to '.Input::get('week');
             $log->save();
-            
+
             DB::table('timeshares')
                 ->where('id','=', $id)
                 ->update(array(
@@ -780,7 +781,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'Levy changed from '.$timeshare->levy.' to '.Input::get('levy');
             $log->save();
-            
+
             DB::table('timeshares')
                 ->where('id','=', $id)
                 ->update(array(
@@ -801,7 +802,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'Departure date changed from '.$timeshare->fromDate.' to '.Input::get('fromDate');
             $log->save();
-            
+
             DB::table('timeshares')
                 ->where('id','=', $id)
                 ->update(array(
@@ -821,7 +822,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'Arrival date changed from '.$timeshare->toDate.' to '.Input::get('toDate');
             $log->save();
-            
+
             DB::table('timeshares')
 		->where('id','=', $id)
 		->update(array(
@@ -841,7 +842,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The season was changed from '.$timeshare->season.' to '.Input::get('season');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -861,7 +862,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The region was changed from '.$timeshare->region.' to '.Input::get('region');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -881,7 +882,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The set price was changed from '.$timeshare->setPrice.' to '.Input::get('setPrice');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -901,7 +902,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The price was changed from '.$timeshare->price.' to '.Input::get('price');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -921,7 +922,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The number of bedrooms was changed from '.$timeshare->bedrooms.' to '.Input::get('bedrooms');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -941,7 +942,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The maximum occupation per unit was changed from '.$timeshare->sleeps.' to '.Input::get('sleeps');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -961,7 +962,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The unit number was changed from '.$timeshare->unit.' to '.Input::get('unit');
             $log->save();
-            
+
             DB::table('timeshares')
                 ->where('id','=', $id)
                 ->update(array(
@@ -981,7 +982,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The owner was changed from '.$timeshare->owner.' to '.Input::get('owner');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -1001,7 +1002,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The space banked year was changed from '.$timeshare->spacebankedyear.' to '.Input::get('spacebankedyear');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -1021,7 +1022,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The space bank owner was changed from '.$timeshare->spacebankOwner.' to '.Input::get('spacebankOwner');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -1041,7 +1042,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The status was changed from '.$timeshare->status.' to '.Input::get('status');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -1061,7 +1062,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The publish status was changed from '.$timeshare->published.' to '.Input::get('published');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -1081,7 +1082,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The status date was changed from '.$timeshare->statusDate.' to '.Input::get('statusDate');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -1122,7 +1123,7 @@ class PagesController extends Controller {
 		$timeshare = DB::table('timeshares')
             ->where('id','=',$id)
             ->first();
-        
+
         if(Input::get('resort')!=$timeshare->resort)
         {
             $log = new TimeshareLog;
@@ -1154,7 +1155,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'Module changed from '.$timeshare->module.' to '.Input::get('module');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -1174,7 +1175,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'Week changed from '.$timeshare->week.' to '.Input::get('week');
             $log->save();
-            
+
             DB::table('timeshares')
                 ->where('id','=', $id)
                 ->update(array(
@@ -1195,7 +1196,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'Levy changed from '.$timeshare->levy.' to '.Input::get('levy');
             $log->save();
-            
+
             DB::table('timeshares')
                 ->where('id','=', $id)
                 ->update(array(
@@ -1216,7 +1217,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'Departure date changed from '.$timeshare->fromDate.' to '.Input::get('fromDate');
             $log->save();
-            
+
             DB::table('timeshares')
                 ->where('id','=', $id)
                 ->update(array(
@@ -1236,7 +1237,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'Arrival date changed from '.$timeshare->toDate.' to '.Input::get('toDate');
             $log->save();
-            
+
             DB::table('timeshares')
 		->where('id','=', $id)
 		->update(array(
@@ -1256,7 +1257,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The season was changed from '.$timeshare->season.' to '.Input::get('season');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -1264,10 +1265,6 @@ class PagesController extends Controller {
                 )
             );
         }
-<<<<<<< HEAD
-
-        if(Input::get('region')!=$timeshare->region)
-=======
 
         if(Input::get('region')!=$timeshare->region)
         {
@@ -1280,7 +1277,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The region was changed from '.$timeshare->region.' to '.Input::get('region');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -1300,7 +1297,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The set price was changed from '.$timeshare->setPrice.' to '.Input::get('setPrice');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -1320,7 +1317,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The price was changed from '.$timeshare->price.' to '.Input::get('price');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -1340,7 +1337,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The number of bedrooms was changed from '.$timeshare->bedrooms.' to '.Input::get('bedrooms');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -1360,7 +1357,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The maximum occupation per unit was changed from '.$timeshare->sleeps.' to '.Input::get('sleeps');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -1380,7 +1377,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The unit number was changed from '.$timeshare->unit.' to '.Input::get('unit');
             $log->save();
-            
+
             DB::table('timeshares')
                 ->where('id','=', $id)
                 ->update(array(
@@ -1390,7 +1387,6 @@ class PagesController extends Controller {
         }
 
         if(Input::get('owner')!=$timeshare->owner)
->>>>>>> rachael
         {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
@@ -1399,131 +1395,18 @@ class PagesController extends Controller {
             $log->resort = $timeshare->resort;
             $log->module = $timeshare->module;
             $log->unit = $timeshare->unit;
-<<<<<<< HEAD
-            $log->change = 'The region was changed from '.$timeshare->region.' to '.Input::get('region');
-=======
             $log->change = 'The owner was changed from '.$timeshare->owner.' to '.Input::get('owner');
->>>>>>> rachael
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
-<<<<<<< HEAD
-                    'region' => Input::get('region')
-                )
-            );
-        }
-
-        if(Input::get('setPrice')!=$timeshare->setPrice)
-        {
-            $log = new TimeshareLog;
-            $log->user_id = Auth::user()->id;
-            $log->timeshare_id = $timeshare->id;
-            $log->name = Auth::user()->name;
-            $log->resort = $timeshare->resort;
-            $log->module = $timeshare->module;
-            $log->unit = $timeshare->unit;
-            $log->change = 'The set price was changed from '.$timeshare->setPrice.' to '.Input::get('setPrice');
-            $log->save();
-            
-            DB::table('timeshares')
-            ->where('id','=', $id)
-            ->update(array(
-                    'setPrice' => Input::get('setPrice')
-                )
-            );
-        }
-
-        if(Input::get('price')!=$timeshare->price)
-        {
-            $log = new TimeshareLog;
-            $log->user_id = Auth::user()->id;
-            $log->timeshare_id = $timeshare->id;
-            $log->name = Auth::user()->name;
-            $log->resort = $timeshare->resort;
-            $log->module = $timeshare->module;
-            $log->unit = $timeshare->unit;
-            $log->change = 'The price was changed from '.$timeshare->price.' to '.Input::get('price');
-            $log->save();
-            
-            DB::table('timeshares')
-            ->where('id','=', $id)
-            ->update(array(
-                    'price' => Input::get('price')
-                )
-            );
-        }
-
-        if(Input::get('bedrooms')!=$timeshare->bedrooms)
-        {
-            $log = new TimeshareLog;
-            $log->user_id = Auth::user()->id;
-            $log->timeshare_id = $timeshare->id;
-            $log->name = Auth::user()->name;
-            $log->resort = $timeshare->resort;
-            $log->module = $timeshare->module;
-            $log->unit = $timeshare->unit;
-            $log->change = 'The number of bedrooms was changed from '.$timeshare->bedrooms.' to '.Input::get('bedrooms');
-            $log->save();
-            
-            DB::table('timeshares')
-            ->where('id','=', $id)
-            ->update(array(
-                    'bedrooms' => Input::get('bedrooms')
-                )
-            );
-        }
-
-        if(Input::get('sleeps')!=$timeshare->sleeps)
-        {
-            $log = new TimeshareLog;
-            $log->user_id = Auth::user()->id;
-            $log->timeshare_id = $timeshare->id;
-            $log->name = Auth::user()->name;
-            $log->resort = $timeshare->resort;
-            $log->module = $timeshare->module;
-            $log->unit = $timeshare->unit;
-            $log->change = 'The maximum occupation per unit was changed from '.$timeshare->sleeps.' to '.Input::get('sleeps');
-            $log->save();
-            
-            DB::table('timeshares')
-            ->where('id','=', $id)
-            ->update(array(
-                    'sleeps' => Input::get('sleeps')
-                )
-            );
-        }
-
-        if(Input::get('unit')!=$timeshare->unit)
-        {
-            $log = new TimeshareLog;
-            $log->user_id = Auth::user()->id;
-            $log->timeshare_id = $timeshare->id;
-            $log->name = Auth::user()->name;
-            $log->resort = $timeshare->resort;
-            $log->module = $timeshare->module;
-            $log->unit = $timeshare->unit;
-            $log->change = 'The unit number was changed from '.$timeshare->unit.' to '.Input::get('unit');
-            $log->save();
-            
-            DB::table('timeshares')
-                ->where('id','=', $id)
-                ->update(array(
-                        'unit' => Input::get('unit')
-                    )
-                );
-        }
-
-        if(Input::get('owner')!=$timeshare->owner)
-=======
                     'owner' => Input::get('owner')
                 )
             );
         }
 
         if(Input::get('spacebankedyear')!=$timeshare->spacebankedyear)
->>>>>>> rachael
         {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
@@ -1532,30 +1415,18 @@ class PagesController extends Controller {
             $log->resort = $timeshare->resort;
             $log->module = $timeshare->module;
             $log->unit = $timeshare->unit;
-<<<<<<< HEAD
-            $log->change = 'The owner was changed from '.$timeshare->owner.' to '.Input::get('owner');
-=======
             $log->change = 'The space banked year was changed from '.$timeshare->spacebankedyear.' to '.Input::get('spacebankedyear');
->>>>>>> rachael
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
-<<<<<<< HEAD
-                    'owner' => Input::get('owner')
-=======
                     'spacebankedyear' => Input::get('spacebankedyear')
->>>>>>> rachael
                 )
             );
         }
 
-<<<<<<< HEAD
-        if(Input::get('spacebankedyear')!=$timeshare->spacebankedyear)
-=======
         if(Input::get('spacebankOwner')!=$timeshare->spacebankOwner)
->>>>>>> rachael
         {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
@@ -1564,30 +1435,18 @@ class PagesController extends Controller {
             $log->resort = $timeshare->resort;
             $log->module = $timeshare->module;
             $log->unit = $timeshare->unit;
-<<<<<<< HEAD
-            $log->change = 'The space banked year was changed from '.$timeshare->spacebankedyear.' to '.Input::get('spacebankedyear');
-=======
             $log->change = 'The space bank owner was changed from '.$timeshare->spacebankOwner.' to '.Input::get('spacebankOwner');
->>>>>>> rachael
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
-<<<<<<< HEAD
-                    'spacebankedyear' => Input::get('spacebankedyear')
-=======
                     'spacebankOwner' => Input::get('spacebankOwner')
->>>>>>> rachael
                 )
             );
         }
 
-<<<<<<< HEAD
-        if(Input::get('spacebankOwner')!=$timeshare->spacebankOwner)
-=======
         if(Input::get('status')!='NULL')
->>>>>>> rachael
         {
             $log = new TimeshareLog;
             $log->user_id = Auth::user()->id;
@@ -1596,58 +1455,17 @@ class PagesController extends Controller {
             $log->resort = $timeshare->resort;
             $log->module = $timeshare->module;
             $log->unit = $timeshare->unit;
-<<<<<<< HEAD
-            $log->change = 'The space bank owner was changed from '.$timeshare->spacebankOwner.' to '.Input::get('spacebankOwner');
-=======
             $log->change = 'The status was changed from '.$timeshare->status.' to '.Input::get('status');
->>>>>>> rachael
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
-<<<<<<< HEAD
-                    'spacebankOwner' => Input::get('spacebankOwner')
-=======
                     'status' => Input::get('status')
->>>>>>> rachael
                 )
             );
         }
 
-<<<<<<< HEAD
-        if(Input::get('status')!='NULL')
-=======
-        if(Input::get('publish')!='NULL')
->>>>>>> rachael
-        {
-            $log = new TimeshareLog;
-            $log->user_id = Auth::user()->id;
-            $log->timeshare_id = $timeshare->id;
-            $log->name = Auth::user()->name;
-            $log->resort = $timeshare->resort;
-            $log->module = $timeshare->module;
-            $log->unit = $timeshare->unit;
-<<<<<<< HEAD
-            $log->change = 'The status was changed from '.$timeshare->status.' to '.Input::get('status');
-=======
-            $log->change = 'The publish status was changed from '.$timeshare->published.' to '.Input::get('published');
->>>>>>> rachael
-            $log->save();
-            
-            DB::table('timeshares')
-            ->where('id','=', $id)
-            ->update(array(
-<<<<<<< HEAD
-                    'status' => Input::get('status')
-=======
-                    'published' => Input::get('publish')
->>>>>>> rachael
-                )
-            );
-        }
-
-<<<<<<< HEAD
         if(Input::get('publish')!='NULL')
         {
             $log = new TimeshareLog;
@@ -1659,7 +1477,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The publish status was changed from '.$timeshare->published.' to '.Input::get('published');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -1668,8 +1486,6 @@ class PagesController extends Controller {
             );
         }
 
-=======
->>>>>>> rachael
         if(Input::get('statusDate')!=$timeshare->statusDate)
         {
             $log = new TimeshareLog;
@@ -1681,7 +1497,7 @@ class PagesController extends Controller {
             $log->unit = $timeshare->unit;
             $log->change = 'The status date was changed from '.$timeshare->statusDate.' to '.Input::get('statusDate');
             $log->save();
-            
+
             DB::table('timeshares')
             ->where('id','=', $id)
             ->update(array(
@@ -3568,13 +3384,51 @@ class PagesController extends Controller {
 	}
 
 	public function serveSuccessfulPayment()
-	{
-		/*DB::table('timeshares')
-                    ->where('id','=', $id)
+	{ 
+        $bulk = DB::table('timeshare_bulk_uploads')
+                    ->where('email','=',Auth::user()->email)
+                    ->whereDate('created_at', \Carbon\Carbon::today())
+                    ->orderBy('created_at', 'desc')
+                    ->first(); 
+        
+        $user = DB::table('users')
+        ->where('id','=',Auth::user()->id)
+        ->first();
+
+        if($bulk==NULL)
+        {
+            $timeshare = DB::table('timeshares')
+                ->where('email','=',$user->email)
+                ->whereDate('created_at', \Carbon\Carbon::today())
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            $data = ['user' => $user, 'timeshare' => $timeshare];
+
+            Mail::send('emails.paymentReference', $data, function($message)
+            {
+            $message->to('info@univateproperties.co.za','Uni-vate')->to('brucel@uni-vision.co.za','Bruce Lynwood')->bcc('koketso.maphopha@gmail.com','Koketso Maphopha')->subject('Successful Payment');
+            $message->from('info@univateproperties.co.za');
+            });
+        }
+        else{
+            $data = ['bulk' => $bulk, 'user' => $user];
+
+            DB::table('timeshare_bulk_uploads')
+                    ->where('id','=', $bulk->id)
                     ->update(array(
-                            'listingFee' => 1
+                            'listingFee' => 'Paid'
                         )
-					); */
+					);
+
+            Mail::send('emails.paymentBulkReference', $data, function($message)
+            {
+            $message->to('info@univateproperties.co.za','Uni-vate')->to('brucel@uni-vision.co.za','Bruce Lynwood')->bcc('koketso.maphopha@gmail.com','Koketso Maphopha')->subject('Successful Payment');
+            $message->from('info@univateproperties.co.za');
+            });
+        }
+
+        
 
 		return View::make('successful-payment');
 	}
@@ -4243,7 +4097,7 @@ class PagesController extends Controller {
         $timeshare = DB::table('timeshares')
 			->where('id','=',$id)
             ->first();
-            
+
 		$validator = Validator::make(Input::all(),
             [
                 'resort' => 'required',
@@ -4368,7 +4222,7 @@ class PagesController extends Controller {
                     'price' => Input::get('price')
                 )
             );
-        
+
         $log = new TimeshareLog;
                 $log->user_id = Auth::user()->id;
                 $log->timeshare_id = $timeshare->id;
@@ -4699,7 +4553,7 @@ class PagesController extends Controller {
     public function handlePreListedWeeks()
     {
         $selected = Input::get('selected');
-        
+
         foreach($selected as $id)
         {
             DB::table('timeshares')
@@ -4715,7 +4569,7 @@ class PagesController extends Controller {
                     'pre_selected' => 1
                 )
             );
-        } 
+        }
 
         $selectedWeeks = NULL;
 
@@ -4813,18 +4667,18 @@ class PagesController extends Controller {
         $resort = DB::table('resorts')
 		->where('slug','=',$slug)
 		->first();
-		
+
 		$awards = explode(',',$resort->awards);
         $facilities = explode(',',$resort->facilities);
 
         //$start = \DateTime::createFromFormat('m-d-Y', Input::get('from'))->format('Y-m-d');
        // $end = \DateTime::createFromFormat('m-d-Y', Input::get('to'))->format('Y-m-d');
-      
+
 
        // Timeshare::whereDate('exam_date', '>=', Carbon::now()->toDateString());
 
         $timeshares = Timeshare::whereBetween(DB::raw('DATE(fromDate)'), array(Input::get('from'), Input::get('to')))->paginate(10);
-         
+
             return View::make('filtered-weeks')
                 ->with('resort',$resort)
                 ->with('awards',$awards)
@@ -4889,11 +4743,11 @@ class PagesController extends Controller {
 				'mobile' => Input::get('cell')
 			)
         );
-     
+
 		return Redirect::back()->with('view-success',"You have successfully updated your details");
 
     }
-    
+
     public function serveUploadTenderWeeks()
     {
         return View::make('admin.upload-tender-weeks');
@@ -4916,7 +4770,7 @@ class PagesController extends Controller {
             ->with('agencies',$agencies);
     }
 
-    
+
 
     public function selectedWeeks($id)
     {
@@ -4932,7 +4786,7 @@ class PagesController extends Controller {
                 ->with('agency',$agency)
                 ->with('timeshares',$timeshares);
 
-        
+
 
     }
 
@@ -4943,7 +4797,7 @@ class PagesController extends Controller {
             ->first();
 
         $selected = Input::get('selected');
-        
+
         foreach($selected as $id)
         {
             DB::table('timeshares')
@@ -4959,7 +4813,7 @@ class PagesController extends Controller {
                     'pre_selected' => 1
                 )
             );
-        } 
+        }
 
         $data = ['agency' => $agency];
 
@@ -4969,7 +4823,7 @@ class PagesController extends Controller {
             $message->from('info@univateproperties.co.za');
 		});
 
-        return Redirect::to('review-prelisted-weeks')->with('view-success','Tender weeks have been successfully assigned to agency.'); 
+        return Redirect::to('review-prelisted-weeks')->with('view-success','Tender weeks have been successfully assigned to agency.');
     }
 
     public function publishTheRest()
@@ -4988,7 +4842,7 @@ class PagesController extends Controller {
             );
             }
 
-            return Redirect::to('review-prelisted-weeks')->with('view-success','The remaining timeshares have been successfully published.'); 
+            return Redirect::to('review-prelisted-weeks')->with('view-success','The remaining timeshares have been successfully published.');
     }
 
     public function serveLogs()
@@ -5022,7 +4876,7 @@ class PagesController extends Controller {
 
     public function serveSearchTimeshareFilter($id)
 	{
-        if(!(Input::has('week')) and !(Input::has('unit')) and !(Input::has('bedrooms')) and !(Input::has('season')) and !(Input::has('maxPrice')) and !(Input::has('minPrice')))
+        if(!(Input::has('week')) and !(Input::has('unit')) and !(Input::has('bedrooms')=="") and !(Input::has('season')=="") and !(Input::has('maxPrice')) and !(Input::has('minPrice')))
         {
             return Redirect::back()->with('view-error', 'No filter entered, please try again')->withInput()->withErrors($validator);
         }
@@ -5067,8 +4921,8 @@ class PagesController extends Controller {
                     $query->where('setPrice','>=', $minPrice); })
                 ->where('resort','=',$resort->resort)
                 ->where('published','=',1)
-                ->simplePaginate(5); 
-                
+                ->get();
+
 
         if($timeshares->isEmpty())
         {
@@ -5086,7 +4940,7 @@ class PagesController extends Controller {
 		}
 
     }
-    
+
     public function serveAddNewResort()
     {
         return View::make('admin.new-resort');
@@ -5107,7 +4961,7 @@ class PagesController extends Controller {
         if($validator->fails())
         {
             return Redirect::back()->with('view-error', ' There were errors in your submission please review below')->withInput()->withErrors($validator);
-        } 
+        }
 
         $resort = new Resort;
         $resort->resort = Input::get('resort');
@@ -5120,7 +4974,7 @@ class PagesController extends Controller {
 		{
 			$resort->advisor = Input::get('advisor');
         }
-        
+
         if(Input::has('url'))
 		{
 			$resort->url = Input::get('url');
@@ -5138,7 +4992,7 @@ class PagesController extends Controller {
 		$file2 = Input::file('image2');
 		$file2->move('images/resorts/', $file2->getClientOriginalName());
         $resort->image2 = '/images/resorts/'.$file2->getClientOriginalName();
-        
+
         $file3 = Input::file('image3');
 		$file3->move('images/resorts/', $file3->getClientOriginalName());
 		$resort->image3 = '/images/resorts/'.$file3->getClientOriginalName();
@@ -5165,30 +5019,94 @@ class PagesController extends Controller {
         config(['excel.import.startRow' => 1 ]);
         Excel::import(new TimesharesImport, Input::file('ex_file'));
 
-        return Redirect::back()->with('view-success', 'Your import is successful!');
+        $bulk = new TimeshareBulk;
+        $bulk->username = Auth::user()->username;
+        $bulk->user_id = Auth::user()->id;
+        $bulk->email = Auth::user()->email;
+        $bulk->save();
+
+        return Redirect::to('/pay-listing-fee/'.$bulk->id)->with('view-success','Your import is successful!');
     }
 
-<<<<<<< HEAD
     function fetch(Request $request)
     {
-     if($request->get('query'))
-     {
-      $query = $request->get('query');
-      $data = DB::table('agencies')
-        ->where('agency', 'LIKE', "%{$query}%")
-        ->get();
-      $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
-      foreach($data as $row)
-      {
-       $output .= '
-       <li><a href="#">'.$row->agency.'</a></li>
-       ';
-      }
-      $output .= '</ul>';
-      echo $output;
-     }
+        if($request->get('query'))
+        {
+                $query = $request->get('query');
+                $data = DB::table('agencies')
+                    ->where('agency', 'LIKE', "%{$query}%")
+                    ->get();
+                $output = '<ul class="navbar-nav w-100 justify-content-center" style="display:block; position: absolute; z-index: 9; background-color: #33689b;">';
+
+                foreach($data as $row)
+                {
+                $output .= '
+                <li class="nav-item choose"><a style="color:white; text-decoration:none;" class="nav-link choose" href="#">' .$row->agency.'</a></li>
+                ';
+                }
+                $output .= '</ul>';
+                echo $output;
+        }
     }
 
-=======
->>>>>>> rachael
+    function fetchAgent(Request $request)
+    {
+        if($request->get('query') && $request->get('estateAgency'))
+        {
+            $agency = $request->get('estateAgency');
+            $query = $request->get('query');
+            $data = DB::table('users')
+                ->where('agency','=',$agency)
+                ->orWhere('name', 'LIKE', "%{$query}%")
+                ->orWhere('surname', 'LIKE', "%{$query}%")
+                ->get();
+            $output = '<ul class="navbar-nav w-100 justify-content-center" style="display:block; position: absolute; z-index: 9; background-color: #33689b;">';
+
+            foreach($data as $row)
+            {
+            $output .= '
+            <span class="nav-item choose"><a style="color:white; text-decoration:none;" class="nav-link choose" href="#">' .$row->name.' '.$row->surname.'</a></span>
+            ';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
+    }
+
+    public function serveLogSearch()
+	{
+		$validator = Validator::make(Input::all(),
+            [
+                'search' => 'required',
+            ]);
+
+        if($validator->fails())
+        {
+            return Redirect::back()->with('view-error', 'No search entered, please try again')->withInput()->withErrors($validator);
+        }
+
+        $query = Input::get('search');
+
+        $logs = DB::table('timeshare_change_logs')
+            ->where('resort', 'LIKE', '%' . $query . '%')//resort name
+            ->orWhere('module', 'LIKE', '%' . $query . '%')
+            ->orWhere('unit', 'LIKE', '%' . $query . '%')
+            ->orWhere('name', 'LIKE', '%' . $query . '%')
+            ->get();
+
+        if($logs->isEmpty())
+        {
+            return Redirect::back()->with('view-search-error', 'There were no results found, please try searching by resort name.');
+        }
+
+        else
+        {
+            // multiple resorts search results
+            return View::make('admin.log-search-results')
+                ->with('logs', $logs);
+
+		}
+
+	}
+
 }

@@ -51,12 +51,6 @@
                             <a class="dropdown-item" href="/bulk-weeks-upload">Bulk Weeks upload</a>
                             @endif
                             <a class="dropdown-item" href="/to-buy">To Buy</a>
-                            @if(Auth::check() && Auth::user()->role == "admin")
-                            <a class="dropdown-item" href="/admin">Admin</a>
-                            <a class="dropdown-item" href="/timeshare-change-logs">Logs</a>
-                            <a class="dropdown-item" href="/all-agents">All agents</a>
-                            <a class="dropdown-item" href="/all-agencies">All agencies</a>
-                            @endif
                             @if(Auth::check())
                             <a class="dropdown-item" href="/my-timeshares">Timeshares Listed</a>
                             @endif
@@ -122,14 +116,19 @@
                             <a class="nav-link" href="/update-profile/{{ Auth::user()->id }}">Update Profile</a>
                         </li>
                     @endif
+                    
                     @if(Auth::check() && Auth::user()->role === 'admin')
                         <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Tender Weeks
+                                        Admin Page
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="/admin">Admin</a>
+                                    <a class="dropdown-item" href="/timeshare-change-logs">Logs</a>
+                                    <a class="dropdown-item" href="/all-agents">All agents</a>
+                                    <a class="dropdown-item" href="/all-agencies">All agencies</a>
                                     <a class="dropdown-item" href="/upload-tender-weeks">Tender Weeks Upload</a>
-                                    <a class="dropdown-item" href="/pre-list-access">Manage Access</a>
+                                    <a class="dropdown-item" href="/pre-list-access">Manage pre-selected weeks Access</a>
                                     <a class="dropdown-item" href="/review-prelisted-weeks">Approve selected Weeks</a>
                                 </div>
                             </li>

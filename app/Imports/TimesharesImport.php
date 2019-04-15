@@ -57,7 +57,7 @@ class TimesharesImport implements ToModel, WithHeadingRow
                 'propertType' => 'Timeshare',
                 'agent'=> 'N/A',
                 'pre_selected' => 0
-    
+
             ]);
         }
         elseif(Auth::user()->role='user' && Auth::user()->role!=NULL)

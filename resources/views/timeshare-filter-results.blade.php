@@ -10,19 +10,21 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-7 offset-md-1">
-            <h1 class="my-4"><span data-resort="{{ $resort->resort }}">{{ $resort->resort }}</h1>
+            <h1 style="text-align: -webkit-right;" class="my-4"><span data-resort="{{ $resort->resort }}">{{ $resort->resort }}</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-7 offset-md-1">
-            <form id="mainForm" method="POST" action="/filter-weeks/{{ $resort->slug }}" accept-charset="UTF-8" enctype="multipart/form-data">
-                @csrf
+            <div class="col-md-3 pl-3 pl-md-5 sidebar">
+                    @include('partials.filter')
+                    @include('partials.sidebar')
+                </div>
+        <div class="col-md-9 offset-md-0">
+           
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
                                 
                         </div> 
-            </form>
                     <table style="font-size: 12px;" class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
@@ -64,12 +66,14 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $timeshares->links() }}
+
+                  
                     @endif
+                    
                 </div>
                 <div class="col-md-12 mb-4">
                     <a class="btn btn-blue" href="/to-buy">Back to Regions</a>
-                    <a class="btn btn-blue" href="/resort/{{ $resort->slug }}">Show all weeks</a>
+                    <a class="btn btn-blue" href="/resort/{{ $resort->slug }}">View all weeks</a>
                 </div>
             </div>
 
@@ -143,7 +147,7 @@
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="directions" role="tabpanel" aria-labelledby="directions-tab">
-                            <iframe src="{{ $resort->map }}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            <iframe src="{{ $resort->map }}" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
                         </div>
                         <div class="tab-pane fade" id="resort-layout" role="tabpanel" aria-labelledby="resort-layout-tab">
                             <img class="img-fluid" src="{{ $resort->layout }}" alt="Resort Layout" />
@@ -153,10 +157,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 pl-3 pl-md-5 sidebar">
-            @include('partials.filter')
-            @include('partials.sidebar')
-        </div>
+        
     </div>
 </div>
 
