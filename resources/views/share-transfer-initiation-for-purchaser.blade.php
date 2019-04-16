@@ -30,7 +30,7 @@
                         1.1 Name(s) and Surname (or) Company Name: 
                     </label>
                     <div class="col-md-4">
-                         <input class="form-control" type="text" name="name" value="{{ $name }}" readonly />
+                         <input class="form-control" type="text" name="name" value="{{ $name }} {{ $surname }}" readonly />
                     </div>
                 </div>
 
@@ -214,7 +214,7 @@
                         2.1 Resort:
                     </label>
                     <div class="col-md-4">
-                         <input class="form-control" type="text" name="resort" value="{{ $timeshare->resort }}" />
+                         <input class="form-control" type="text" name="resort" value="{{ $timeshare->resort }}" readonly/>
                     </div>
                 </div>
 
@@ -223,7 +223,7 @@
                         2.2 Unit/Chalet:
                     </label>
                     <div class="col-md-4">
-                         <input class="form-control" type="text" name="unit" value="{{ $timeshare->unit }}" />
+                         <input class="form-control" type="text" name="unit" value="{{ $timeshare->unit }}" readonly/>
                     </div>
                 </div>
 
@@ -232,7 +232,7 @@
                         2.3 Module/Week:
                     </label>
                     <div class="col-md-4">
-                         <input class="form-control" type="text" name="module" value="{{ $timeshare->module }}" />
+                         <input class="form-control" type="text" name="module" value="{{ $timeshare->module }}" readonly/>
                     </div>
                 </div>
 
@@ -241,7 +241,7 @@
                         2.4 Purchase Price:
                     </label>
                     <div class="col-md-4">
-                         <input class="form-control" type="text" name="price" value="{{ $timeshare->price }}" />
+                         <input class="form-control" type="text" name="price" value="{{ $timeshare->price }}" readonly/>
                     </div>
                 </div>
 

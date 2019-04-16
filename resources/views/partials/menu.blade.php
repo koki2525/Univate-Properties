@@ -66,7 +66,6 @@
                             @endif
                             @if(Auth::check() && Auth::user()->role == "admin")
                             <a class="dropdown-item" href="/pre-listed-weeks">Pre-listed Weeks</a>
-                            <a class="dropdown-item" href="/pre-list-access">Manage pre-listed weeks access</a>
                             @endif
                             <a class="dropdown-item" href="/faqs">FAQs</a>
                         </div>

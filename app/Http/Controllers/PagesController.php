@@ -241,6 +241,7 @@ class PagesController extends Controller {
             ->get();
 
         $resorts = DB::table('resorts')
+            ->orderBy('resort','asc')
             ->get();
 
             $gauteng = NULL;
@@ -2025,7 +2026,7 @@ class PagesController extends Controller {
 
         $timeshares = DB::table('timeshares')
             ->where('resort', 'LIKE', '%' . $query . '%')//resort name
-            ->paginate(10);
+            ->get();
 
         if($timeshares->isEmpty())
         {
@@ -2035,7 +2036,7 @@ class PagesController extends Controller {
         else
         {
             // multiple resorts search results
-            return View::make('search-results')
+            return View::make('search-results') 
                 ->with('timeshares', $timeshares);
 
 		}
@@ -3206,12 +3207,14 @@ class PagesController extends Controller {
 			->where('id','=',$id)
 			->first();
 
-			$name = Auth::user()->name;
+            $name = Auth::user()->name;
+            $surname = Auth::user()->surname;
 			$phone = Auth::user()->phone;
 			$cell = Auth::user()->mobile;
 			$email = Auth::user()->email;
 
-		return View::make('share-transfer-initiation-for-purchaser')
+        return View::make('share-transfer-initiation-for-purchaser')
+            ->with('surname',$surname)
 			->with('email',$email)
 			->with('phone',$phone)
 			->with('cell',$cell)
@@ -5188,6 +5191,7 @@ class PagesController extends Controller {
         $toDate = Input::get('toDate');
 
         $resorts = DB::table('resorts')
+            ->orderBy('resort','asc')
             ->get();
 
 		$timeshares = DB::table('timeshares')

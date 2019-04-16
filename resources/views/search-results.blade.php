@@ -210,7 +210,7 @@
         </div>
         
         <div class="col-md-6 offset-md-3 mb-4 d-flex justify-content-center">
-            <?php echo $timeshares->links(); ?>
+           
         </div>
     </div>
 </div>

@@ -85,6 +85,17 @@
         </div>
 
         <div class="form-row">
+                <div class="col-md-6">
+                    <label>Arrival Date</label>
+                    <input class="form-control" type="text" name="fromDate" value="{{ $timeshare->fromDate }}" readonly/>
+                </div>
+                <div class="col-md-6">
+                    <label>Departure Date</label>
+                    <input class="form-control" type="text" name="toDate" value="{{ $timeshare->toDate }}" readonly/>
+                </div>
+            </div>
+
+        <div class="form-row">
             <div class="col-md-6">
                 <label>Status <em>(current : {{ $timeshare->status }})</em></label>
                 <!-- <select class="form-control" name="status">
@@ -104,8 +115,8 @@
                 </select> 
             </div>
             <div class="col-md-6">
-                <label>Date</label>
-                <input id="statusDate" class="form-control" name="statusDate"  />
+                <label>Levy Amount</label>
+                <input id="levy" type="text" class="form-control" name="levy"  />
             </div> -->
         </div>
 
