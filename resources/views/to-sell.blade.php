@@ -358,6 +358,9 @@
                 else if (val == "Jackalberry Ridge") {
                     $("#region").html("<option value='mpumalanga'>Mpumalanga</option>");
                 }
+                else if (val == "Ngwenya Lodge") {
+                    $("#region").html("<option value='mpumalanga'>Mpumalanga</option>");
+                }
                 else if (val == "Sudwala Lodge") {
                     $("#region").html("<option value='mpumalanga'>Mpumalanga</option>");
                 }

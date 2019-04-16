@@ -9,7 +9,14 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+            <div class="col-md-3 pl-3 pl-md-5 sidebar">
+                <br>
+                @include('partials.filter2')
+                <br>
+            </div>
+        <div class="col-md-9 offset-md-0">
+                <div class="row">
+        <div class="col-md-12"> 
             <h1 class="my-4">To Buy</h1>
             <p>
                 The resorts have been listed in their relevant provinces. Please select the resort for which you would like to view the available weeks and then select the weeks that interest you on the resort page.
@@ -187,6 +194,8 @@
                 @endif
             </div>
         </div>
+    </div>
+    </div>
     </div>
 </div>
 @stop

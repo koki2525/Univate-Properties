@@ -5,8 +5,8 @@
             <form id="mainForm" method="POST" action="/filter/{{ $resort->id }}" accept-charset="UTF-8" enctype="multipart/form-data">
             @csrf
                 <div class="form-group">
-                    <select style="color: white;" class="form-control" name="season">
-                        <option value="">Season</option>
+                    <select class="form-control" name="season">
+                        <option value=""><span style="color:white;">Season</span></option>
                         <option value="Peak" {{ old('season') ==  'Peak' ? 'selected' : '' }}>Peak</option>
                         <option value="Peak 1" {{ old('season') ==  'Peak 1' ? 'selected' : '' }}>Peak 1</option>
                         <option value="Peak 2" {{ old('season') ==  'Peak 2' ? 'selected' : '' }}>Peak 2</option>
@@ -28,7 +28,7 @@
                     <input class="form-control" type="text" name="module" placeholder="Module" />
                 </div>
                 <div class="form-group">
-                    <select style="color: white;" class="form-control" name="bedrooms">
+                    <select class="form-control" name="bedrooms">
                             <option value="">Bedrooms</option>
                             <option value="Studio" {{ old('bedrooms') ==  'Studio' ? 'selected' : '' }}>Studio</option>
                             <option value="Hotel" {{ old('bedrooms') ==  'Hotel' ? 'selected' : '' }}>Hotel</option>

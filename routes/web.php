@@ -84,6 +84,7 @@ Route::post('contact-us','PagesController@handleContacts');
 Route::get('confirmation/{email}','PagesController@confirmationButton');
 Route::post('search','PagesController@serveSearch');
 Route::post('search-log','PagesController@serveLogSearch');
+Route::post('filter','PagesController@serveSearchResortFilter');
 
 Route::get('commercial-sales','PagesController@serveCommercialSales');
 Route::get('commercial-rentals','PagesController@serveCommercialRentals');

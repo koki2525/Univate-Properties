@@ -240,6 +240,9 @@ class PagesController extends Controller {
         $timeshares = DB::table('timeshares')
             ->get();
 
+        $resorts = DB::table('resorts')
+            ->get();
+
             $gauteng = NULL;
             $limpopo = NULL;
             $mpumalanga = NULL;
@@ -349,7 +352,8 @@ class PagesController extends Controller {
                 }
             }
 
-		return View::make('to-buy')
+        return View::make('to-buy')
+        ->with('resorts',$resorts)
 		->with('easterncape',$easterncape)
 		->with('limpopo',$limpopo)
 		->with('northwest',$northwest)
@@ -659,7 +663,8 @@ class PagesController extends Controller {
 	public function serveResort($slug)
 	{
 		$resort = DB::table('resorts')
-		->where('slug','=',$slug)
+        ->where('slug','=',$slug)
+        ->orWhere('resort','=',$slug)
 		->first();
 		$timeshares = DB::table('timeshares')
 		->where('resort','=',$resort->resort)
@@ -5106,7 +5111,111 @@ class PagesController extends Controller {
                 ->with('logs', $logs);
 
 		}
+    }
 
-	}
+    public function serveSearchResorts()
+	{
+		$validator = Validator::make(Input::all(),
+            [
+                'search' => 'required',
+            ]);
 
+        if($validator->fails())
+        {
+            return Redirect::back()->with('view-error', 'No search entered, please try again')->withInput()->withErrors($validator);
+        }
+
+        $query = Input::get('search');
+
+        $logs = DB::table('timeshare_change_logs')
+            ->where('resort', 'LIKE', '%' . $query . '%')//resort name
+            ->orWhere('module', 'LIKE', '%' . $query . '%')
+            ->orWhere('unit', 'LIKE', '%' . $query . '%')
+            ->orWhere('name', 'LIKE', '%' . $query . '%')
+            ->get();
+
+
+
+            $timeshares = DB::table('timeshares')
+            ->get();
+
+            $gauteng = NULL;
+            $limpopo = NULL;
+            $mpumalanga = NULL;
+            $kwazulunatal = NULL;
+            $freestate = NULL;
+            $northwest = NULL;
+            $northerncape = NULL;
+            $westerncape = NULL;
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='gauteng' and $timeshare->published=1)
+                {
+                    $gauteng = DB::table('resorts')
+                        ->where('region','=','gauteng')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+
+        if($logs->isEmpty())
+        {
+            return Redirect::back()->with('view-search-error', 'There were no results found, please try searching by resort name.');
+        }
+
+        else
+        {
+            // multiple resorts search results
+            return View::make('admin.log-search-results')
+                ->with('logs', $logs);
+
+		}
+    }
+
+    public function serveSearchResortFilter()
+	{
+        if(!(Input::has('resort')) && !(Input::has('maxPrice')) && !(Input::has('minPrice')) && !(Input::has('fromDate')) && !(Input::has('toDate')))
+        {
+            return Redirect::back()->with('view-error', 'No filter entered, please try again')->withInput();
+        }
+
+        $resort = Input::get('resort');
+        $minPrice = (float) (Input::get('minPrice'));
+        $maxPrice = (float) (Input::get('maxPrice'));
+        $fromDate = Input::get('fromDate');
+        $toDate = Input::get('toDate');
+
+        $resorts = DB::table('resorts')
+            ->get();
+
+		$timeshares = DB::table('timeshares')
+                ->where(function($query) use ($resort, $minPrice, $maxPrice, $fromDate, $toDate) {
+                if ($resort)
+                $query->where('resort', 'LIKE', '%' . $resort . '%')->where('published','=',1);
+                if ($fromDate)
+                    $query->where('fromDate','>=',$fromDate)->where('published','=',1);
+                if ($toDate)
+                    $query->where('fromDate','<=',$toDate)->where('published','=',1);
+                if ($maxPrice)
+                    $query->where('setPrice','<=', $maxPrice)->where('published','=',1);
+                if ($minPrice)
+                    $query->where('setPrice','>=', $minPrice)->where('published','=',1); })
+                ->get();
+
+
+        if($timeshares->isEmpty())
+        {
+            return Redirect::back()->with('view-search-error', 'There were no results found, please try searching by resort name, dates or price.');
+        }
+
+        else
+        {
+            // multiple resorts search results
+            return View::make('to-buy-results')
+                ->with('resorts',$resorts)
+                ->with('timeshares',$timeshares);
+		}
+    }
 }
