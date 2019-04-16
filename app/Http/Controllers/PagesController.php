@@ -138,9 +138,9 @@ class PagesController extends Controller {
                 'region' => 'required'
             ]);
 
-        if(!Input::has('mandate'))
+        if(!Input::has('mandate') && Auth::user()->agency!=NULL)
         {
-            return Redirect::back()->with('view-error', 'A copy of a mandate is required to submit youe timeshare.')->withInput()->withErrors($validator);
+            return Redirect::back()->with('view-error', 'A copy of a mandate is required to submit your timeshare.')->withInput()->withErrors($validator);
         }
 
 
@@ -5221,5 +5221,47 @@ class PagesController extends Controller {
                 ->with('resorts',$resorts)
                 ->with('timeshares',$timeshares);
 		}
+    }
+
+    public function serveGetUsername()
+    {
+        return View::make('get-username');
+    }
+
+    public function sendUsername()
+    {
+        $users = DB::table('users')
+            ->get();
+
+        $email = Input::get('email');
+        $sendTo = NULL;
+
+        foreach($users as $user)
+        {
+            if($email==$user->email)
+            {
+                $sendTo = $user->email;
+            }
+        }
+
+        $user = NULL;
+
+        if($sendTo!=NULL)
+        {
+            $user = DB::table('users')
+                ->where('email','=',$sendTo)
+                ->first();
+
+                $data = ['user' => $user];
+                Mail::send('emails.get-username', $data, function($message) use ($user)
+                {
+                    $message->to($user->email,$user->name)->bcc('koketso.maphopha@gmail.com','Koketso Maphopha')->subject('Username request');
+                    $message->from('info@univateproperties.co.za');
+                });
+                return Redirect::to('get-username')->with('view-success', 'Your username has been sent to your email address.')->withInput();
+        }
+        else{
+            return Redirect::to('get-username')->with('view-error', 'Email does not exist.')->withInput();
+        }
     }
 }

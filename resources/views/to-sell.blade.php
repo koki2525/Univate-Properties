@@ -310,7 +310,7 @@
 
                 <div class="form-group row">
                         <label for="name" class="col-form-label col-md-8">
-                            1.7 Mandate to sell timeshare
+                            1.8 Mandate to sell timeshare
                         </label>
                         <div class="col-md-4">
                             <input class="form-control" type="file" name="mandate" value="{{ old('mandate') }}" />

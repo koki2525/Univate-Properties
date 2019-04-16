@@ -264,3 +264,6 @@ Route::post('bulk-weeks-upload','PagesController@handleBulkExcelUpload');
 
 Route::post('/autocomplete/fetch', 'PagesController@fetch')->name('autocomplete.fetch');
 Route::post('/autocompleteAgent/fetch', 'PagesController@fetchAgent')->name('autocompleteAgent.fetch');
+
+Route::get('get-username','PagesController@serveGetUsername');
+Route::post('get-username','PagesController@sendUsername');

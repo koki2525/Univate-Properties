@@ -66,6 +66,10 @@
                                                             {{ __('Forgot Your Password?') }}
                                                         </a>
                                                     @endif
+                                                    or
+                                                    <a class="btn btn-link" href="/get-username">
+                                                        {{ __('Forgot Your Username?') }}
+                                                    </a>
                                                 </div>
                                             </form>
                                     </div>
