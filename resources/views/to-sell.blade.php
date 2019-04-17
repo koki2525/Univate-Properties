@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="my-4">To Sell
-                @if(Auth::check() && Auth::user()->agency!=NULL or Auth::user()->role=="admin")
+                @if(Auth::check() && Auth::user()->agency!=NULL or (Auth::check() && Auth::user()->role=="admin"))
                     <a style="float: right;" class="btn btn-blue btn-lg" href="/bulk-weeks-upload">Bulk Weeks upload</a>
                 @endif  
             </h1>
