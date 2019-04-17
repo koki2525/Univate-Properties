@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Search Results')
+@section('title', 'Admin')
 
 @section('description', '')
 
@@ -114,7 +114,7 @@
             rt.adjustCount = 0;
         }
     });
-    
+
     function Conform_Delete() {
         return confirm("Are you sure want to delete this timeshare?");
     }
@@ -124,49 +124,63 @@
 <div class="container-fluid">
     <div class="row mb-4 mt-5">
         <div class="col-md-10 offset-md-1">
-            <form id="mainForm" method="POST" action="/search-admin-timeshares" accept-charset="UTF-8" enctype="multipart/form-data">
-                @csrf
-                    <div class="form-row">
-                        <div class="col-md-3">
-                            <label>Resort name</label>
-                            <select class="form-control" id="resort" name="resort">
-                                <option value="select">Please Select</option>
-                                @foreach($resorts as $resort)
-                                <option value="{{ $resort->resort }}" {{ old('resort') ==  $resort->resort  ? 'selected' : '' }}>{{ $resort->resort }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label>Status</label>
-                            <select class="form-control" id="status" name="status">
-                                <option value="select">Select</option>
-                                <option value="0">Unpublished Weeks</option>
-                                <option value="1">Published Weeks</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label>Season</label>
-                            <select class="form-control" name="season">
-                                <option value="select"><span style="color:white;">Season</span></option>
-                                <option value="Peak" {{ old('season') ==  'Peak' ? 'selected' : '' }}>Peak</option>
-                                <option value="Peak 1" {{ old('season') ==  'Peak 1' ? 'selected' : '' }}>Peak 1</option>
-                                <option value="Peak 2" {{ old('season') ==  'Peak 2' ? 'selected' : '' }}>Peak 2</option>
-                                <option value="Peak 3" {{ old('season') ==  'Peak 3' ? 'selected' : '' }}>Peak 3</option>
-                                <option value="Peak 4" {{ old('season') ==  'Peak 4' ? 'selected' : '' }}>Peak 4</option>
-                                <option value="Red" {{ old('season') ==  'Red' ? 'selected' : '' }}>Red</option>
-                                <option value="White" {{ old('season') ==  'White' ? 'selected' : '' }}>White</option>
-                                <option value="Blue" {{ old('season') ==  'Blue' ? 'selected' : '' }}>Blue</option>
-                                <option value="Flexi" {{ old('season') ==  'Flexi' ? 'selected' : '' }}>Flexi</option>
-                                </select>
-                        </div>
-                        <div class="col-md-3">
-                            <button class="btn btn-blue" style="margin-top: 2rem;" type="submit">
-                                FILTER
-                            </button>
+                <div class="container mt-4">
+                        <div class="row">
+                            <div class="col">
+                                <div class="alert alert-danger mb-0">
+                                    <p class="text-danger mb-0 text-center">
+                                        No results found, please try again.
+                                        <a href="#" class="close">&times;</a>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+            <h1>All Timeshare Weeks</h1>
+            <form id="mainForm" method="POST" action="/search-admin-timeshares" accept-charset="UTF-8" enctype="multipart/form-data">
+            @csrf
+                <div class="form-row">
+                    <div class="col-md-3">
+                        <label>Resort name</label>
+                        <select class="form-control" id="resort" name="resort">
+                            <option value="select">Please Select</option>
+                            @foreach($resorts as $resort)
+                            <option value="{{ $resort->resort }}" {{ old('resort') ==  $resort->resort  ? 'selected' : '' }}>{{ $resort->resort }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Status</label>
+                        <select class="form-control" id="status" name="status">
+                            <option value="select">Select</option>
+                            <option value="0">Unpublished Weeks</option>
+                            <option value="1">Published Weeks</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Season</label>
+                        <select class="form-control" name="season">
+                            <option value="select"><span style="color:white;">Season</span></option>
+                            <option value="Peak" {{ old('season') ==  'Peak' ? 'selected' : '' }}>Peak</option>
+                            <option value="Peak 1" {{ old('season') ==  'Peak 1' ? 'selected' : '' }}>Peak 1</option>
+                            <option value="Peak 2" {{ old('season') ==  'Peak 2' ? 'selected' : '' }}>Peak 2</option>
+                            <option value="Peak 3" {{ old('season') ==  'Peak 3' ? 'selected' : '' }}>Peak 3</option>
+                            <option value="Peak 4" {{ old('season') ==  'Peak 4' ? 'selected' : '' }}>Peak 4</option>
+                            <option value="Red" {{ old('season') ==  'Red' ? 'selected' : '' }}>Red</option>
+                            <option value="White" {{ old('season') ==  'White' ? 'selected' : '' }}>White</option>
+                            <option value="Blue" {{ old('season') ==  'Blue' ? 'selected' : '' }}>Blue</option>
+                            <option value="Flexi" {{ old('season') ==  'Flexi' ? 'selected' : '' }}>Flexi</option>
+                            </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-blue" style="margin-top: 2rem;" type="submit">
+                            FILTER
+                        </button>
+                    </div>
+                </div>
             </form>
-            <a class="btn btn-blue" style="margin-top: 2rem;" href="/admin">SHOW ALL</a>
+
+            <hr>
         </div>
     </div>
 
@@ -188,6 +202,7 @@
                         <th>Submitted</th>
                         <th>Publish</th>
                         <th>Status</th>
+                        <!--<th>Status updated on</th>-->
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -196,7 +211,7 @@
                     @foreach($timeshares as $timeshare)
                     <tr>
                         <td>{{ $timeshare->owner }}</td>
-                        <th>{{ $timeshare->agent }}</th>
+                        <td>{{ $timeshare->agent }}</td>
                         <td>{{ $timeshare->resort }}</td>
                         <td>{{ $timeshare->week }}</td>
                         <td>{{ $timeshare->module }}</td>
@@ -204,7 +219,7 @@
                         <td>{{ $timeshare->bedrooms }}</td>
                         <td>{{ ucfirst(trans($timeshare->season)) }}</td>
                         <td>{{ ucfirst(trans($timeshare->region)) }}</td>
-                        <td>R {{ $timeshare->price }}</td>
+                        <td>R {{ number_format($timeshare->price, 2) }}</td>
                         <td>{{ $timeshare->created_at }}</td>
 
                         @if($timeshare->published==1)
@@ -220,8 +235,9 @@
                             </a>
                         </td>
                         @endif
-                        
+
                         <td>{{ $timeshare->status }}</td>
+                        <!--<td>{{ date('F d, Y', strtotime($timeshare->updated_at)) }}</td>-->
 
                         <td class="text-center">
                             <a href="/edit-timeshare/{{ $timeshare->id }}">
@@ -239,9 +255,9 @@
                 </tbody>
             </table>
         </div>
-        
+
         <div class="col-md-6 offset-md-3 mb-4 d-flex justify-content-center">
-           
+            <?php echo $timeshares->links(); ?>
         </div>
     </div>
 </div>

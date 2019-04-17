@@ -7,7 +7,7 @@
 @section('keywords', 'Timeshare selling, where to sell my timeshare, Uni-Vate Properties, Uni-Vate timeshare, timeshare for sale, tender weeks available, sell my tender week')
 
 @section('content')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 <style>
     .choose :hover {
         background-color: #72c5ed;
@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="my-4">To Sell
-                    @if(Auth::check())
+                @if(Auth::check() && Auth::user()->agency!=NULL or Auth::user()->role=="admin")
                     <a style="float: right;" class="btn btn-blue btn-lg" href="/bulk-weeks-upload">Bulk Weeks upload</a>
                 @endif  
             </h1>
@@ -274,12 +274,12 @@
 
                 <div class="form-group row">
                     <label for="name" class="col-form-label col-md-8">
-                        1.5 I/We bought the timeshare module/week for the following dates:
+                        1.5 I/We bought the timeshare module/week for the following dates for the current year:
                     </label>
                     <div class="col-md-4">
-                    From :
+                    Arrival Date :
                     <input data-date-format="dd-mm-yyyy" id="datepicker3" class="form-control" name="occupationDate1" value="{{ old('occupationDate1') }}"  />
-                    To :
+                    Departure Date :
                     <input data-date-format="dd-mm-yyyy" id="datepicker4" class="form-control" name="occupationDate2" value="{{ old('occupationDate2') }}"  />
                     </div>
                 </div>

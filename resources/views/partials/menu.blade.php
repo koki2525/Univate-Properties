@@ -3,7 +3,7 @@
         <div class="col-md-12 text-center">
             <p class="mb-0"><img class="img-fluid logo" src="{{ asset('/images/logo.png') }}" alt="Uni-Vate Properties Logo" /></p>
             <div class="social-media">
-                <a href="tel:+27124921238"><i class="fas fa-phone-square fa-2x"></i></a>
+                <a title="+2712 4921 238" href="tel:+27124921238"><i class="fas fa-phone-square fa-2x"></i></a>
                 <a href="mailto:info@univateproperties.co.za"><i class="fas fa-envelope-square fa-2x"></i></a>
                 <a href="https://www.facebook.com/univateproperties/" target="_blank"><i class="fab fa-facebook-square fa-2x"></i></a>
                 @if(Auth::check() && Auth::user()->role == "agent")

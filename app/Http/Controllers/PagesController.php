@@ -75,11 +75,16 @@ class PagesController extends Controller {
 	public function serveAdmin()
 	{
 		$timeshares = DB::table('timeshares')
+		->orderBy('published','asc')
+        ->paginate(10);
+        
+        $resorts = DB::table('resorts')
 		->orderBy('resort','asc')
-		->paginate(10);
+		->get();
 
 		if (Auth::check() && Auth::user()->role == "admin") {
-			return View::make('admin.admin')
+            return View::make('admin.admin')
+            ->with('resorts',$resorts)
 			->with('timeshares',$timeshares);
 		  }else{
 			return Redirect::to('/');
@@ -2038,7 +2043,6 @@ class PagesController extends Controller {
             // multiple resorts search results
             return View::make('search-results') 
                 ->with('timeshares', $timeshares);
-
 		}
 
 	}
@@ -4884,7 +4888,7 @@ class PagesController extends Controller {
 
     public function serveSearchTimeshareFilter($id)
 	{
-        if(!(Input::has('week')) and !(Input::has('unit')) and !(Input::has('bedrooms')=="") and !(Input::has('season')=="") and !(Input::has('maxPrice')) and !(Input::has('minPrice')))
+        if(!(Input::has('bedrooms')=="") and !(Input::has('season')=="") and !(Input::has('maxPrice')) and !(Input::has('minPrice')))
         {
             return Redirect::back()->with('view-error', 'No filter entered, please try again')->withInput()->withErrors($validator);
         }
@@ -4894,10 +4898,8 @@ class PagesController extends Controller {
             ->first();
 
         $awards = explode(',',$resort->awards);
-		$facilities = explode(',',$resort->facilities);
-
-        $week = Input::get('week');
-        $unit = Input::get('unit');
+        $facilities = explode(',',$resort->facilities);
+        
         $bedrooms = Input::get('bedrooms');
         $minPrice = (float) (Input::get('minPrice'));
         $maxPrice = (float) (Input::get('maxPrice'));
@@ -4907,12 +4909,8 @@ class PagesController extends Controller {
         $toDate = Input::get('toDate');
 
 		$timeshares = DB::table('timeshares')
-                ->where(function($query) use ($week, $unit, $bedrooms, $season, $minPrice, $maxPrice, $module, $fromDate, $toDate) {
+                ->where(function($query) use ($bedrooms, $season, $minPrice, $maxPrice, $module, $fromDate, $toDate) {
 
-                if ($week)
-                    $query->where('week','=', $week);
-                if ($unit)
-                    $query->where('unit','=', $unit);
                 if ($bedrooms)
                     $query->where('bedrooms','=', $bedrooms);
                 if ($module)
@@ -5137,19 +5135,8 @@ class PagesController extends Controller {
             ->orWhere('name', 'LIKE', '%' . $query . '%')
             ->get();
 
-
-
             $timeshares = DB::table('timeshares')
             ->get();
-
-            $gauteng = NULL;
-            $limpopo = NULL;
-            $mpumalanga = NULL;
-            $kwazulunatal = NULL;
-            $freestate = NULL;
-            $northwest = NULL;
-            $northerncape = NULL;
-            $westerncape = NULL;
 
             foreach($timeshares as $timeshare)
             {
@@ -5162,7 +5149,6 @@ class PagesController extends Controller {
                 }
             }
 
-
         if($logs->isEmpty())
         {
             return Redirect::back()->with('view-search-error', 'There were no results found, please try searching by resort name.');
@@ -5173,18 +5159,15 @@ class PagesController extends Controller {
             // multiple resorts search results
             return View::make('admin.log-search-results')
                 ->with('logs', $logs);
-
 		}
     }
 
     public function serveSearchResortFilter()
 	{
-        if(!(Input::has('resort')) && !(Input::has('maxPrice')) && !(Input::has('minPrice')) && !(Input::has('fromDate')) && !(Input::has('toDate')))
-        {
-            return Redirect::back()->with('view-error', 'No filter entered, please try again')->withInput();
-        }
-
         $resort = Input::get('resort');
+        $bedrooms = Input::get('bedrooms');
+        $season = Input::get('season');
+        $region = Input::get('region');
         $minPrice = (float) (Input::get('minPrice'));
         $maxPrice = (float) (Input::get('maxPrice'));
         $fromDate = Input::get('fromDate');
@@ -5195,23 +5178,287 @@ class PagesController extends Controller {
             ->get();
 
 		$timeshares = DB::table('timeshares')
-                ->where(function($query) use ($resort, $minPrice, $maxPrice, $fromDate, $toDate) {
-                if ($resort)
-                $query->where('resort', 'LIKE', '%' . $resort . '%')->where('published','=',1);
-                if ($fromDate)
+                ->where(function($query) use ($region, $season, $bedrooms, $resort, $minPrice, $maxPrice, $fromDate, $toDate) {
+                if ($resort!=null)
+                $query->where('resort', '=',$resort)->where('published','=',1);
+                if ($season!=null)
+                    $query->where('season','=',$season)->where('published','=',1);
+                if ($region!=null)
+                    $query->where('region','=',$region)->where('published','=',1);
+                if ($bedrooms!=null)
+                $query->where('bedrooms','=',$bedrooms)->where('published','=',1);
+                if ($fromDate!=null)
                     $query->where('fromDate','>=',$fromDate)->where('published','=',1);
-                if ($toDate)
+                if ($toDate!=null)
                     $query->where('fromDate','<=',$toDate)->where('published','=',1);
-                if ($maxPrice)
+                if ($maxPrice!=0.0)
                     $query->where('setPrice','<=', $maxPrice)->where('published','=',1);
-                if ($minPrice)
+                if ($minPrice!=0.0)
                     $query->where('setPrice','>=', $minPrice)->where('published','=',1); })
                 ->get();
 
 
         if($timeshares->isEmpty())
         {
-            return Redirect::back()->with('view-search-error', 'There were no results found, please try searching by resort name, dates or price.');
+            $timeshares = DB::table('timeshares')
+            ->get();
+
+        $resorts = DB::table('resorts')
+            ->orderBy('resort','asc')
+            ->get();
+
+            $gauteng = NULL;
+            $limpopo = NULL;
+            $mpumalanga = NULL;
+            $kwazulunatal = NULL;
+            $freestate = NULL;
+            $northwest = NULL;
+            $northerncape = NULL;
+            $westerncape = NULL;
+            $easterncape = NULL;
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='gauteng' and $timeshare->published=1)
+                {
+                    $gauteng = DB::table('resorts')
+                        ->where('region','=','gauteng')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='limpopo' && $timeshare->published=1)
+                {
+                    $limpopo = DB::table('resorts')
+                        ->where('region','=','limpopo')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='mpumalanga' && $timeshare->published=1)
+                {
+                    $mpumalanga = DB::table('resorts')
+                        ->where('region','=','mpumalanga')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='Kwazulu Natal' && $timeshare->published=1)
+                {
+                    $kwazulunatal = DB::table('resorts')
+                        ->where('region','=','Kwazulu Natal')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='free state' && $timeshare->published=1)
+                {
+                    $freestate = DB::table('resorts')
+                        ->where('region','=','free state')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='north west' && $timeshare->published=1)
+                {
+                    $northwest = DB::table('resorts')
+                        ->where('region','=','north west')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='northern cape' && $timeshare->published=1)
+                {
+                    $northerncape = DB::table('resorts')
+                        ->where('region','=','northern cape')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='western cape' && $timeshare->published=1)
+                {
+                    $westerncape = DB::table('resorts')
+                        ->where('region','=','western cape')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='eastern cape' && $timeshare->published=1)
+                {
+                    $easterncape = DB::table('resorts')
+                        ->where('region','=','eastern cape')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+                return View::make('no-results-found2')
+                ->with('gauteng',$gauteng)
+                ->with('westerncape',$westerncape)
+                ->with('northwest',$northwest)
+                ->with('mpumalanga',$mpumalanga)
+                ->with('limpopo',$limpopo)
+                ->with('freestate',$freestate)
+                ->with('easterncape',$easterncape)
+                ->with('westerncape',$westerncape)
+                ->with('northerncape',$northerncape)
+                ->with('kwazulunatal',$kwazulunatal)
+                ->with('resorts',$resorts)
+                ->with('view-search-error', 'There were no results found.');
+        }
+
+        else if(($resort==null) && $region==null && $bedrooms==null && $season==null && $minPrice==0.0 && $maxPrice==0.0){
+            $timeshares = DB::table('timeshares')
+            ->get();
+
+        $resorts = DB::table('resorts')
+            ->orderBy('resort','asc')
+            ->get();
+
+            $gauteng = NULL;
+            $limpopo = NULL;
+            $mpumalanga = NULL;
+            $kwazulunatal = NULL;
+            $freestate = NULL;
+            $northwest = NULL;
+            $northerncape = NULL;
+            $westerncape = NULL;
+            $easterncape = NULL;
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='gauteng' and $timeshare->published=1)
+                {
+                    $gauteng = DB::table('resorts')
+                        ->where('region','=','gauteng')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='limpopo' && $timeshare->published=1)
+                {
+                    $limpopo = DB::table('resorts')
+                        ->where('region','=','limpopo')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='mpumalanga' && $timeshare->published=1)
+                {
+                    $mpumalanga = DB::table('resorts')
+                        ->where('region','=','mpumalanga')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='Kwazulu Natal' && $timeshare->published=1)
+                {
+                    $kwazulunatal = DB::table('resorts')
+                        ->where('region','=','Kwazulu Natal')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='free state' && $timeshare->published=1)
+                {
+                    $freestate = DB::table('resorts')
+                        ->where('region','=','free state')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='north west' && $timeshare->published=1)
+                {
+                    $northwest = DB::table('resorts')
+                        ->where('region','=','north west')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='northern cape' && $timeshare->published=1)
+                {
+                    $northerncape = DB::table('resorts')
+                        ->where('region','=','northern cape')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='western cape' && $timeshare->published=1)
+                {
+                    $westerncape = DB::table('resorts')
+                        ->where('region','=','western cape')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+
+            foreach($timeshares as $timeshare)
+            {
+                if($timeshare->region=='eastern cape' && $timeshare->published=1)
+                {
+                    $easterncape = DB::table('resorts')
+                        ->where('region','=','eastern cape')
+                        ->groupBy('resort')
+                        ->get();
+                }
+            }
+                return View::make('to-buy')
+                ->with('gauteng',$gauteng)
+                ->with('westerncape',$westerncape)
+                ->with('northwest',$northwest)
+                ->with('mpumalanga',$mpumalanga)
+                ->with('limpopo',$limpopo)
+                ->with('freestate',$freestate)
+                ->with('easterncape',$easterncape)
+                ->with('westerncape',$westerncape)
+                ->with('northerncape',$northerncape)
+                ->with('kwazulunatal',$kwazulunatal)
+                ->with('resorts',$resorts)
+                ->with('view-search-error', 'There were no results found.');  
         }
 
         else
@@ -5263,5 +5510,84 @@ class PagesController extends Controller {
         else{
             return Redirect::to('get-username')->with('view-error', 'Email does not exist.')->withInput();
         }
+    }
+
+    public function serveAdminFilter()
+	{
+        if(Input::get('status')=="select" && Input::get('season')=="select" && Input::get('resort')=="select")
+        {
+            $timeshares = DB::table('timeshares')
+                ->orderBy('published','asc')
+                ->paginate(10);
+                
+                $resorts = DB::table('resorts')
+                ->orderBy('resort','asc')
+                ->get();
+
+                return View::make('admin.admin')
+                    ->with('resorts',$resorts)
+                    ->with('timeshares',$timeshares)
+                    ->with('view-search-error', 'No filter entered, please try again.');
+        }
+
+        $resort = Input::get('resort');
+        $season = Input::get('season');
+        $status = Input::get('status');
+
+		$timeshares = DB::table('timeshares')
+                ->where(function($query) use ($season, $status, $resort) {
+                if ($resort!="select")
+                $query->where('resort', '=', $resort);
+                if ($season!="select")
+                    $query->where('season','=',$season);
+                if ($status!="select")
+                    $query->where('published','=',$status);
+                 })
+                ->get();
+        
+        $resorts = DB::table('resorts')
+        ->orderBy('resort','asc')
+        ->get();
+
+        if($timeshares->isNotEmpty())
+        {
+            return View::make('search-results')
+                ->with('resorts',$resorts)
+                ->with('timeshares',$timeshares);
+            
+        }
+        else if(Input::get('status')=="select" and Input::get('season')=="select" and Input::get('resort')=="select")
+        {
+            $timeshares = DB::table('timeshares')
+                ->orderBy('published','asc')
+                ->paginate(10);
+                
+                $resorts = DB::table('resorts')
+                ->orderBy('resort','asc')
+                ->get();
+
+                return View::make('admin.admin')
+                    ->with('resorts',$resorts)
+                    ->with('timeshares',$timeshares)
+                    ->with('view-search-error', 'No filter entered, please try again.');
+        }
+
+        else
+        {
+            $timeshares = DB::table('timeshares')
+                ->orderBy('published','asc')
+                ->paginate(10);
+                
+                $resorts = DB::table('resorts')
+                ->orderBy('resort','asc')
+                ->get();
+
+                if (Auth::check() && Auth::user()->role == "admin") {
+                    return View::make('no-results-found')
+                    ->with('resorts',$resorts)
+                    ->with('timeshares',$timeshares)
+                    ->with('view-search-error', 'There were no results found.');
+                }
+		}
     }
 }

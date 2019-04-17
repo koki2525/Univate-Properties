@@ -124,34 +124,51 @@
 <div class="container-fluid">
     <div class="row mb-4 mt-5">
         <div class="col-md-10 offset-md-1">
-            <form id="mainForm" method="POST" action="/search" accept-charset="UTF-8" enctype="multipart/form-data">
+            <h1>All Timeshare Weeks</h1>
+            <form id="mainForm" method="POST" action="/search-admin-timeshares" accept-charset="UTF-8" enctype="multipart/form-data">
             @csrf
                 <div class="form-row">
-                    <div class="col-md-5 offset-md-3">
-                        <input class="form-control" name="search" type="text">
+                    <div class="col-md-3">
+                        <label>Resort name</label>
+                        <select class="form-control" id="resort" name="resort">
+                            <option value="select">Please Select</option>
+                            @foreach($resorts as $resort)
+                            <option value="{{ $resort->resort }}" {{ old('resort') ==  $resort->resort  ? 'selected' : '' }}>{{ $resort->resort }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-blue" type="submit">
-                            <i class="fas fa-search-plus"></i>
-                            SEARCH
+                    <div class="col-md-3">
+                        <label>Status</label>
+                        <select class="form-control" id="status" name="status">
+                            <option value="select">Select</option>
+                            <option value="0">Unpublished Weeks</option>
+                            <option value="1">Published Weeks</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Season</label>
+                        <select class="form-control" name="season">
+                            <option value="select"><span style="color:white;">Season</span></option>
+                            <option value="Peak" {{ old('season') ==  'Peak' ? 'selected' : '' }}>Peak</option>
+                            <option value="Peak 1" {{ old('season') ==  'Peak 1' ? 'selected' : '' }}>Peak 1</option>
+                            <option value="Peak 2" {{ old('season') ==  'Peak 2' ? 'selected' : '' }}>Peak 2</option>
+                            <option value="Peak 3" {{ old('season') ==  'Peak 3' ? 'selected' : '' }}>Peak 3</option>
+                            <option value="Peak 4" {{ old('season') ==  'Peak 4' ? 'selected' : '' }}>Peak 4</option>
+                            <option value="Red" {{ old('season') ==  'Red' ? 'selected' : '' }}>Red</option>
+                            <option value="White" {{ old('season') ==  'White' ? 'selected' : '' }}>White</option>
+                            <option value="Blue" {{ old('season') ==  'Blue' ? 'selected' : '' }}>Blue</option>
+                            <option value="Flexi" {{ old('season') ==  'Flexi' ? 'selected' : '' }}>Flexi</option>
+                            </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-blue" style="margin-top: 2rem;" type="submit">
+                            FILTER
                         </button>
                     </div>
                 </div>
             </form>
 
             <hr>
-
-
-                <!--<form id="mainForm" method="POST" action="/upload-timeshares" accept-charset="UTF-8" enctype="multipart/form-data">
-                    @csrf
-                    <div style="margin-left: 18rem;" class="col-md-10 offset-md-1">
-                    <label for="file">Excel Upload</label>
-                    <input type="file" id="file" name="ex_file">
-                    <button class="btn btn-blue" type="submit">
-                            LOAD
-                    </button>
-                    </div> -->
-                </form>
         </div>
     </div>
 

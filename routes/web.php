@@ -267,3 +267,4 @@ Route::post('/autocompleteAgent/fetch', 'PagesController@fetchAgent')->name('aut
 
 Route::get('get-username','PagesController@serveGetUsername');
 Route::post('get-username','PagesController@sendUsername');
+Route::post('search-admin-timeshares','PagesController@serveAdminFilter');

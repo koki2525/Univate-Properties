@@ -90,7 +90,7 @@
             </div>
             <div class="col-md-6">
                     <label>Levy</label>
-                    <input class="form-control" type="text" name="levy" value="{{ $timeshare->levy }}" />
+                    <input class="form-control" type="number" step="any" name="levy" value="{{ $timeshare->levy }}" />
                 </div>
             </div>
             <div class="form-row">
@@ -118,11 +118,11 @@
         <div class="form-row">
             <div class="col-md-6">
                 <label>Asking Price</label>
-                <input class="form-control" type="text" name="price" value="{{ $timeshare->price }}" />
+                <input class="form-control" type="number" step="any" name="price" value="{{ $timeshare->price }}" />
             </div>
             <div class="col-md-6">
                 <label>Final Price</label>
-                <input class="form-control" type="text" name="setPrice" value="{{ $timeshare->setPrice }}" />
+                <input class="form-control" type="number" step="any" name="setPrice" value="{{ $timeshare->setPrice }}" />
             </div>
         </div>
 
@@ -132,6 +132,7 @@
                 <select class="form-control" name="status">
                     <option value='NULL'>Please Select</option>
                     <option value="Publish">Publish</option>
+                    <option value="Cancelled">Cancelled</option>
                     <option value='Awaiting payment'>Awaiting payment</option>
                     <option value="Authorization needed">Authorization needed</option>
                     <option value="For Sale">For Sale</option>

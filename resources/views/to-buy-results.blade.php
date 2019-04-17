@@ -7,6 +7,7 @@
 @section('keywords')@stop
 
 @section('content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-7 offset-md-1">
@@ -82,5 +83,34 @@
 
 <!-- interested -->
 @include('partials.interested')
+
+<script>
+        $(document).ready(function () {
+            $("#region").change(function () {
+                var val = $(this).val();
+                if (val == "gauteng") {
+                    $("#resort").html("<option value=''>Please Select</option><option value='Little Eden'>Little Eden</option><option value='Little Eden'>Manzi Monate</option>");
+                } else if (val == "western cape") {
+                    $("#resort").html("<option value=''>Please Select</option><option value='Kagga Kamma Nature Reserve'>Kagga Kamma Nature Reserve</option>");
+                }
+                else if (val == "limpopo") {
+                    $("#resort").html("<option value=''>Please Select</option><option value='Mabalingwe Nature Reserve'>Mabalingwe Nature Reserve</option>");
+                }
+                else if (val == "Kwazulu Natal") {
+                    $("#resort").html("<option value=''>Please Select</option><option value='Margate Beach Club'>Margate Beach Club</option><option value='Sandy Place'>Sandy Place</option><option value='Uvongo River Resort'>Uvongo River Resort</option>");
+                }
+                else if (val == "mpumalanga") {
+                    $("#resort").html("<option value=''>Please Select</option><option value='Jackalberry Ridge'>Jackalberry Ridge</option><option value='Ngwenya Lodge'>Ngwenya Lodge</option><option value='Sudwala Lodge'>Sudwala Lodge</option><option value='Verlorenkloof'>Verlorenkloof</option>");
+                }
+                else if (val == "North West") {
+                    $("#resort").html("<option value=''>Please Select</option><option value='Mount Amanzi'>Mount Amanzi</option>");
+                }
+                else {
+                    $("#resort").html("<option value=''>Please Select</option><option value='Little Eden'>Little Eden</option><option value='Little Eden'>Manzi Monate</option><option value='Kagga Kamma Nature Reserve'>Kagga Kamma Nature Reserve</option><option value='Mabalingwe Nature Reserve'>Mabalingwe Nature Reserve</option><option value='Margate Beach Club'>Margate Beach Club</option><option value='Sandy Place'>Sandy Place</option><option value='Uvongo River Resort'>Uvongo River Resort</option><option value='Jackalberry Ridge'>Jackalberry Ridge</option><option value='Ngwenya Lodge'>Ngwenya Lodge</option><option value='Sudwala Lodge'>Sudwala Lodge</option><option value='Verlorenkloof'>Verlorenkloof</option><option value='Mount Amanzi'>Mount Amanzi</option>");
+                }
+            })
+        }
+        );
+</script>
 
 @stop

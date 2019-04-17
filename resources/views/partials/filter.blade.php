@@ -19,15 +19,6 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="week" placeholder="Week" />
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="unit" placeholder="Unit" />
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="module" placeholder="Module" />
-                </div>
-                <div class="form-group">
                     <select class="form-control" name="bedrooms">
                             <option value="">Bedrooms</option>
                             <option value="Studio" {{ old('bedrooms') ==  'Studio' ? 'selected' : '' }}>Studio</option>

@@ -18,6 +18,18 @@
         <div class="col-md-9 offset-md-0">
                 <div class="row">
         <div class="col-md-12"> 
+                <div class="container mt-4">
+                        <div class="row">
+                            <div class="col">
+                                <div class="alert alert-danger mb-0">
+                                    <p class="text-danger mb-0 text-center">
+                                        No results found, please try again.
+                                        <a href="#" class="close">&times;</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             <h1 class="my-4">To Buy</h1>
             <p>
                 The resorts have been listed in their relevant provinces. Please select the resort for which you would like to view the available weeks and then select the weeks that interest you on the resort page.
