@@ -2514,7 +2514,26 @@ class PagesController extends Controller {
         if($validator->fails())
         {
             return Redirect::back()->with('view-error', 'Please select For Sale or For Rent')->withInput()->withErrors($validator);
-		}
+        }
+
+            $commercials = DB::table('commercials')
+                ->where(function($query) use ($for, $region, $town, $surburb, $propertType) {
+
+                if ($for)
+                    $query->where('for','=', $for);
+                if ($region)
+                    $query->where('region','=', $region);
+                if ($town)
+					$query->where('town','=', $town);
+                if ($surburb)
+					$query->where('surburb','=', $surburb);
+                if ($propertType)
+					$query->where('propertType','=', $propertType); })
+                ->groupBy('name')
+				->where('published','=',1)
+
+				->get();
+ 
 		/*
 		$commercials = DB::table('commercials')
                 ->where(function($query) use ($for, $region, $town, $surburb, $propertType) {
@@ -2533,7 +2552,7 @@ class PagesController extends Controller {
 				->where('published','=',1)
 
 				->get(); */
-
+                    /*
 				$commercials = DB::table('properties')
                 ->where(function($query) use ($for, $region, $town, $surburb, $propertType) {
 
@@ -2550,7 +2569,7 @@ class PagesController extends Controller {
 
 				->where('published','=',1)
 
-				->get();
+				->get();*/
 
 
         if($commercials->isEmpty())
@@ -2921,13 +2940,15 @@ class PagesController extends Controller {
 	public function officeParks()
 	{
 		$mooikloof = DB::table('commercials')
-			->where('surburb','=','Mooikloof')
+            ->where('surburb','=','Mooikloof')
+            ->orderBy('created_at','asc')
 			->get();
 
 			$query = 'Lombardy Business Park';
 
 		$lombardy = DB::table('commercials')
-			->where('name', 'LIKE', '%' . $query . '%')
+            ->where('name', 'LIKE', '%' . $query . '%')
+            ->orderBy('created_at','asc')
 			->get();
 
 		return View::make('office-parks')
@@ -2938,11 +2959,15 @@ class PagesController extends Controller {
 	public function Lombardy()
 	{
 		$lombardy = DB::table('commercials')
-			->where('name','=','Lombardy Business Park')
+            ->where('name','=','Lombardy Business Park')
+            ->where('status2','=','For Rent')
+            ->orWhere('status2','=','Rented Out')
+            ->orderBy('created_at','asc')
 			->paginate(6);
 
 		$property = DB::table('commercials')
-			->where('name','=','Lombardy Business Park')
+            ->where('name','=','Lombardy Business Park')
+            ->orderBy('created_at','asc')
 			->first();
 
 		$facilities = explode(',',$property->facilities);
@@ -5022,6 +5047,16 @@ class PagesController extends Controller {
 
     public function handleBulkExcelUpload()
     {
+        $validator = Validator::make(Input::all(),
+            [
+                'ex_file' => 'required'
+            ]);
+
+        if($validator->fails())
+        {
+            return Redirect::back()->with('view-error', ' No file uploaded.')->withInput()->withErrors($validator);
+        }
+
         config(['excel.import.startRow' => 1 ]);
         Excel::import(new TimesharesImport, Input::file('ex_file'));
 
@@ -5589,5 +5624,66 @@ class PagesController extends Controller {
                     ->with('view-search-error', 'There were no results found.');
                 }
 		}
+    }
+
+    public function serveUpdateAgencyProfile($agency)
+    {
+        $agency = DB::table('agencies')
+            ->where('agency','=',$agency)
+            ->first();
+
+            return View::make('update-agency-profile')
+                ->with('agency',$agency);
+    }
+
+    public function handleUpdateAgencyProfile($agency)
+    {
+        $validator = Validator::make(Input::all(),
+            [
+                'agency' => 'required',
+                'registrationNum' => 'required',
+                'EAAB_FFC_Number' => 'required'
+            ]);
+
+        if($validator->fails())
+        {
+            return Redirect::back()->with('view-error', ' Your information is incomplete, please review below')->withInput()->withErrors($validator);
+        }
+
+        $users = DB::table('users')
+            ->get();
+
+            foreach($users as $user)
+            {
+                DB::table('users')
+                ->where('agency','=',$agency)
+                ->update(array(
+                        'agency' => Input::get('agency')
+                    )
+                ); 
+            }
+
+		DB::table('agencies')
+		->where('agency','=', $agency)
+		->update(array(
+				'registrationNum' => Input::get('registrationNum')
+			)
+		);
+
+		DB::table('agencies')
+		->where('agency','=', $agency)
+		->update(array(
+				'EAAB_FFC_Number' => Input::get('EAAB_FFC_Number')
+			)
+        );
+
+        DB::table('agencies')
+                    ->where('agency','=', $agency)
+                    ->update(array(
+                            'agency' => Input::get('agency')
+                        )
+					);
+       
+		return Redirect::to('/')->with('view-success',"You have successfully updated agency details");
     }
 }

@@ -3,7 +3,7 @@
         <div class="col-md-12 text-center">
             <p class="mb-0"><img class="img-fluid logo" src="{{ asset('/images/logo.png') }}" alt="Uni-Vate Properties Logo" /></p>
             <div class="social-media">
-                <a title="+2712 4921 238" href="tel:+27124921238"><i class="fas fa-phone-square fa-2x"></i></a>
+                <a title="+2712 4921 238" href="/contact-us"><i class="fas fa-phone-square fa-2x"></i></a>
                 <a href="mailto:info@univateproperties.co.za"><i class="fas fa-envelope-square fa-2x"></i></a>
                 <a href="https://www.facebook.com/univateproperties/" target="_blank"><i class="fab fa-facebook-square fa-2x"></i></a>
                 @if(Auth::check() && Auth::user()->role == "agent")
@@ -110,7 +110,17 @@
                             @endif
                         </div>
                     </li>
-                    @if(Auth::check())
+                    @if(Auth::check() && Auth::user()->role=='agency admin')
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Profile
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/update-agency-profile/{{ Auth::user()->agency }}">Update Agency Profile</a>
+                                <a class="dropdown-item" href="/update-profile/{{ Auth::user()->id }}">Update Profile</a>
+                            </div>
+                        </li>
+                    @elseif(Auth::check())
                         <li class="nav-item">
                             <a class="nav-link" href="/update-profile/{{ Auth::user()->id }}">Update Profile</a>
                         </li>

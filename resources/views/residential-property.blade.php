@@ -6,7 +6,7 @@
 
 @section('keywords'){{ $property->meta_Keywords }}@stop
 
-@section('content')
+@section('content') 
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-7 offset-md-1">
@@ -19,6 +19,38 @@
     </div>
     <div class="row mb-4">
         <div class="col-md-7 offset-md-1">
+                <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Size</th>
+                                        <th>Price ex VAT</th>
+                                        <th>Suburb</th>
+                                        <th>Unit</th>
+                                        <th>Status</th>
+                                        <td>Ref</td>
+                                        <th>Interested?</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $property->size }}</td>
+                                        <td>R {{ number_format($property->price, 2) }}</td>
+                                        <td>{{ $property->surburb }}</td>
+                                        <td>{{ $property->unit }}</td>
+                                        <td>{{ $property->status2 }}</td>
+                                        <td>{{ $property->ref }}</td>
+                                        <td><a href="#interestedPropertyModal" data-toggle="modal" data-target="#interestedPropertyModal"><i class="fa fa-flag" aria-hidden="true"></i> Yes</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+        
+                        </div>
+                        <div class="col-md-12 mb-4">
+                            <a class="btn btn-blue" href="javascript:history.back()">Back</a>
+                        </div>
+                    </div>
             <div class="row mb-4">
                 @if($property->image1)
                 <div class="col-md-4">

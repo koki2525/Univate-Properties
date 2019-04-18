@@ -14,13 +14,7 @@
             <h1 class="my-4">Lombardy Business Park</h1>
         </div>
         <div class="col-md-6">
-            <p>
-            The cream of the crop; no costs were spared on the finishing touches of this beautiful office. This 160m² office is ideally situated in Pretoria East in the hub of business expansion for Pretoria.
-
-Two superb, air-conditioned ground floor units divided only by glass, and completed with two small recording studios. <br><br>The space is currently used for corporate boardroom and training centre functions, and can accommodate up to 25 delegates. Stunning finishes by interior designer complete the unit with style and class.
-
-The business park offers 24hr security with gated access and a back-up generator. The perfect address and office for the established professional or for the training centre of your dreams! <br><br>View by appointment only. Please contact Mynie on 076 647 1327 or leave your details.
-            </p>
+            {!! $unit->description !!}
         </div>
         <div class="col-md-6">
             <form id="mainForm" method="POST" action="/lombardy-enquiry/{{ $unit->id }}" accept-charset="UTF-8" enctype="multipart/form-data">

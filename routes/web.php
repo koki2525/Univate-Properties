@@ -218,9 +218,7 @@ Route::get('give-prelist-acess/{id}','PagesController@givePrelistAccess');
 Route::get('revoke-prelist-acess/{id}','PagesController@revokePrelistAccess');
 
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'PagesController@serveHome')->name('home');
 
 Route::get('verifyTimeshare/{id}','PagesController@verifyTimeshare');
 
@@ -268,3 +266,6 @@ Route::post('/autocompleteAgent/fetch', 'PagesController@fetchAgent')->name('aut
 Route::get('get-username','PagesController@serveGetUsername');
 Route::post('get-username','PagesController@sendUsername');
 Route::post('search-admin-timeshares','PagesController@serveAdminFilter');
+
+Route::get('update-agency-profile/{agency}','PagesController@serveUpdateAgencyProfile');
+Route::post('update-agency-profile/{agency}','PagesController@handleUpdateAgencyProfile');

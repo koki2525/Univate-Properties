@@ -57,7 +57,7 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col">
-                <div class="alert alert-danger mb-0">
+                <div style="background-color: #ff000073;" class="alert alert-danger mb-0">
                     <p class="text-danger mb-0 text-center">
                         {{ Session::get('view-search-error') }}
                         <a href="#" class="close">&times;</a>
@@ -73,7 +73,7 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col">
-                <div class="alert-box alert mb-0">
+                <div style="background-color: #ff000073;" class="alert-box alert mb-0">
                     <p class="text-danger mb-0 text-center">
                         {{ Session::get('view-error') }}
                         <a href="#" class="close">&times;</a>
