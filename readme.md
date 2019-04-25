@@ -1,7 +1,7 @@
 <p align="center"><img src="https://www.univateproperties.co.za/images/logo.png"></p>
 
 <p align="center">
-<a href="https://www.univateproperties.co.za/"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://www.univateproperties.co.za/"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Uni-Vate Properties Website Stable Version"></a>
 </p>
 
 ## About Uni-Vate Properties
