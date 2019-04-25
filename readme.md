@@ -1,69 +1,29 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+<p align="center"><img src="https://www.univateproperties.co.za/images/logo.png"></p>
 
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+<a href="https://www.univateproperties.co.za/"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Uni-Vate Properties Website Stable Version"></a>
 </p>
 
-## About Laravel
+## About Uni-Vate Properties
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+Uni-Vate Properties (Pty) Ltd began in 2013 in Pretoria East with various properties in their portfolio. Led by our Director, Delia O' Conner, who has over 25 years of experience in the timeshare industry, the move to conventional property sales and rentals was an easy transition for the Uni-Vate team.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+To date the team have processed many sales in the residential, share block and commercial arenas within South Africa and are currently involved in the rental and management of 40 commercial and 15 residential properties. The Uni-Vate support team consists of three highly qualified and experienced staff, who have thirteen years' joint experience in the timeshare and property industry.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+Owners seeking to sell their property understand the power of internet marketing and the sophistication of target marketing to consumers who have shown an interest in buying property. Buyers can save by purchasing from owners advertising their property for sale through Uni-Vate, using their website. Sellers across SA are able to list properties for a listing fee of R380 per property listing which gives them exposure not only on the website, but on social media sites also.
 
-## Learning Laravel
+Uni-Vate Properties is affiliated to the Estate Agents Board (EAAB) and also to the Institute of Estate Agents South Africa (IEASA) and operates in compliance with the Estate Agents Code of Conduct. This assures our clients of professional, ethical and fair service at all times.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+Meeting the property needs of consumers is at the heart of what we do; whether it is helping an owner transition out of their property ownership, or helping the buyer find the property they have been looking for.
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+So whether you would like to sell or rent out your: timeshare, home, industrial, commercial, or vacant property or whether you would like to buy or rent a: timeshare, home, industrial, commercial, or vacant property; Uni-Vate is able to assist you.
 
-## Laravel Sponsors
+## Timeshare Resales
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+Uni-Vate Properties found that there was a desperate need for a reputable source for buyers and sellers to turn to with their timeshare needs in South Africa. Over the years, Uni-Vate has developed a treasure of networking alliances of professional acquaintances and that has made timeshare resales a pleasure for both buyers and sellers. We are fully equipped to assist with conventional timeshare requirements and assure you of fast, efficient and personal service.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
+We strive to legitimize an industry that has fallen victim to scam artists and unscrupulous sales tactics. Your best option for buying or selling a timeshare resale week is through a real-estate company where an agent is able to assist you with the sale from point of offer, to negotiation, to conclusion, to successful payment and transfer.
 
-## Contributing
+Our goal for our sellers is to obtain the best price the market will bear for their week/s. We do this by continually evaluating our marketplace, educating the consumer, and encouraging sellers to price their properties at competitive prices. This ensures buyers of well researched data to be able to make informed decisions about their purchase which will provide their families with hassle free future holidays.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# uni
+Uni-Vate Properties facilitates the timeshare resale for a listing fee of only R380 including VAT payable when listing your week/module. Transfer fees vary per week depending on the share block but this will be confirmed on request when making an offer on an interested week. Transfer fees are payable by the buyers. List your week for sale or browse our already listed weeks available for easy access to creating new holiday memories for the whole family.
