@@ -163,10 +163,12 @@
                             <button class="btn btn-blue" style="margin-top: 2rem;" type="submit">
                                 FILTER
                             </button>
+                        </form>
+                            <a class="btn btn-blue" style="margin-top: 2rem;" href="/admin">SHOW ALL</a>
                         </div>
                     </div>
-            </form>
-            <a class="btn btn-blue" style="margin-top: 2rem;" href="/admin">SHOW ALL</a>
+            
+            
         </div>
     </div>
 

@@ -15,14 +15,17 @@ class TimesharesImport implements ToModel, WithHeadingRow
      *
      * @return Timeshare|null
      */
+    public $count = 0;
 
     public function model(array $row)
     {
-        if(Auth::user()->role='user' && Auth::user()->role==NULL)
+        if(Auth::user()->role=='user' && Auth::user()->agency==NULL)//private seller/buyer
         {
             $user = DB::table('users')
                 ->where('id','=',Auth::user()->id)
                 ->first();
+
+                ++$this->count;
 
             return new Timeshare([
                 'resort'     => $row['Resort'],
@@ -34,8 +37,8 @@ class TimesharesImport implements ToModel, WithHeadingRow
                 'price' => $row['Price'],
                 'sleeps' => $row['Sleeps'],
                 'unit' => $row['Unit'],
-                'fromDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Arrival date']),
-                'toDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Departure date']),
+                'fromDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Arrival']),
+                'toDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Departure']),
                 'levy' => $row['Levy'],
                 'setPrice' => 0,
                 'offerPending' => 0,
@@ -60,11 +63,13 @@ class TimesharesImport implements ToModel, WithHeadingRow
 
             ]);
         }
-        elseif(Auth::user()->role='user' && Auth::user()->role!=NULL)
+        elseif(Auth::user()->role=='user' && Auth::user()->agency!=NULL) //Agents who are under an agency
         {
             $user = DB::table('users')
                 ->where('id','=',Auth::user()->id)
                 ->first();
+
+                ++$this->count;
 
             return new Timeshare([
                 'resort'     => $row['Resort'],
@@ -76,8 +81,8 @@ class TimesharesImport implements ToModel, WithHeadingRow
                 'price' => $row['Price'],
                 'sleeps' => $row['Sleeps'],
                 'unit' => $row['Unit'],
-                'fromDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Arrival date']),
-                'toDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Departure date']),
+                'fromDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Arrival']),
+                'toDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Departure']),
                 'levy' => $row['Levy'],
                 'setPrice' => 0,
                 'offerPending' => 0,
@@ -101,11 +106,13 @@ class TimesharesImport implements ToModel, WithHeadingRow
                 'pre_selected' => 0
                 ]);
         }
-        elseif(Auth::user()->role='agency admin')
+        elseif(Auth::user()->role=='agency admin') //Agency administrator
         {
             $user = DB::table('users')
                 ->where('id','=',Auth::user()->id)
                 ->first();
+
+                ++$this->count;
 
             return new Timeshare([
                 'resort'     => $row['Resort'],
@@ -117,8 +124,8 @@ class TimesharesImport implements ToModel, WithHeadingRow
                 'price' => $row['Price'],
                 'sleeps' => $row['Sleeps'],
                 'unit' => $row['Unit'],
-                'fromDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Arrival date']),
-                'toDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Departure date']),
+                'fromDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Arrival']),
+                'toDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Departure']),
                 'levy' => $row['Levy'],
                 'setPrice' => 0,
                 'offerPending' => 0,
@@ -142,21 +149,21 @@ class TimesharesImport implements ToModel, WithHeadingRow
                 'pre_selected' => 0
                 ]);
         }
-        elseif(Auth::user()->role='admin')
+        elseif(Auth::user()->role=='admin') //admin
         {
             return new Timeshare([
-                'resort'     => $row['Resort'],
-                'module' => $row['Module'],
-                'week' => $row['Week'],
-                'bedrooms' => $row['Bedrooms'],
-                'season' => $row['Season'],
-                'region' => $row['Region'],
-                'price' => $row['Price'],
-                'sleeps' => $row['Sleeps'],
-                'unit' => $row['Unit'],
-                'fromDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['From date']),
-                'toDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['To date']),
-                'levy' => $row['Levy'],
+                'resort'     => $row['resort'],
+                'module' => $row['module'],
+                'week' => $row['week'],
+                'bedrooms' => $row['bedrooms'],
+                'season' => $row['season'],
+                'region' => $row['region'],
+                'price' => $row['price'],
+                'sleeps' => $row['sleeps'],
+                'unit' => $row['unit'],
+                'fromDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['arrival_date']),
+                'toDate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['departure_date']),
+                'levy' => $row['levy'],
                 'setPrice' => 0,
                 'offerPending' => 0,
                 'sold' => 0,

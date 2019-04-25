@@ -27,7 +27,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="collapse navbar-collapse" id="navbarNavDropdown" style="font-size: 13px;">
                 <ul class="navbar-nav w-100 justify-content-center">
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
@@ -36,7 +36,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             About
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div style="font-size: 13px;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/about">About Us</a>
                             <a class="dropdown-item" href="/timeshare">About Timeshare Resales</a>
                         </div>
@@ -45,9 +45,9 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Timeshare
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div style="font-size: 13px;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/to-sell">To Sell</a>
-                            @if(Auth::check())
+                            @if(Auth::check() && Auth::user()->agency!=NULL or (Auth::check() && Auth::user()->role=="admin"))
                             <a class="dropdown-item" href="/bulk-weeks-upload">Bulk Weeks upload</a>
                             @endif
                             <a class="dropdown-item" href="/to-buy">To Buy</a>
@@ -74,7 +74,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Commercial
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div style="font-size: 13px;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/commercial">Search</a>
                             <a class="dropdown-item" href="/list-commercial-rental">To Rent</a>
                             <a class="dropdown-item" href="/list-commercial-sale">To Sell</a>
@@ -94,7 +94,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Residential
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div style="font-size: 13px;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/residential">Search</a>
                             <a class="dropdown-item" href="/list-residential-rental">To Rent</a>
                             <a class="dropdown-item" href="/list-residential-sale">To Sell</a>
@@ -115,7 +115,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Profile
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <div style="font-size: 13px;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="/update-agency-profile/{{ Auth::user()->agency }}">Update Agency Profile</a>
                                 <a class="dropdown-item" href="/update-profile/{{ Auth::user()->id }}">Update Profile</a>
                             </div>
@@ -131,7 +131,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Admin Page
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <div style="font-size: 13px;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="/admin">Admin</a>
                                     <a class="dropdown-item" href="/timeshare-change-logs">Logs</a>
                                     <a class="dropdown-item" href="/all-agents">All agents</a>
@@ -164,7 +164,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Register
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <div style="font-size: 13px;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="/register">Private Individual</a>
                                 <a class="dropdown-item" href="/register-agency">Agency</a>
                             </div>

@@ -31,8 +31,7 @@
         <p>Bedrooms : {{ $timeshare->bedrooms }}</p>
         <p>Season : {{ $timeshare->season }}</p>
         <p>Region : {{ $timeshare->region }}</p>
-        <p>Asking Price : {{ $timeshare->price }}</p>
-        <p>Region : {{ $timeshare->region }}</p>
+        <p>Asking Price : R {{ $timeshare->price }}</p>
         <p>Arrival Date : {{  $timeshare->fromDate }}</p>
         <p>Departure Date : {{  $timeshare->toDate }}</p>
 
@@ -40,17 +39,19 @@
         <p>Were you referred by an agent? : {{ $seller->referedBy }}</p>
         @if($seller->referedBy=='Yes')
         <p>Agent Name : {{ $seller->agentName }}</p>
-        <p>Agency Name : {{ $seller->agencyName }}</p>
+        <p>Agency Name : {{ $timeshare->agency }}</p>
         @endif
         <p>All Levy Amounts for the current cycle have been paid in full : {{ $seller->paid }}</p>
         <p>Levy Amount : {{ $timeshare->levy }}
-        <p>My week is Space banked for the current year:  : {{ $seller->spaceBanked }}</p>
+        @if($timeshare->spacebankedyear=='Yes')
+        <p>My week is Space banked for the current year: Yes</p>
+        <p>Space Bank Owner : {{ $timeshare->spacebankOwner }}
+        @endif
         <p>My week is placed for Rental this year   : {{ $seller->rental }}</p>
         <p>I/We bought the timeshare module/week on the following date   : {{ $seller->date }}</p>
-        <p>Current year occupation date : {{ $seller->occupationDate1 }} to {{ $seller->occupationDate2 }}
+        <p>Current year occupation dates : {{ $seller->occupationDate1 }} to {{ $seller->occupationDate2 }}
         <p>The Purchase Price for which I/We bought timeshare module/week was  : {{ $seller->purchasePrice }}</p>
         <p>The Selling Price for the timeshare module/week for which I/We want to sell is (Including Vat) : {{ $seller->sellingPrice }}</p>
-        <p>Name of Estate Agency  : {{ $seller->estateAgency }}</p>
         <p>Estate Agent’s commission agreed to (state Rand value) : {{ $seller->commission }}</p>
 
         <hr>

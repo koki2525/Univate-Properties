@@ -227,4 +227,31 @@
         }
         );
 </script>
+<script>
+        $(document).ready(function(){
+        
+         $('#estateAgency').keyup(function(){ 
+            var query = $(this).val();
+            if(query != '')
+            {
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                url:"{{ route('autocompleteResortList.fetch') }}",
+                method:"POST",
+                data:{query:query, _token:_token},
+                success:function(data){
+                $('#agencyList').fadeIn();  
+                            $('#agencyList').html(data);
+                }
+                });
+            }
+            });
+        
+            $(document).on('click', 'li', function(){  
+                $('#estateAgency').val($(this).text());  
+                $('#agencyList').fadeOut();  
+            });  
+        
+        });
+</script>
 @stop

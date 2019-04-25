@@ -65,9 +65,9 @@
 
             <div class="row my-4">
                 <div class="col-md-12">
-                        <p> 
-                                These units are filling up quickly, so don’t miss out! Set at the centre of a bustling neighbourhood, these open spaces allow your business to choose a layout fit for your needs. The business park offers 24hr security with gated access and a back-up generator. The perfect address and office for the established professional or for the training centre of your dreams! View by appointment only.<br><br> To arrange a viewing contact Mynie: <strong>012 941 8521</strong> | <strong>076 647 1327</strong> | <a href="mailto:uvprop@oaks.co.za">uvprop@oaks.co.za</a>
-                        </p>
+                    <p> 
+                            These units are filling up quickly, so don’t miss out! Set at the centre of a bustling neighbourhood, these open spaces allow your business to choose a layout fit for your needs. The business park offers 24hr security with gated access and a back-up generator. The perfect address and office for the established professional or for the training centre of your dreams! View by appointment only.<br><br> To arrange a viewing contact Mynie: <strong>012 941 8521</strong> | <strong>076 647 1327</strong> | <a href="mailto:uvprop@oaks.co.za">uvprop@oaks.co.za</a>
+                    </p>
                 </div>
             </div>
                 
@@ -106,8 +106,5 @@
         </div>
     </div>
 </div>
-
-<!-- interested -->
-@include('partials.interestedLombardy')
 
 @stop

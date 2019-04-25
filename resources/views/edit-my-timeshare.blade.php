@@ -77,7 +77,7 @@
         <div class="form-row">
             <div class="col-md-6">
                 <label>Asking Price</label>
-                <input class="form-control" type="text" name="price" value="{{ $timeshare->price }}" />
+                <input class="form-control" type="number" step="any" name="price" value="{{ $timeshare->price }}" />
             </div>
             <div class="col-md-6">
                 <label>Final Price</label>

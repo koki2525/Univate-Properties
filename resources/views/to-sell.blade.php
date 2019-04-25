@@ -112,9 +112,14 @@
                         <select class="form-control" name="season">
                             <option value="">Please Select</option>
                             <option value="Peak" {{ old('season') ==  'Peak' ? 'selected' : '' }}>Peak</option>
-                            <option value="Red" {{ old('season') ==  'Red' ? 'selected' : '' }}>Red</option>
-                            <option value="White" {{ old('season') ==  'White' ? 'selected' : '' }}>White</option>
-                            <option value="Blue" {{ old('season') ==  'Blue' ? 'selected' : '' }}>Blue</option>
+                        <option value="Peak 1" {{ old('season') ==  'Peak 1' ? 'selected' : '' }}>Peak 1</option>
+                        <option value="Peak 2" {{ old('season') ==  'Peak 2' ? 'selected' : '' }}>Peak 2</option>
+                        <option value="Peak 3" {{ old('season') ==  'Peak 3' ? 'selected' : '' }}>Peak 3</option>
+                        <option value="Peak 4" {{ old('season') ==  'Peak 4' ? 'selected' : '' }}>Peak 4</option>
+                        <option value="Red" {{ old('season') ==  'Red' ? 'selected' : '' }}>Red</option>
+                        <option value="White" {{ old('season') ==  'White' ? 'selected' : '' }}>White</option>
+                        <option value="Blue" {{ old('season') ==  'Blue' ? 'selected' : '' }}>Blue</option>
+                        <option value="Flexi" {{ old('season') ==  'Flexi' ? 'selected' : '' }}>Flexi</option>
                         </select>
                     </div>
                 </div>
@@ -255,7 +260,7 @@
                         1.3 I/We bought the timeshare module/week on the following date:
                     </label>
                     <div class="col-md-4">
-                    <input data-date-format="dd-mm-yyyy" id="datepicker1" class="form-control" name="date" value="{{ old('date') }}"  />
+                    <input type="date" class="form-control" name="date" value="{{ old('date') }}"  />
                     </div>
                 </div>
 
@@ -278,9 +283,9 @@
                     </label>
                     <div class="col-md-4">
                     Arrival Date :
-                    <input data-date-format="dd-mm-yyyy" id="datepicker3" class="form-control" name="occupationDate1" value="{{ old('occupationDate1') }}"  />
+                    <input type="date" class="form-control" name="occupationDate1" value="{{ old('occupationDate1') }}"  />
                     Departure Date :
-                    <input data-date-format="dd-mm-yyyy" id="datepicker4" class="form-control" name="occupationDate2" value="{{ old('occupationDate2') }}"  />
+                    <input type="date" class="form-control" name="occupationDate2" value="{{ old('occupationDate2') }}"  />
                     </div>
                 </div>
 

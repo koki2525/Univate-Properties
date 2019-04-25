@@ -1,7 +1,6 @@
 <div class="row">
         <div class="col-md-12 blue-bg p-2 p-md-4">
             <h2>Filter Weeks</h2>
-            <p>* Select atleast 1 filter field</p>
             <form id="mainForm" method="POST" action="/filter/{{ $resort->id }}" accept-charset="UTF-8" enctype="multipart/form-data">
             @csrf
                 <div class="form-group">

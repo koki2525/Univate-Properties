@@ -21,7 +21,11 @@
             <form id="mainForm" method="POST" action="/contact-us" accept-charset="UTF-8" enctype="multipart/form-data">
             @csrf
                 <div class="form-group">
+                    @if($errors->first('name'))
+                        <input style="border: 1px solid #F44336;" class="form-control" type="text" name="name" placeholder="Name" />
+                    @else
                     <input class="form-control" type="text" name="name" placeholder="Name" />
+                    @endif
                 </div>
                 <div class="form-group">
                     <input class="form-control" type="email" name="email" placeholder="Email" />
@@ -33,7 +37,11 @@
                     <input class="form-control" type="text" name="property" placeholder="Property" />
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" name="message" placeholder="Message"></textarea>
+                    @if($errors->first('message'))
+                        <textarea style="border: 1px solid #F44336;" class="form-control" name="message" placeholder="Message"></textarea>
+                    @else
+                        <textarea class="form-control" name="message" placeholder="Message"></textarea>
+                    @endif
                 </div>
 
                 <button class="btn btn-blue btn-lg" type="submit">SEND</button>

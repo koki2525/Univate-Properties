@@ -1,13 +1,11 @@
 <div class="row">
         <div class="col-md-12 blue-bg p-2 p-md-4">
             <h2>Filter Resorts</h2>
-            <p>* Select atleast 1 filter field</p>
             <form id="mainForm" method="POST" action="/filter" accept-charset="UTF-8" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                    <label>Region</label>
                     <select class="form-control" name="region" id="region">
-                        <option value="">Please Select</option>
+                        <option value="">Region</option>
                         <option value="gauteng" {{ old('region') ==  'gauteng' ? 'selected' : '' }}>Gauteng</option>
                         <option value="Kwazulu Natal" {{ old('region') ==  'Kwazulu Natal'  ? 'selected' : '' }}>Kwazulu Natal</option>
                         <option value="mpumalanga" {{ old('region') ==  'mpumalanga'  ? 'selected' : '' }}>Mpumalanga</option>
@@ -20,9 +18,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Resort</label>
                         <select class="form-control" id="resort" name="resort">
-                            <option value="">Please Select</option>
+                            <option value="">Resort</option>
                             @foreach($resorts as $resort)
                             <option value="{{ $resort->resort }}" {{ old('resort') ==  $resort->resort  ? 'selected' : '' }}>{{ $resort->resort }}</option>
                             @endforeach
@@ -30,7 +27,6 @@
                         </select>
                 </div>
                 <div class="form-group">
-                        <label>Season</label>
                         <select class="form-control" name="season">
                             <option value=""><span style="color:white;">Season</span></option>
                             <option value="Peak" {{ old('season') ==  'Peak' ? 'selected' : '' }}>Peak</option>
@@ -45,7 +41,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Bedrooms</label>
                             <select class="form-control" name="bedrooms">
                                 <option value="">Bedrooms</option>
                                 <option value="Studio" {{ old('bedrooms') ==  'Studio' ? 'selected' : '' }}>Studio</option>
@@ -60,11 +55,9 @@
                     </div>
               
                 <div class="form-group">
-                    <label>Minimum Price</label>
                     <input class="form-control" type="number" step="any" id="minPrice" name="minPrice" placeholder="Minimum Price" />
                 </div>
                 <div class="form-group">
-                    <label>Maximum Price</label>
                     <input class="form-control" type="number" step="any" id="maxPrice" name="maxPrice" placeholder="Maximum Price" />
                 </div>
                 <div class="form-group">

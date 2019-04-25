@@ -50,10 +50,10 @@ Route::get('to-buy','PagesController@serveToBuy');
 Route::get('resort-upload','PagesController@serveResortUpload');
 Route::post('resort-upload','PagesController@handleResortUpload');
 Route::get('privacy-policy','PagesController@servePrivacyPolicy');
-/*
+
 Route::get('login','PagesController@serveLogin');
 Route::post('login', 'PagesController@handleLogin');
-*/
+
 
 Route::get('publishResidential/{id}','PagesController@publishResidential');
 Route::get('interested/{id}','PagesController@serveInterested');
@@ -223,12 +223,12 @@ Route::get('/home', 'PagesController@serveHome')->name('home');
 Route::get('verifyTimeshare/{id}','PagesController@verifyTimeshare');
 
 Route::post('filter-weeks/{slug}','PagesController@filterWeeks');
-
+/*
 Auth::routes([
     'register' => false,
     'verify' => false,
     'reset' => true
-  ]);
+  ]); */
 
 //Route::post('password/reset','Auth\ResetPasswordController@reset');
 
@@ -262,6 +262,7 @@ Route::post('bulk-weeks-upload','PagesController@handleBulkExcelUpload');
 
 Route::post('/autocomplete/fetch', 'PagesController@fetch')->name('autocomplete.fetch');
 Route::post('/autocompleteAgent/fetch', 'PagesController@fetchAgent')->name('autocompleteAgent.fetch');
+Route::post('/autocompleteResortList/fetch', 'PagesController@fetchAllResorts')->name('autocompleteResortList.fetch');
 
 Route::get('get-username','PagesController@serveGetUsername');
 Route::post('get-username','PagesController@sendUsername');
@@ -269,3 +270,7 @@ Route::post('search-admin-timeshares','PagesController@serveAdminFilter');
 
 Route::get('update-agency-profile/{agency}','PagesController@serveUpdateAgencyProfile');
 Route::post('update-agency-profile/{agency}','PagesController@handleUpdateAgencyProfile');
+
+Route::get('lombardy-sales','PagesController@serveLombardySales');
+
+Route::get('pay-bulk-listing-fee/{listings}','PagesController@serveBulkPayment');

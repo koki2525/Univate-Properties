@@ -15,8 +15,11 @@
     </div>
 
     @if($commercials!=NULL)
+
     @foreach($commercials as $commercial)
+
     @if($commercial->name=='Lombardy Business Park')
+        @if($for=='rental')
             <div class="row mb-4">
             <div class="col-md-3">
                 <a href="/lombardy">
@@ -32,7 +35,25 @@
             </div>
         </div>
         <hr>
-        @elseif($commercial->name=='Mooikloof Office Park')
+        @elseif($for=='Sale')
+        <div class="row mb-4">
+                <div class="col-md-3">
+                    <a href="/lombardy-sales">
+                        <img class="img-fluid" src="/images/commercial_rentals/lombardy1.jpg" alt="Lombardy"> 
+                    </a>   
+                </div>
+                <div class="col-md-6">
+                    <h2>{{ $commercial->name }}</h2>
+                    <p class="description">{{ $commercial->intro }}</p>
+                </div>
+                <div class="col-md-3 text-center d-flex justify-content-center flex-column">
+                    <a href="/lombardy-sales"><button class="btn btn-blue btn-lg">View Details</button></a>
+                </div>
+            </div>
+            <hr>
+    @endif
+
+    @elseif($commercial->name=='Mooikloof Office Park')
         <div class="row mb-4">
             <div class="col-md-3">
                 <a href="/mooikloof">
@@ -48,22 +69,22 @@
             </div>
         </div>
         <hr>
-        @else
-            <div class="row mb-4">
-            <div class="col-md-3">
-                <a href="/commercial-property/{{ $commercial->id }}">
-                    <img class="img-fluid" src="{{ $commercial->image1 }}"> 
-                </a>   
-            </div>
-            <div class="col-md-6">
-                <h2>{{ $commercial->name }}</h2>
-                <p class="description">{{ $commercial->intro }}</p>
-            </div>
-            <div class="col-md-3 text-center d-flex justify-content-center flex-column">
-                <a href="/commercial-property/{{ $commercial->id }}"><button class="btn btn-blue btn-lg">View Details</button></a>
-            </div>
+    @else
+        <div class="row mb-4">
+        <div class="col-md-3">
+            <a href="/commercial-property/{{ $commercial->id }}">
+                <img class="img-fluid" src="{{ $commercial->image1 }}"> 
+            </a>   
         </div>
-        @endif
+        <div class="col-md-6">
+            <h2>{{ $commercial->name }}</h2>
+            <p class="description">{{ $commercial->intro }}</p>
+        </div>
+        <div class="col-md-3 text-center d-flex justify-content-center flex-column">
+            <a href="/commercial-property/{{ $commercial->id }}"><button class="btn btn-blue btn-lg">View Details</button></a>
+        </div>
+    </div>
+    @endif
     @endforeach
     @endif
 

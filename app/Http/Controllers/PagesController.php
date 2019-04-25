@@ -143,7 +143,7 @@ class PagesController extends Controller {
                 'region' => 'required'
             ]);
 
-        if(!Input::has('mandate') && Auth::user()->agency!=NULL)
+        if(!Input::has('mandate') && (Auth::check() && Auth::user()->agency!=NULL))
         {
             return Redirect::back()->with('view-error', 'A copy of a mandate is required to submit your timeshare.')->withInput()->withErrors($validator);
         }
@@ -206,7 +206,9 @@ class PagesController extends Controller {
 
         $request = request();
 
-        $mandate = $request->file('mandate');
+        if(Input::hasFile('mandate')){
+
+            $mandate = $request->file('mandate');
         $profileImageSaveAsName = time() . Auth::id() . "-mandate." .
                                   $mandate->getClientOriginalExtension();
 
@@ -216,16 +218,31 @@ class PagesController extends Controller {
 
         $timeshare->mandate = $profile_image_url;
 
+        }
+
         $timeshare->save();
 
-		$data = ['timeshare' => $timeshare, 'seller' => $seller];
+        $data = ['timeshare' => $timeshare, 'seller' => $seller];
+        
+        if(Input::hasFile('mandate')){
 
-        Mail::send('emails.timeshare', $data, function($message) use ($timeshare)
-        {
-            $message->to('rachael@x-scape.co.za','Uni-vate')->bcc('koketso.maphopha@gmail.com','Koketso Maphopha')->subject('New timeshare submission');
-            $message->from('info@univateproperties.co.za');
-            $message->attach($timeshare->mandate);
-		});
+            Mail::send('emails.timeshare', $data, function($message) use ($timeshare)
+            {
+                $message->to('info@univateproperties.co.za','Uni-vate')->bcc('koketso.maphopha@gmail.com','Koketso Maphopha')->subject('New timeshare submission');
+                $message->from('info@univateproperties.co.za');
+                $message->attach($timeshare->mandate);
+            });
+        
+        }
+        else{
+            Mail::send('emails.timeshare', $data, function($message) use ($timeshare)
+            {
+                $message->to('info@univateproperties.co.za','Uni-vate')->bcc('koketso.maphopha@gmail.com','Koketso Maphopha')->subject('New timeshare submission');
+                $message->from('info@univateproperties.co.za');
+            });
+        }
+
+        
 
 		return Redirect::to('/pay-listing-fee/'.$timeshare->id)->with('view-success',' Your Timeshare has been successfully submitted');
 	}
@@ -2960,8 +2977,7 @@ class PagesController extends Controller {
 	{
 		$lombardy = DB::table('commercials')
             ->where('name','=','Lombardy Business Park')
-            ->where('status2','=','For Rent')
-            ->orWhere('status2','=','Rented Out')
+            ->where('for','=','rental')
             ->orderBy('created_at','asc')
 			->paginate(6);
 
@@ -3424,21 +3440,19 @@ class PagesController extends Controller {
 	{ 
         $bulk = DB::table('timeshare_bulk_uploads')
                     ->where('email','=',Auth::user()->email)
-                    ->whereDate('created_at', \Carbon\Carbon::today())
-                    ->orderBy('created_at', 'desc')
-                    ->first(); 
-        
+                    ->orderBy('id', 'desc')->first();
+            
         $user = DB::table('users')
         ->where('id','=',Auth::user()->id)
         ->first();
 
-        if($bulk==NULL)
+        //dd($bulk);
+
+        if($bulk)
         {
             $timeshare = DB::table('timeshares')
                 ->where('email','=',$user->email)
-                ->whereDate('created_at', \Carbon\Carbon::today())
-                ->orderBy('created_at', 'desc')
-                ->first();
+                ->orderBy('id', 'desc')->first();
 
             $data = ['user' => $user, 'timeshare' => $timeshare];
 
@@ -5058,15 +5072,21 @@ class PagesController extends Controller {
         }
 
         config(['excel.import.startRow' => 1 ]);
-        Excel::import(new TimesharesImport, Input::file('ex_file'));
+        $import = new TimesharesImport;
+
+        Excel::import($import, Input::file('ex_file'));
 
         $bulk = new TimeshareBulk;
         $bulk->username = Auth::user()->username;
         $bulk->user_id = Auth::user()->id;
         $bulk->email = Auth::user()->email;
+        $bulk->number_of_timeshares = $import->count;
+        $bulk->amount = $import->count*380;
         $bulk->save();
 
-        return Redirect::to('/pay-listing-fee/'.$bulk->id)->with('view-success','Your import is successful!');
+       // dd($import->count);
+
+        return Redirect::to('/pay-bulk-listing-fee/'.$import->count)->with('view-success','Your import is successful!');
     }
 
     function fetch(Request $request)
@@ -5098,8 +5118,6 @@ class PagesController extends Controller {
             $query = $request->get('query');
             $data = DB::table('users')
                 ->where('agency','=',$agency)
-                ->orWhere('name', 'LIKE', "%{$query}%")
-                ->orWhere('surname', 'LIKE', "%{$query}%")
                 ->get();
             $output = '<ul class="navbar-nav w-100 justify-content-center" style="display:block; position: absolute; z-index: 9; background-color: #33689b;">';
 
@@ -5685,5 +5703,56 @@ class PagesController extends Controller {
 					);
        
 		return Redirect::to('/')->with('view-success',"You have successfully updated agency details");
+    }
+
+    public function serveLombardySales()
+    {
+        $lombardy = DB::table('commercials')
+            ->where('name','=','Lombardy Business Park')
+            ->where('for','=','Sale')
+            ->orWhere('for','=','Sold')
+            ->orderBy('created_at','asc')
+            ->paginate(6);
+
+            $property = DB::table('commercials')
+            ->where('name','=','Lombardy Business Park')
+            ->orderBy('created_at','asc')
+			->first();
+
+		$facilities = explode(',',$property->facilities);
+            
+            return View::make('lombardy-sales')
+                ->with('property',$property)
+                ->with('facilities',$facilities)
+                ->with('lombardy',$lombardy);
+    }
+
+    function fetchAllResorts(Request $request)
+    {
+        $wsdl = "https://www.tradeunipoint.com/unibackend/seam/resource/rest/products/resorts/list/";
+
+        $details = json_decode(file_get_contents($wsdl), true);
+        dd($details);
+        
+        $data = $details;
+        $output = '<ul class="navbar-nav w-100 justify-content-center" style="display:block; position: absolute; z-index: 9; background-color: #33689b;">';
+
+        foreach($data as $row)
+        {
+        $output .= '
+        <li class="nav-item choose"><a style="color:white; text-decoration:none;" class="nav-link choose" href="#">' .$row->resortName.'</a></li>
+        ';
+        }
+        $output .= '</ul>';
+        echo $output;
+        
+    }
+
+    public function serveBulkPayment($listings)
+    {
+        $total = $listings*380;
+
+        return View::make('pay-bulk-listing-fee')
+            ->with('total',$total);
     }
 }
