@@ -199,29 +199,109 @@
     </div>
     </div>
 </div>
+
 <script>
         $(document).ready(function () {
             $("#region").change(function () {
                 var val = $(this).val();
                 if (val == "gauteng") {
-                    $("#resort").html("<option value=''>Please Select</option><option value='Little Eden'>Little Eden</option><option value='Little Eden'>Manzi Monate</option>");
-                } else if (val == "western cape") {
-                    $("#resort").html("<option value=''>Please Select</option><option value='Kagga Kamma Nature Reserve'>Kagga Kamma Nature Reserve</option>");
+                    $.getJSON("https://www.tradeunipoint.com/unibackend/seam/resource/rest/products/resorts/GA/", function(json){
+                        $('#resort').empty();
+                        $('#resort').append($('<option>').text("Resort"));
+                        $.each(json, function(i, obj){
+                                $('#resort').append($('<option>').text(obj.resortName).attr('value', obj.resortName));
+                        });
+                    });
                 }
+                
+                else if (val == "western cape") {
+                    $.getJSON("https://www.tradeunipoint.com/unibackend/seam/resource/rest/products/resorts/WC/", function(json){
+                        $('#resort').empty();
+                        $('#resort').append($('<option>').text("Resort"));
+                        $.each(json, function(i, obj){
+                                $('#resort').append($('<option>').text(obj.resortName).attr('value', obj.resortName));
+                        });
+                    });
+                }
+                
                 else if (val == "limpopo") {
-                    $("#resort").html("<option value=''>Please Select</option><option value='Mabalingwe Nature Reserve'>Mabalingwe Nature Reserve</option>");
+                    $.getJSON("https://www.tradeunipoint.com/unibackend/seam/resource/rest/products/resorts/LI/", function(json){
+                        $('#resort').empty();
+                        $('#resort').append($('<option>').text("Resort"));
+                        $.each(json, function(i, obj){
+                                $('#resort').append($('<option>').text(obj.resortName).attr('value', obj.resortName));
+                        });
+                    });
                 }
+                
                 else if (val == "Kwazulu Natal") {
-                    $("#resort").html("<option value=''>Please Select</option><option value='Margate Beach Club'>Margate Beach Club</option><option value='Sandy Place'>Sandy Place</option><option value='Uvongo River Resort'>Uvongo River Resort</option>");
+                    $.getJSON("https://www.tradeunipoint.com/unibackend/seam/resource/rest/products/resorts/KZN/", function(json){
+                        $('#resort').empty();
+                        $('#resort').append($('<option>').text("Resort"));
+                        $.each(json, function(i, obj){
+                                $('#resort').append($('<option>').text(obj.resortName).attr('value', obj.resortName));
+                        });
+                    });
                 }
+                
                 else if (val == "mpumalanga") {
-                    $("#resort").html("<option value=''>Please Select</option><option value='Jackalberry Ridge'>Jackalberry Ridge</option><option value='Ngwenya Lodge'>Ngwenya Lodge</option><option value='Sudwala Lodge'>Sudwala Lodge</option><option value='Verlorenkloof'>Verlorenkloof</option>");
+                    $.getJSON("https://www.tradeunipoint.com/unibackend/seam/resource/rest/products/resorts/MP/", function(json){
+                        $('#resort').empty();
+                        $('#resort').append($('<option>').text("Resort"));
+                        $.each(json, function(i, obj){
+                                $('#resort').append($('<option>').text(obj.resortName).attr('value', obj.resortName));
+                        });
+                    });
                 }
+                
                 else if (val == "North West") {
-                    $("#resort").html("<option value=''>Please Select</option><option value='Mount Amanzi'>Mount Amanzi</option>");
+                    $.getJSON("https://www.tradeunipoint.com/unibackend/seam/resource/rest/products/resorts/NW/", function(json){
+                        $('#resort').empty();
+                        $('#resort').append($('<option>').text("Resort"));
+                        $.each(json, function(i, obj){
+                                $('#resort').append($('<option>').text(obj.resortName).attr('value', obj.resortName));
+                        });
+                    });
+                }
+                
+                else if (val == "eastern cape") {
+                    $.getJSON("https://www.tradeunipoint.com/unibackend/seam/resource/rest/products/resorts/EC/", function(json){
+                        $('#resort').empty();
+                        $('#resort').append($('<option>').text("Resort"));
+                        $.each(json, function(i, obj){
+                                $('#resort').append($('<option>').text(obj.resortName).attr('value', obj.resortName));
+                        });
+                    });
+                }
+                else if (val == "free state") {
+                    $.getJSON("https://www.tradeunipoint.com/unibackend/seam/resource/rest/products/resorts/FS/", function(json){
+                        $('#resort').empty();
+                        $('#resort').append($('<option>').text("Resort"));
+                        $.each(json, function(i, obj){
+                                $('#resort').append($('<option>').text(obj.resortName).attr('value', obj.resortName));
+                        });
+                    });
+                }
+                else if (val == "northern cape") {
+                    $.getJSON("https://www.tradeunipoint.com/unibackend/seam/resource/rest/products/resorts/NC/", function(json){
+                        $('#resort').empty();
+                        $('#resort').append($('<option>').text("Resort"));
+                        $.each(json, function(i, obj){
+                                $('#resort').append($('<option>').text(obj.resortName).attr('value', obj.resortName));
+                        });
+                    });
                 }
                 else {
-                    $("#resort").html("<option value=''>Please Select</option><option value='Little Eden'>Little Eden</option><option value='Little Eden'>Manzi Monate</option><option value='Kagga Kamma Nature Reserve'>Kagga Kamma Nature Reserve</option><option value='Mabalingwe Nature Reserve'>Mabalingwe Nature Reserve</option><option value='Margate Beach Club'>Margate Beach Club</option><option value='Sandy Place'>Sandy Place</option><option value='Uvongo River Resort'>Uvongo River Resort</option><option value='Jackalberry Ridge'>Jackalberry Ridge</option><option value='Ngwenya Lodge'>Ngwenya Lodge</option><option value='Sudwala Lodge'>Sudwala Lodge</option><option value='Verlorenkloof'>Verlorenkloof</option><option value='Mount Amanzi'>Mount Amanzi</option>");
+                   // $("#resort").html("<option value=''>Please Select</option><option value='Little Eden'>Little Eden</option><option value='Little Eden'>Manzi Monate</option><option value='Kagga Kamma Nature Reserve'>Kagga Kamma Nature Reserve</option><option value='Mabalingwe Nature Reserve'>Mabalingwe Nature Reserve</option><option value='Margate Beach Club'>Margate Beach Club</option><option value='Sandy Place'>Sandy Place</option><option value='Uvongo River Resort'>Uvongo River Resort</option><option value='Jackalberry Ridge'>Jackalberry Ridge</option><option value='Ngwenya Lodge'>Ngwenya Lodge</option><option value='Sudwala Lodge'>Sudwala Lodge</option><option value='Verlorenkloof'>Verlorenkloof</option><option value='Mount Amanzi'>Mount Amanzi</option>");
+                   
+                   $.getJSON("https://www.tradeunipoint.com/unibackend/seam/resource/rest/products/resorts/list/", function(json){
+                    $('#resort').empty();
+                    $('#resort').append($('<option>').text("Resort"));
+                    $.each(json, function(i, obj){
+                            $('#resort').append($('<option>').text(obj.resortName).attr('value', obj.resortName));
+                    });
+            });
+
                 }
             })
         }
