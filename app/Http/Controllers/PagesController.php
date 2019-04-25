@@ -2978,7 +2978,7 @@ class PagesController extends Controller {
 		$lombardy = DB::table('commercials')
             ->where('name','=','Lombardy Business Park')
             ->where('for','=','rental')
-            ->orderBy('created_at','asc')
+            ->orderBy('created_at','desc')
 			->paginate(6);
 
 		$property = DB::table('commercials')
@@ -5725,27 +5725,6 @@ class PagesController extends Controller {
                 ->with('property',$property)
                 ->with('facilities',$facilities)
                 ->with('lombardy',$lombardy);
-    }
-
-    function fetchAllResorts(Request $request)
-    {
-        $wsdl = "https://www.tradeunipoint.com/unibackend/seam/resource/rest/products/resorts/list/";
-
-        $details = json_decode(file_get_contents($wsdl), true);
-        dd($details);
-        
-        $data = $details;
-        $output = '<ul class="navbar-nav w-100 justify-content-center" style="display:block; position: absolute; z-index: 9; background-color: #33689b;">';
-
-        foreach($data as $row)
-        {
-        $output .= '
-        <li class="nav-item choose"><a style="color:white; text-decoration:none;" class="nav-link choose" href="#">' .$row->resortName.'</a></li>
-        ';
-        }
-        $output .= '</ul>';
-        echo $output;
-        
     }
 
     public function serveBulkPayment($listings)

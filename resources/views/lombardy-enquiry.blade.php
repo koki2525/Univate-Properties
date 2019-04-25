@@ -60,6 +60,35 @@
             </form>
         </div>
     </div>
+    @if($unit->unit=='46')
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+            @if($unit->virtualtour)
+            <li class="nav-item">
+                <a class="nav-link active" id="virtual-tour-tab" data-toggle="tab" href="#virtual-tour" role="tab" aria-controls="virtual-tour" aria-selected="true">Virtual Tour</a>
+            </li>
+            @endif
+            @if($unit->directions)
+            <li class="nav-item">
+                <a class="nav-link @if($unit->virtualtour == null) active @endif" id="directions-tab" data-toggle="tab" href="#directions" role="tab" aria-controls="directions" aria-selected="false">Directions</a>
+            </li>
+            @endif
+        </ul>
+        <div class="tab-content mb-4" id="myTabContent">
+            @if($unit->virtualtour)
+            <div class="tab-pane fade show active" id="virtual-tour" role="tabpanel" aria-labelledby="virtual-tour-tab">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="{{ $unit->virtualtour }}" allowfullscreen></iframe>
+                </div>
+            </div>
+            @endif
+            @if($unit->directions)
+            <div class="tab-pane fade @if($unit->virtualtour == null) show active @endif" id="directions" role="tabpanel" aria-labelledby="directions-tab">
+                <iframe src="{{ $unit->directions }}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+            @endif
+        </div>
+    </div>
+    @else
     <div class="row mb-4">
         <div class="col-md-4">
             <img class="img-fluid" src="{{ $unit->image1 }}" alt="Resort Image" />
@@ -71,6 +100,7 @@
             <img class="img-fluid" src="{{ $unit->image3 }}" alt="Resort Image" />
         </div>
     </div>
+    @endif
         
 </div>
 @stop
